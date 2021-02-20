@@ -1,5 +1,5 @@
 import pygame as pg
-from game.color import *
+from color import *
 from enum import Enum
 
 class Menu():

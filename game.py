@@ -1,7 +1,7 @@
 import pygame as pg
-from game.settings import Settings
-from game.color import *
-from game.menu import *
+from settings import Settings
+from color import *
+from menu import *
 
 class Game:
     
