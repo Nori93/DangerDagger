@@ -1,7 +1,7 @@
 import pygame as pg
 from color import *
 from enum import Enum
-
+from input_handlers import handle_main_manu
 class Menu():
     def __init__(self, game):
         self.game = game
@@ -30,6 +30,15 @@ class Menu():
         self.cursor_rect_l.midtop =(x + self.offset_l, y + self.offset_h)
         self.cursor_rect_r.midtop =(x + self.offset_r, y + self.offset_h)
 
+    def handle_manu(self):
+        action = handle_main_manu()
+        self.start_key = action.get("start_key")
+        self.back_key = action.get("back_key")
+        self.down_key = action.get("down_key")
+        self.up_key = action.get("up_key")
+        self.esc = action.get("esc")
+        self.mouse_left = action.get("mouse_left")
+        self.quit = action.get("quit")
 
     
 
@@ -56,9 +65,12 @@ class MainMenu(Menu):
 
     def display_menu(self):
         self.run_display = True
-        while self.run_display:
-            self.game.check_events()    
-
+      
+        while self.run_display:            
+            self.game.clock.tick(self.game.FPS)
+            self.handle_manu() 
+            if self.quit:
+                self.game.running , self.run_display = False, False         
             self.game.display.fill(BLACK)
             self.game.draw_text(self.game.title, 40, self.mid_w , self.mid_h - self.mid_h/3)
             self.start_game_rect = self.game.draw_text("Start Game",  self.font_size, self.start_x , self.start_y)
@@ -70,7 +82,7 @@ class MainMenu(Menu):
             self.blit_screen()
 
     def move_cursor(self):
-        if self.game.DOWN_KEY:
+        if self.down_key:
             if self.state == MainMenu.State.START:
                 self.set_cur_options()
                 
@@ -83,7 +95,7 @@ class MainMenu(Menu):
             elif self.state == MainMenu.State.EXIT:
                 self.set_cur_start()
                 
-        if self.game.UP_KEY:
+        if self.up_key:
             if self.state == MainMenu.State.START:
                 self.set_cur_exit()
                 
@@ -100,7 +112,7 @@ class MainMenu(Menu):
     def check_input(self):
         self.move_cursor()
         self.move_mouse()
-        if self.game.START_KEY or (self.game.L_MOUSE_BUTTON_DOWN and self.mouse_is_over_menu):
+        if self.start_key or (self.mouse_left and self.mouse_is_over_menu):
             if self.state == MainMenu.State.START:
                 self.game.playing = True
             elif self.state == MainMenu.State.OPTIONS:
@@ -173,9 +185,11 @@ class OptionsMenu(Menu):
 
     def display_menu(self):
         self.run_display = True
-        while self.run_display:
-            self.game.check_events()
+        while self.run_display:            
             self.game.display.fill(BLACK)
+            self.handle_manu()
+            if self.quit:
+                self.game.running , self.run_display = False, False    
             self.game.draw_text("Options", 40, self.mid_w , self.mid_h - self.mid_h/3)
             self.vol_rect = self.game.draw_text("Volume",  self.font_size, self.vol_x , self.vol_y)
             self.controls_rect =self.game.draw_text("Controls",  self.font_size, self.controls_x , self.controls_y)
@@ -187,10 +201,10 @@ class OptionsMenu(Menu):
     def check_input(self):
         self.move_cursor()
         self.move_mouse()
-        if self.game.ESC:
+        if self.esc:
             self.game.curr_menu = self.game.main_manu
             self.run_display = False
-        elif self.game.START_KEY or (self.game.L_MOUSE_BUTTON_DOWN and self.mouse_is_over_menu):
+        elif self.start_key or (self.mouse_left and self.mouse_is_over_menu):
             if self.state == OptionsMenu.State.SAVE:
                 #Save Options
                 self.game.curr_menu = self.game.main_manu
@@ -201,14 +215,14 @@ class OptionsMenu(Menu):
 
 
     def move_cursor(self):
-        if self.game.DOWN_KEY:
+        if self.down_key:
             if self.state == OptionsMenu.State.VOLUME:
                 self.set_curr_controls()
             elif self.state == OptionsMenu.State.CONTROLS:
                 self.set_curr_save()
             elif self.state == OptionsMenu.State.SAVE:
                 self.set_curr_vol()
-        if self.game.UP_KEY:
+        if self.up_key:
             if self.state == OptionsMenu.State.VOLUME:
                 self.set_curr_save()
             elif self.state == OptionsMenu.State.CONTROLS:
@@ -249,9 +263,9 @@ class CreditsMenu(Menu):
 
     def display_menu(self):
         self.run_display = True
-        while self.run_display:
-            self.game.check_events()
-            if self.game.START_KEY or self.game.ESC or self.game.L_MOUSE_BUTTON_DOWN:
+        while self.run_display:            
+            self.handle_manu()
+            if self.start_key or self.esc or self.mouse_left:
                 self.game.curr_menu = self.game.main_manu
                 self.run_display = False
             self.game.display.fill(BLACK)
