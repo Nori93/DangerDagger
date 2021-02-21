@@ -2,9 +2,10 @@ class Settings:
     def __init__(self):
         self.window_title = "Danger Dagger"
 
-        self.screen_width = 600
-        self.screen_height = 480
+        self.screen_width = 1024
+        self.screen_height = 680
 
+        self.tile_size = 20
         self.FPS = 60
 
         self.bar_width = 20 
@@ -23,9 +24,9 @@ class Settings:
 
         self.max_room = 30
 
-        self.fov_alhorithm = 0
+        self.fov_algorithm = 0
         self.fov_light_walls = True
-        self.fov_radius = 10
+        self.fov_radius = 5
 
         
         self.font = '.\Assets\8-BIT WONDER.TTF'
@@ -37,6 +38,7 @@ class Settings:
             "window_title":self.window_title,
             "screen_width":self.screen_width,
             "screen_height":self.screen_height,
+            "tile_size":self.tile_size,
             "bar_width":self.bar_width,
             "panel_height":self.panel_height,
             "panel_y":self.panel_y,
@@ -48,7 +50,7 @@ class Settings:
             "room_max_size":self.room_max_size,
             "room_min_size":self.room_min_size,
             "max_room":self.max_room,
-            "fov_alhorithm":self.fov_alhorithm,
+            "fov_algorithm":self.fov_algorithm,
             "fov_light_walls":self.fov_light_walls,
             "fov_radius":self.fov_radius,
             "font":self.font,
