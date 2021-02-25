@@ -6,7 +6,7 @@ from init_new_game import get_game_variables
 from render_function import render_all
 from death_functions import *
 from game_state import GameState
-from input_handlers import handle_game
+from input_handlers import handle_game, handle_mouse
 from fov_functions import intialize_fov, recompute_fov
 from text_align import TEXT_ALIGN
 class Game:   
@@ -43,7 +43,7 @@ class Game:
         pg.init()
         #initalize game sounds
         pg.mixer.init()
-        self.display = pg.Surface((self.width, self.height))
+        self.display = pg.Surface((self.width, self.height + 100))
 
         #set screen 
         self.window = pg.display.set_mode((self.width, self.height + 100))
@@ -105,6 +105,7 @@ class Game:
 
     def handle_game_keys(self):
         action = handle_game(self.game_state)
+        mouse_action = handle_mouse()
         self.act_move = action.get("move")
         self.act_pickup = action.get("pickup")
         self.act_show_inv = action.get("show_inventory")
@@ -115,6 +116,9 @@ class Game:
         self.act_exit = action.get("exit")
         self.act_quit = action.get("quit")
 
+        self.act_left_click = mouse_action.get("left_click")
+        self.act_right_click = mouse_action.get("right_click")
+
 
     def game_loop(self):
         self.player = None
@@ -124,36 +128,147 @@ class Game:
         self.game_state = None
     
         self.player, self.entities, self.game_map, self.game_state, self.message_log = get_game_variables(self)
-      
+        self.previous_game_state = self.game_state
+        self.player_turn_result =  []
+        
         self.fov_map = intialize_fov(self.game_map)
         self.fov_recompute = True
+
+        self.targeting_item = None
+
         while self.playing:
             if self.fov_recompute:
                 recompute_fov(self.fov_map, self.player.x, self.player.y, self.fov_radius,
                     self.fov_light_walls, self.fov_algorithm)
 
             self.handle_game_keys()
+            self.player_turn_results =  []
+
+
             if self.act_quit:
                 self.playing , self.running = False, False
             if self.act_exit:
                 self.playing = False    
-            if self.act_show_inv:
-                self.inventory.display_menu()
-
-            self.display.fill(BLACK)
-            self.player_turn_results =  []
-
-
+            
+            if self.act_stairs and self.game_state == GameState.PLAYERS_TURN:
+                pass
+           
+                 
             if self.act_move and self.game_state == GameState.PLAYERS_TURN:
                 self.move()
                 self.game_state = GameState.ENEMY_TURN
-               
-            render_all(self.display,self.game_map,self.fov_map,self.fov_recompute,self.entities)           
+            
+            if self.act_pickup:
+                self.pickup()
+
+            if self.act_show_inv:
+                self.inventory.display_menu()
+
+            if self.game_state == GameState.TARGETING:
+                self.targeting_stage()
+
+
+            if self.player_turn_results:
+                self.handling_player_turn_result()
+            
+            self.display.fill(BLACK)
+            render_all(self.display,self.game_map,self.fov_map,self.fov_recompute,self.entities,self.message_log,self.font_name,self.player)           
             self.window.blit(self.display, (0, 0))
             pg.display.update()
+
             if self.game_state == GameState.ENEMY_TURN:
                 self.enemy_move()
 
+    def taking_stairs(self):
+        for entity in entities:
+            if entity.stairs and entity.x == self.player.x and entity.y == self.player.y:
+                self.entities = game_map.next_floor(player, message_log, constants)
+                self.fov_map = intialize_fov(game_map)
+                self.fov_recompute = True,
+                self.display.fill(BLACK)
+                    
+                break
+            else:
+                self.message_log.add_message(Message("The are no stairs here.", libtcod.yellow))
+    def targeting_stage(self):
+        if self.act_left_click:
+                target_x, target_y = self.act_left_click
+
+                item_use_results = self.player.inventory.use(
+                    self.targeting_item,
+                    entities = self.entities,
+                    fov_map = self.fov_map,
+                    target_x = target_x, target_y = target_y
+                )
+
+                self.player_turn_results.extend(item_use_results)
+        elif self.act_right_click:
+            self.player_turn_results.append({"targeting_cancelled":True})
+
+    def handling_player_turn_result(self):
+        for player_turn_result in self.player_turn_results:
+            message = player_turn_result.get("message")
+            dead_entity = player_turn_result.get("dead")
+            item_added = player_turn_result.get("item_added")
+            item_component = player_turn_result.get("consumed")
+            item_dropped = player_turn_result.get("item_dropped")
+            equip = player_turn_result.get("equip")
+            targeting = player_turn_result.get("targeting")
+            targeting_cancelled = player_turn_result.get("targeting_canceled")
+            xp = player_turn_result.get("xp")
+            if message:
+                self.message_log.add_message(message)
+            if dead_entity:
+                if dead_entity == self.player:
+                    message , self.game_state = kill_player(dead_entity)
+                else:
+                    message = kill_monster(dead_entity)
+                self.message_log.add_message(message)
+            if item_added:
+                self.entities.remove(item_added)
+                self.game_state = GameState.ENEMY_TURN
+            if item_component:
+                self.game_state = GameState.ENEMY_TURN
+            if item_dropped:
+                self.entities.append(item_dropped)
+                self.game_state = GameState.ENEMY_TURN
+            if equip:
+                equip_results = self.player.equipment.toggle_equip(equip)
+                for equip_result in  equip_results:
+                    equipped = equip_result.get("equipped")
+                    dequipped = equip_result.get("dequipped")
+                    
+                    if equipped:
+                        self.message_log.add_message(Message("You equipped the {}".format(equipped.name)))
+                    if dequipped:
+                        self.message_log.add_message(Message("You dequipped the {}".format(dequipped.name)))
+                self.game_state = GameState.ENEMY_TURN
+            if targeting:
+                self.previous_game_state = GameState.PLAYERS_TURN
+                self.game_state = GameState.TARGETING
+                targeting_item = targeting
+                self.message_log.add_message(targeting_item.item.targeting_message)
+            if targeting_cancelled:
+                self.game_state = self.previous_game_state
+                self.message_log.add_message(Message("Targeting cancelled"))
+            if xp:
+                leveled_up =self.player.level.add_xp(xp)
+                self.message_log.add_message(Message("You gain {} experience points.".format(xp), WHITE))
+                if leveled_up:
+                    self.message_log.add_message(Message(
+                        "You battle skills grow stronger! You reached level {}.".format(
+                        self.player.level.current_level),YELLOW))
+                    self.previous_game_state = self.game_state
+                    self.game_state = GameState.LEVEL_UP
+    
+    def pickup(self):
+        for entity in self.entities:
+            if entity.item and entity.x == self.player.x and entity.y == self.player.y:
+                pickup_results = self.player.inventory.add_item(entity)
+                self.player_turn_results.extend(pickup_results)
+                break
+        else:
+            self.message_log.add_message(Message("There is nothing here to pick up.", YELLOW))
 
            
     def enemy_move(self):
@@ -188,27 +303,7 @@ class Game:
             target = self.player.get_blocking_entities_at_location(self.entities, destination_x, destination_y)
             if target:
                 attack_results = self.player.fighter.attack(target)
-                player_turn_results.extend(attack_results)                
+                self.player_turn_results.extend(attack_results)                
             else:
-                fov_recompute = True
+                self.fov_recompute = True
                 self.player.move(dx,dy)
-
-
-    def draw_text(self, text, size, x, y, color=WHITE,text_align=TEXT_ALIGN.CENTER):
-        font = pg.font.Font(self.font_name, size)
-        text_surface = font.render(text, True, color)
-        text_rect = text_surface.get_rect()
-        if text_align == TEXT_ALIGN.CENTER:
-            text_rect.center = (x,y)
-        elif text_align == TEXT_ALIGN.LEFT:
-            text_rect.midleft = (x, y)
-        elif text_align == TEXT_ALIGN.RIGHT:
-            text_rect.midright = (x,y)
-        self.display.blit(text_surface,text_rect)
-
-        return text_rect
-
-    def draw_panel(self, color, x, y, width, height):
-        rect = (x, y, width, height)
-        pg.draw.rect(self.display,color,rect)
-        return rect

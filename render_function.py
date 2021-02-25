@@ -1,7 +1,7 @@
 import pygame as pg
 from enum import Enum
 from color import *
-
+from text_align import TEXT_ALIGN
 
 class RenderOrder(Enum):
     STAIRS = 1
@@ -9,7 +9,7 @@ class RenderOrder(Enum):
     ITEM = 3
     ACTOR = 4
 
-def render_all(display,game_map,fov_map,fov_recompute,entities):
+def render_all(display, game_map, fov_map, fov_recompute, entities, message_log, font_name, player):
     ts = game_map.tile_size
     if fov_recompute:
         for y in range(game_map.map_height):
@@ -36,6 +36,15 @@ def render_all(display,game_map,fov_map,fov_recompute,entities):
         if fov_map.fov[entity.y][entity.x] or (entity.stairs and game_map.tiles[entity.x][entity.y].explored):
              draw_entity(display, entity, ts)
 
+    render_bar(display, 50, 20, 200, 30, "HP", player.fighter.hp, player.fighter.max_hp,
+        GREEN, DARK_RED, 14,font_name,half_color = ORANGE, quarter_coler = RED)
+
+    y= game_map.height - 10
+    x = 10
+    for message_log in message_log.messages:
+        draw_text(display, message_log.text, 15, font_name, x, y, message_log.color, text_align=TEXT_ALIGN.LEFT)
+        y+= 20
+
    
       
 def draw_entity(display, entity, tile_size):    
@@ -43,3 +52,40 @@ def draw_entity(display, entity, tile_size):
     #libtcod.console_put_char(con, entity.x, entity.y, entity.char,libtcod.BKGND_NONE)
     rect = (entity.x * tile_size, entity.y * tile_size, tile_size, tile_size)     
     pg.draw.rect(display, entity.color, rect )
+
+def draw_text(display, text,  size, font_name, x, y, color=WHITE,text_align=TEXT_ALIGN.CENTER):
+    font = pg.font.Font(font_name, size)
+    text_surface = font.render(text, True, color)
+    text_rect = text_surface.get_rect()
+    if text_align == TEXT_ALIGN.CENTER:
+        text_rect.center = (x,y)
+    elif text_align == TEXT_ALIGN.LEFT:
+        text_rect.midleft = (x, y)
+    elif text_align == TEXT_ALIGN.RIGHT:
+        text_rect.midright = (x,y)
+    display.blit(text_surface,text_rect)
+    return text_rect
+
+def draw_panel(display, color, x, y, width, height):
+    rect = (x, y, width, height)
+    pg.draw.rect(display,color,rect)
+    return rect
+
+def render_bar(display, x, y, total_width, height, name, value, maximum, bar_color, back_color,font_size,font_name,half_color = None, quarter_coler= None):
+    bar_width = int(float(value / maximum * total_width))
+    if half_color == None:
+        half_color = bar_color
+    if quarter_coler == None:
+        quarter_coler == bar_color
+
+    draw_panel(display,back_color, x, y, total_width, height)
+    if bar_width > int( total_width / 2 ):
+        draw_panel(display, bar_color, x, y, bar_width, height)
+    elif bar_width <= int( total_width / 2 ) and bar_width >= int( total_width / 4 ):
+        draw_panel(display,half_color, x, y, bar_width, height)
+    elif bar_width <= int( total_width / 4 ) and bar_width > 0:
+        draw_panel(display, quarter_coler, x, y, bar_width, height) 
+    
+    
+    
+    draw_text(display, "{}: {}/{}".format(name, value, maximum),font_size,font_name,int(x+ total_width/2),y+12)

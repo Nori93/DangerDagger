@@ -2,6 +2,7 @@ import pygame as pg
 from color import *
 from enum import Enum
 from input_handlers import handle_main_menu
+from render_function import draw_text, draw_panel
 from text_align import TEXT_ALIGN
 from equipment_slots import EQUIPMENT_SLOTS
 class Menu():
@@ -20,8 +21,8 @@ class Menu():
         self.offset_h = -0
 
     def draw_cursor(self):
-        self.game.draw_text("[",  self.font_size, self.cursor_rect_l.x, self.cursor_rect_l.y)
-        self.game.draw_text("]",  self.font_size, self.cursor_rect_r.x, self.cursor_rect_r.y)
+        draw_text(self.game.display,"[",  self.font_size, self.game.font_name, self.cursor_rect_l.x, self.cursor_rect_l.y)
+        draw_text(self.game.display,"]",  self.font_size, self.game.font_name, self.cursor_rect_r.x, self.cursor_rect_r.y)
 
     def blit_screen(self):
         self.game.window.blit(self.game.display, (0, 0))
@@ -74,11 +75,11 @@ class MainMenu(Menu):
             if self.quit:
                 self.game.running , self.run_display = False, False         
             self.game.display.fill(BLACK)
-            self.game.draw_text(self.game.title, 40, self.mid_w , self.mid_h - self.mid_h/3)
-            self.start_game_rect = self.game.draw_text("Start Game",  self.font_size, self.start_x , self.start_y)
-            self.options_rect =self.game.draw_text("Options",  self.font_size, self.options_x , self.options_y)
-            self.credist_rect =self.game.draw_text("Credits",  self.font_size, self.credits_x , self.credits_y)
-            self.exit_rect =self.game.draw_text("Exit",  self.font_size, self.exit_x , self.exit_y)
+            draw_text(self.game.display,self.game.title,  40, self.game.font_name,self.mid_w , self.mid_h - self.mid_h/3)
+            self.start_game_rect = draw_text(self.game.display,"Start Game",  self.font_size, self.game.font_name, self.start_x , self.start_y)
+            self.options_rect =draw_text(self.game.display,"Options",  self.font_size, self.game.font_name, self.options_x , self.options_y)
+            self.credist_rect =draw_text(self.game.display,"Credits",  self.font_size, self.game.font_name, self.credits_x , self.credits_y)
+            self.exit_rect =draw_text(self.game.display,"Exit",  self.font_size, self.game.font_name, self.exit_x , self.exit_y)
             self.check_input()           
             self.draw_cursor()
             self.blit_screen()
@@ -192,10 +193,10 @@ class OptionsMenu(Menu):
             self.handle_manu()
             if self.quit:
                 self.game.running , self.run_display = False, False    
-            self.game.draw_text("Options", 40, self.mid_w , self.mid_h - self.mid_h/3)
-            self.vol_rect = self.game.draw_text("Volume",  self.font_size, self.vol_x , self.vol_y)
-            self.controls_rect =self.game.draw_text("Controls",  self.font_size, self.controls_x , self.controls_y)
-            self.save_rect =self.game.draw_text("Save",  self.font_size, self.save_x , self.save_y)
+            draw_text(self.game.display,"Options", 40, self.game.font_name, self.mid_w , self.mid_h - self.mid_h/3)
+            self.vol_rect = draw_text(self.game.display,"Volume",  self.font_size, self.game.font_name, self.vol_x , self.vol_y)
+            self.controls_rect =draw_text(self.game.display,"Controls",  self.font_size,  self.game.font_name, self.controls_x , self.controls_y)
+            self.save_rect =draw_text(self.game.display,"Save",  self.font_size, self.game.font_name, self.save_x , self.save_y)
             self.check_input()
             self.draw_cursor()
             self.blit_screen()
@@ -252,7 +253,7 @@ class OptionsMenu(Menu):
         self.state = OptionsMenu.STATE.VOLUME
     
     def set_curr_controls(self):
-        self.set_cur(self.controls_x,self.controls_y)        
+        self.set_cur(self.controls_x,self.controls_y)
         self.state = OptionsMenu.STATE.CONTROLS
 
     def set_curr_save(self):
@@ -273,8 +274,8 @@ class CreditsMenu(Menu):
                 self.game.curr_menu = self.game.main_menu
                 self.run_display = False
             self.game.display.fill(BLACK)
-            self.game.draw_text('Credits',40, self.mid_w,self.mid_h - 40)
-            self.game.draw_text('Mady by Norbert W.',20, self.mid_w, self.mid_h + 10)
+            draw_text(self.game.display,'Credits',40, self.game.font_name, self.mid_w, self.mid_h - 40)
+            draw_text(self.game.display,'Mady by Norbert W.',20, self.game.font_name, self.mid_w, self.mid_h + 10)
             self.blit_screen()
 
 class InventoryMenu(Menu):
@@ -297,9 +298,9 @@ class InventoryMenu(Menu):
                self.use_item()
            
             panel_height = 40 + (len(self.game.player.inventory.items) * 25)
-            self.game.draw_panel(INVENTORY_BG, 330, 200, 400, panel_height + 50)
-            self.game.draw_panel(INVENTORY_INNER, 340, 240, 380, panel_height)
-            self.game.draw_text('Inventory',20, 440, 220)
+            draw_panel(self.game.display,INVENTORY_BG, 330, 200, 400, panel_height + 50)
+            draw_panel(self.game.display,INVENTORY_INNER, 340, 240, 380, panel_height)
+            draw_text(self.game.display,'Inventory',20, self.game.font_name, 440, 220)
             opt = self.draw_inventory()
             self.move_cursor()
             self.draw_cursor(opt)
@@ -342,13 +343,13 @@ class InventoryMenu(Menu):
             
             for item in self.game.player.inventory.items:
                 if self.game.player.equipment.main_hand == item:
-                    rect = self.game.draw_text("{} [on main hand]".format(item.name),font_size,item_x,item_y,color= BLACK, text_align=TEXT_ALIGN.LEFT)
+                    rect = draw_text(self.game.display,"{} [on main hand]".format(item.name), font_size, self.game.font_name, item_x, item_y,color= BLACK, text_align=TEXT_ALIGN.LEFT)
                     options.append((rect,item))
                 elif self.game.player.equipment.off_hand == item:
-                    rect =self.game.draw_text("{} [on off hand]".format(item.name),font_size,item_x,item_y,color= BLACK, text_align=TEXT_ALIGN.LEFT)
+                    rect =draw_text(self.game.display,"{} [on off hand]".format(item.name), font_size, self.game.font_name, item_x, item_y,color= BLACK, text_align=TEXT_ALIGN.LEFT)
                     options.append((rect,item))
                 else:
-                    rect = self.game.draw_text(item.name,font_size,item_x,item_y,color=BLACK, text_align=TEXT_ALIGN.LEFT)
+                    rect = draw_text(self.game.display, item.name, font_size, self.game.font_name, item_x, item_y,color=BLACK, text_align=TEXT_ALIGN.LEFT)
                     options.append((rect,item))
                 
                 item_y += 20
@@ -370,7 +371,7 @@ class InventoryMenu(Menu):
 
     def draw_cursor(self,options):
         rect, item = options[self.option_index]
-        self.game.draw_text("=>", 14, rect.x - 15, rect.y + 5, color=BLACK)
+        draw_text(self.game.display,"=>", 14, self.game.font_name, rect.x - 15, rect.y + 5, color=BLACK)
         self.curent_item = item
 
 
@@ -393,9 +394,9 @@ class MainOrOffHandMenu(Menu):
                 return self.option_index
            
             panel_height = 40 + (len(self.game.player.inventory.items) * 25)
-            self.game.draw_panel(INVENTORY_BG, 330, 200, 400, panel_height + 50)
-            self.game.draw_panel(INVENTORY_INNER, 340, 240, 380, panel_height)
-            self.game.draw_text('Inventory',20, 440, 220)
+            draw_panel(self.game.display,INVENTORY_BG, 330, 200, 400, panel_height + 50)
+            draw_panel(self.game.display,INVENTORY_INNER, 340, 240, 380, panel_height)
+            draw_text(self.game.display,'Inventory',20, self.game.font_name,440, 220)
           
             opt = self.draw_option()
             self.move_cursor()
@@ -404,8 +405,8 @@ class MainOrOffHandMenu(Menu):
             
     def draw_option(self):
         options = []    
-        options.append(self.game.draw_text("main hand",15, 370, 250,color= BLACK, text_align=TEXT_ALIGN.LEFT))
-        options.append(self.game.draw_text("off hand",15, 370, 270,color= BLACK, text_align=TEXT_ALIGN.LEFT))               
+        options.append(draw_text(self.game.display,"main hand",15, self.game.font_name, 370, 250,color= BLACK, text_align=TEXT_ALIGN.LEFT))
+        options.append(draw_text(self.game.display,"off hand",15, self.game.font_name, 370, 270,color= BLACK, text_align=TEXT_ALIGN.LEFT))               
         return options
 
     def move_cursor(self):
@@ -423,7 +424,7 @@ class MainOrOffHandMenu(Menu):
 
     def draw_cursor(self,options):
         rect = options[self.option_index]
-        self.game.draw_text("=>", 14, rect.x - 15, rect.y + 5, color=BLACK)
+        draw_text(self.game.display,"=>", 14, self.game.font_name, rect.x - 15, rect.y + 5, color=BLACK)
        
 
 

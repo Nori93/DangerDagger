@@ -186,5 +186,5 @@ class GameMap:
 
                 entities.append(item)
 
-    def tile_set_id(tile)
+
             

@@ -65,3 +65,13 @@ def handle_player_turn_keys():
                 return {"exit": True}
     return {}   
     
+
+def handle_mouse():
+    for event in pg.event.get():
+         if event.type == pg.MOUSEBUTTONDOWN:
+            x ,y =pg.mouse.get_pos()
+            if event.button == 1:
+                return {"mouse_left":(x,y)}
+            elif event.button == 2:
+                return {"right_click":(x, y)}    
+    return {}

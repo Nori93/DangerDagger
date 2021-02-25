@@ -27,4 +27,5 @@ class Tile:
 
 
     def set_tile_index(tiles):
-        if self.x != 0 and self.y !=
+        if self.x != 0 and self.y != 0:
+            pass
