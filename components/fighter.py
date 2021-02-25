@@ -18,10 +18,17 @@ class Fighter:
 
     @property
     def power(self):
+        
         if self.owner and self.owner.equipment:
             bonus = self.owner.equipment.power_bonus
         else:
             bonus = 0
+        
+        if self.owner and  self.owner.equipment and self.owner.equipment.main_hand and self.owner.equipment.main_hand.weapon:
+            if self.owner and self.owner.equipment.off_hand and self.owner.equipment.main_hand.weapon:
+                return self.owner.equipment.main_hand.weapon.damage_done + self.owner.equipment.off_hand.weapon.damage_done + bonus
+            else:
+                return self.owner.equipment.main_hand.weapon.damage_done + bonus
         return self.base_power + bonus
     
     @property

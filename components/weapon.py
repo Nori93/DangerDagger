@@ -1,4 +1,5 @@
 from enum import Enum
+from random import randint
 class WEAPON_TYPE(Enum):
     #Simple Melee Weapons
     CLUB = 0                
@@ -49,7 +50,7 @@ class WEAPON_TYPE(Enum):
 class Weapon:
 
     def __init__(self, dmg, max_dmg,  crit_rate, w_type, range_use=None):
-        self.dmg = dmg,
+        self.dmg = dmg
         self.max_dmg = max_dmg
         self.crit_rate = crit_rate
         self.w_type = w_type,    
@@ -91,7 +92,13 @@ class Weapon:
         self.only_off_hand = self.w_type[0] in self.off_hand
         
         
-            
-    
+    @property
+    def damage_done(self):
+        chanse = randint(1,100)
+        if chanse >= 100 - self.crit_rate:
+            return self.max_dmg
+        else:
+            return self.dmg
+
     def throw(self):
         pass
