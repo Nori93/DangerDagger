@@ -1,6 +1,6 @@
 from enum import Enum
 
-class EquipmentSlots(Enum):
+class EQUIPMENT_SLOTS(Enum):
     # FACK: googles, lenses, mask, spectacles, thrid eyes
     FACE = 1
     # HEAD: cirlets, crowns, hats, headbands, helmets, phylacteries.

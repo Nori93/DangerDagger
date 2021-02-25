@@ -1,7 +1,7 @@
 import pygame as pg
 from game_state import GameState
 
-def handle_main_manu():
+def handle_main_menu():
     for event in pg.event.get():
         if event.type == pg.QUIT:
             return {"quit": True}

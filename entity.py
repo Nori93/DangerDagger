@@ -69,10 +69,10 @@ class Entity:
             self.move(dx, dy)
 
     def move_astar(self, target,  game_map, entities):
-        fov = libtcod.map_new(game_map.width, game_map.height)
+        fov = libtcod.map_new(game_map.map_width, game_map.map_height)
 
-        for y1 in range(game_map.height):
-            for x1 in range(game_map.width):
+        for y1 in range(game_map.map_height):
+            for x1 in range(game_map.map_width):
                 fov.transparent[y1][x1]= not game_map.tiles[x1][y1].block_sight
                 fov.walkable[y1][x1]= not game_map.tiles[x1][y1].blocked
         for entity in entities:

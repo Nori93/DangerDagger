@@ -48,35 +48,6 @@ class WEAPON_TYPE(Enum):
 
 class Weapon:
 
-    two_hand_weapon = [
-        WEAPON_TYPE.GREAT_CLUB,
-        WEAPON_TYPE.SHORTBOW,
-        WEAPON_TYPE.GLAIVE,
-        WEAPON_TYPE.GREATAXE,
-        WEAPON_TYPE.GREATSWORD,
-        WEAPON_TYPE.HALBERD,
-        WEAPON_TYPE.MAUL,
-        WEAPON_TYPE.PIKE,
-        WEAPON_TYPE.CROSSBOW_HEAVY,
-        WEAPON_TYPE.LONGBOW
-        ]
-
-    throw_weapon = [
-        WEAPON_TYPE.HANDAXE,
-        WEAPON_TYPE.JAVELIN,
-        WEAPON_TYPE.LIGHT_HAMMER,
-        WEAPON_TYPE.SPEAR,
-        WEAPON_TYPE.DART,
-        WEAPON_TYPE.TRIDNET,
-        WEAPON_TYPE.NET
-    ]
-
-    off_hand = [
-        WEAPON_TYPE.SHIELD,
-        WEAPON_TYPE.GREATSHIELD
-
-    ]
-
     def __init__(self, dmg, max_dmg,  crit_rate, w_type, range_use=None):
         self.dmg = dmg,
         self.max_dmg = max_dmg
@@ -84,10 +55,43 @@ class Weapon:
         self.w_type = w_type,    
         self.range_use = range_use
 
+        self.two_hand_weapon = [
+            WEAPON_TYPE.GREAT_CLUB,
+            WEAPON_TYPE.SHORTBOW,
+            WEAPON_TYPE.GLAIVE,
+            WEAPON_TYPE.GREATAXE,
+            WEAPON_TYPE.GREATSWORD,
+            WEAPON_TYPE.HALBERD,
+            WEAPON_TYPE.MAUL,
+            WEAPON_TYPE.PIKE,
+            WEAPON_TYPE.CROSSBOW_HEAVY,
+            WEAPON_TYPE.LONGBOW
+        ]
+
+        self. throw_weapon = [
+            WEAPON_TYPE.HANDAXE,
+            WEAPON_TYPE.JAVELIN,
+            WEAPON_TYPE.LIGHT_HAMMER,
+            WEAPON_TYPE.SPEAR,
+            WEAPON_TYPE.DART,
+            WEAPON_TYPE.TRIDNET,
+            WEAPON_TYPE.NET
+        ]
+        self.off_hand = [
+            WEAPON_TYPE.SHIELD,
+            WEAPON_TYPE.GREATSHIELD
+        ]
+
+        self.main = True
         if self.range_use:
             self.range_use.owner = self
 
-        self.two_hand = self.w_type in Weapon.two_hand_weapon
-        self.throwable = self.w_type in Weapon.throw_weapon
+        self.two_hand = self.w_type[0] in self.two_hand_weapon
+        self.throwable = self.w_type[0] in self.throw_weapon       
+        self.only_off_hand = self.w_type[0] in self.off_hand
+        
+        
+            
     
     def throw(self):
+        pass

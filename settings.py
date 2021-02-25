@@ -29,7 +29,7 @@ class Settings:
         self.fov_radius = 5
 
         
-        self.font = '.\Assets\8-BIT WONDER.TTF'
+        self.font = '.\Assets\dogicabold.ttf'
 
 
     @property

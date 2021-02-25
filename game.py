@@ -4,9 +4,11 @@ from color import *
 from menu import *
 from init_new_game import get_game_variables
 from render_function import render_all
+from death_functions import *
 from game_state import GameState
 from input_handlers import handle_game
 from fov_functions import intialize_fov, recompute_fov
+from text_align import TEXT_ALIGN
 class Game:   
 
     def __init__(self):
@@ -24,6 +26,10 @@ class Game:
         self.map_width = int(self.width / self.tile_size)
         self.map_height= int(self.height/ self.tile_size)  
 
+        self.message_x = self.settings.get["message_x"]
+        self.message_width = self.settings.get["message_width"]
+        self.message_height = self.settings.get["message_height"]
+
         # get title from settings
         self.title = self.settings.get["window_title"]
 
@@ -40,7 +46,7 @@ class Game:
         self.display = pg.Surface((self.width, self.height))
 
         #set screen 
-        self.window = pg.display.set_mode((self.width, self.height))
+        self.window = pg.display.set_mode((self.width, self.height + 100))
         #set title of game
         pg.display.set_caption(self.title)
         #set clock for FPS
@@ -60,11 +66,14 @@ class Game:
 
         #keys
         self.reset_keys()
-        self.main_manu = MainMenu(self)
+        #Main Manu
+        self.main_menu = MainMenu(self)
         self.options = OptionsMenu(self)
-        self.credits = CreditsMenu(self)
-        self.curr_menu = self.main_manu
-
+        self.credits = CreditsMenu(self)        
+        self.curr_menu = self.main_menu
+        #Sub Menu
+        self.inventory = InventoryMenu(self)
+        self.sub_menu = None
 
     def load_data(self):
         pass
@@ -114,7 +123,7 @@ class Game:
         self.message_log = None
         self.game_state = None
     
-        self.player, self.entities, self.game_map, self.game_state = get_game_variables(self)
+        self.player, self.entities, self.game_map, self.game_state, self.message_log = get_game_variables(self)
       
         self.fov_map = intialize_fov(self.game_map)
         self.fov_recompute = True
@@ -128,22 +137,48 @@ class Game:
                 self.playing , self.running = False, False
             if self.act_exit:
                 self.playing = False    
-                    
+            if self.act_show_inv:
+                self.inventory.display_menu()
+
             self.display.fill(BLACK)
             self.player_turn_results =  []
 
 
             if self.act_move and self.game_state == GameState.PLAYERS_TURN:
                 self.move()
+                self.game_state = GameState.ENEMY_TURN
                
             render_all(self.display,self.game_map,self.fov_map,self.fov_recompute,self.entities)           
             self.window.blit(self.display, (0, 0))
             pg.display.update()
+            if self.game_state == GameState.ENEMY_TURN:
+                self.enemy_move()
 
 
+           
+    def enemy_move(self):
+        for entity in self.entities:
+                if entity.ai:
+                    enemy_turn_results = entity.ai.take_turn(self.player, self.fov_map, self.game_map, self.entities)
 
-            self.reset_keys()
+                    for enemy_turn_result in enemy_turn_results:
+                        message = enemy_turn_result.get("message")
+                        dead_entity = enemy_turn_result.get("dead")
 
+                        if message:
+                            self.message_log.add_message(message)
+                        if dead_entity:
+                            if dead_entity == self.player:
+                                message , self.game_state = kill_player(dead_entity)
+                            else:
+                                message = kill_monster(dead_entity)
+                            self.message_log .add_message(message)
+                        if self.game_state == GameState.PLAYER_DEAD:
+                            break
+                    if self.game_state == GameState.PLAYER_DEAD:
+                        break
+        else:
+            self.game_state = GameState.PLAYERS_TURN
     def move(self):
         dx,dy = self.act_move
         destination_x = self.player.x + dx
@@ -152,19 +187,28 @@ class Game:
         if not self.game_map.is_blocked(destination_x,destination_y):
             target = self.player.get_blocking_entities_at_location(self.entities, destination_x, destination_y)
             if target:
-                #attack_results = player.fighter.attack(target)
-                #player_turn_results.extend(attack_results)
-                pass
+                attack_results = self.player.fighter.attack(target)
+                player_turn_results.extend(attack_results)                
             else:
                 fov_recompute = True
                 self.player.move(dx,dy)
 
 
-    def draw_text(self, text, size, x, y):
+    def draw_text(self, text, size, x, y, color=WHITE,text_align=TEXT_ALIGN.CENTER):
         font = pg.font.Font(self.font_name, size)
-        text_surface = font.render(text, True, WHITE)
+        text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
-        text_rect.center = (x,y)
+        if text_align == TEXT_ALIGN.CENTER:
+            text_rect.center = (x,y)
+        elif text_align == TEXT_ALIGN.LEFT:
+            text_rect.midleft = (x, y)
+        elif text_align == TEXT_ALIGN.RIGHT:
+            text_rect.midright = (x,y)
         self.display.blit(text_surface,text_rect)
 
         return text_rect
+
+    def draw_panel(self, color, x, y, width, height):
+        rect = (x, y, width, height)
+        pg.draw.rect(self.display,color,rect)
+        return rect
