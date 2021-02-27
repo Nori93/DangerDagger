@@ -1,13 +1,21 @@
 import pygame as pg
 from settings import Settings
 from color import *
-from menu import *
+
+from menus.menu import Menu
+from menus.main_menu import MainMenu
+from menus.options_menu import OptionsMenu
+from menus.credits_menu import CreditsMenu
+from menus.inventory_menu import InventoryMenu
+from menus.pauze_menu import PauzeMenu
+
 from init_new_game import get_game_variables
 from render_function import render_all
 from death_functions import *
 from game_state import GameState
 from input_handlers import handle_game, handle_mouse
 from fov_functions import intialize_fov, recompute_fov
+from data_loaders import save_game, load_game
 from text_align import TEXT_ALIGN
 class Game:   
 
@@ -64,8 +72,6 @@ class Game:
 
         self.load_data()
 
-        #keys
-        self.reset_keys()
         #Main Manu
         self.main_menu = MainMenu(self)
         self.options = OptionsMenu(self)
@@ -74,35 +80,16 @@ class Game:
         #Sub Menu
         self.inventory = InventoryMenu(self)
         self.sub_menu = None
+        self.pauze_menu = PauzeMenu(self)
+
+        #NewGame or Load Game
+        self.new_game = False
+        self.load_game = False
+        self.error = False
 
     def load_data(self):
         pass
     
-
-    def check_events(self):
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                self.running, self.playing  = False, False
-                self.curr_menu.run_display = False
-            if event.type == pg.KEYDOWN:
-                if event.key == pg.K_RETURN:
-                    self.START_KEY = True
-                if event.key == pg.K_BACKSPACE:
-                    self.BACK_KEY = True
-                if event.key == pg.K_DOWN:
-                    self.DOWN_KEY = True
-                if event.key == pg.K_UP:
-                    self.UP_KEY = True
-                if event.key == pg.K_ESCAPE:
-                    self.ESC = True
-            if event.type == pg.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    self.L_MOUSE_BUTTON_DOWN = True
-    
-
-    def reset_keys(self):
-         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY ,self.L_MOUSE_BUTTON_DOWN, self.ESC = False, False, False, False, False, False
-
     def handle_game_keys(self):
         action = handle_game(self.game_state)
         mouse_action = handle_mouse()
@@ -119,6 +106,18 @@ class Game:
         self.act_left_click = mouse_action.get("left_click")
         self.act_right_click = mouse_action.get("right_click")
 
+    def save_game(self):
+        save_game(self.player, self.entities,self.game_map, self.message_log, self.game_state)
+
+    def start_new_game(self):
+        self.player, self.entities, self.game_map, self.message_log, self.game_state = get_game_variables(self)
+        self.fov_map = intialize_fov(self.game_map)
+        self.display.fill(BLACK)
+
+    def load_last_game(self):
+        self.player, self.entities, self.game_map, self.message_log, self.game_state = load_game()
+        self.fov_map = intialize_fov(self.game_map)
+        self.display.fill(BLACK)
 
     def game_loop(self):
         self.player = None
@@ -127,11 +126,19 @@ class Game:
         self.message_log = None
         self.game_state = None
     
-        self.player, self.entities, self.game_map, self.game_state, self.message_log = get_game_variables(self)
+        if self.new_game:
+           self.start_new_game()
+        elif self.load_game:
+            try:
+                self.load_last_game()
+            except:
+                self.error = True
+                self.load_message = "Save file not found"
+                return
+        
         self.previous_game_state = self.game_state
         self.player_turn_result =  []
-        
-        self.fov_map = intialize_fov(self.game_map)
+                
         self.fov_recompute = True
 
         self.targeting_item = None
@@ -146,19 +153,28 @@ class Game:
 
 
             if self.act_quit:
+                
                 self.playing , self.running = False, False
+
             if self.act_exit:
-                self.playing = False    
-            
+                #Pause Menu
+                #TODO: Pause Menu with save, load,exit , newgame, options,
+                # In future some nice illustration of flors and starrs 
+                self.pauze_menu.display_menu()
+                
+
             if self.act_stairs and self.game_state == GameState.PLAYERS_TURN:
-                pass
-           
-                 
+                #next Flore
+                pass 
+
             if self.act_move and self.game_state == GameState.PLAYERS_TURN:
+                #Make a move
                 self.move()
+                #Give Ai a move
                 self.game_state = GameState.ENEMY_TURN
             
             if self.act_pickup:
+                #PickUp staff
                 self.pickup()
 
             if self.act_show_inv:

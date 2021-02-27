@@ -16,6 +16,8 @@ def handle_main_menu():
                 return {"up_key":True}
             if event.key == pg.K_ESCAPE:
                 return {"esc":True}
+            if event.key == pg.K_KP_ENTER:
+                return {'start_key': True}
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == 1:
                 return {"mouse_left":True}
@@ -23,6 +25,8 @@ def handle_main_menu():
 
 def handle_game(game_state):
     if game_state == GameState.PLAYERS_TURN:
+        return handle_player_turn_keys()
+    if game_state == GameState.PLAYER_DEAD:
         return handle_player_turn_keys()
 
     return {}
@@ -64,7 +68,19 @@ def handle_player_turn_keys():
             if event.key == pg.K_ESCAPE:
                 return {"exit": True}
     return {}   
+
+
+def handle_player_dead_keys():
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            return {"quit": True}
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_ESCAPE:
+                return {"exit": True}
+            if event.key == pg.K_KP_ENTER:
+                return {'restart': True}
     
+    return {}
 
 def handle_mouse():
     for event in pg.event.get():

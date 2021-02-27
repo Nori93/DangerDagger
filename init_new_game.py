@@ -26,7 +26,7 @@ def get_game_variables(game):
     entities = [player]
 
     dag_equippable_component = Equippable(EQUIPMENT_SLOTS.WEAPONS)
-    dag_weapon_component = Weapon(2, 4, 10, WEAPON_TYPE.DAGGER)
+    dag_weapon_component = Weapon(4, 7, 20, WEAPON_TYPE.DAGGER)
     dagger = Entity(0,0, SKY, "Dagger",equippable= dag_equippable_component, weapon= dag_weapon_component)
     player.inventory.add_item(dagger)
     player.equipment.toggle_equip_main_hand(dagger)
@@ -43,4 +43,4 @@ def get_game_variables(game):
     message_log = MessageLog(game.message_x, game.message_width, game.message_height)
     game_state = GameState.PLAYERS_TURN
 
-    return player, entities, game_map, game_state, message_log
+    return player, entities, game_map, message_log, game_state, 

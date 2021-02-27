@@ -37,7 +37,10 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
              draw_entity(display, entity, ts)
 
     render_bar(display, 50, 20, 200, 30, "HP", player.fighter.hp, player.fighter.max_hp,
-        GREEN, DARK_RED, 14,font_name,half_color = ORANGE, quarter_coler = RED)
+        GREEN, DARK_RED, 14, font_name, half_color = ORANGE, quarter_coler = RED)
+
+    render_bar(display, 50, 5, 200, 15, "EXP", player.level.current_xp, player.level.exprience_to_next_level,
+        YELLOW, DARK_RED, 8, font_name,half_color=YELLOW, quarter_coler=YELLOW)
 
     y= game_map.height - 10
     x = 10
@@ -71,7 +74,7 @@ def draw_panel(display, color, x, y, width, height):
     pg.draw.rect(display,color,rect)
     return rect
 
-def render_bar(display, x, y, total_width, height, name, value, maximum, bar_color, back_color,font_size,font_name,half_color = None, quarter_coler= None):
+def render_bar(display, x, y, total_width, height, name, value, maximum, bar_color, back_color,font_size,font_name, half_color = None, quarter_coler= None):
     bar_width = int(float(value / maximum * total_width))
     if half_color == None:
         half_color = bar_color

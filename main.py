@@ -1,5 +1,5 @@
 from game import Game
-
+import sys
 g = Game()
 
 while g.running:
