@@ -37,6 +37,20 @@ class GameMap:
         tiles = [[Tile(True,x,y) for y in range(self.map_height)] for x in range(self.map_width)]
         return tiles
 
+    def next_floor(self, player, message_log, max_rooms, room_min_size, room_max_size, map_width, map_height):
+        self.dungeon_level += 1
+        entities = [player]
+        
+        self.tiles = self.initialize_tiles()
+        self.make_map(max_rooms, room_min_size,room_max_size, map_width, map_height, player, entities)
+          
+        player.fighter.heal(player.fighter.max_hp // 2)
+
+        message_log.add_message(Message("You take a moment to rest, and rocover your strength.", 
+            libtcod.light_violet))
+        
+        return entities
+
     def make_map(self,max_rooms, room_min_size, room_max_size, map_width, map_height,
      player, entities):
         rooms = []

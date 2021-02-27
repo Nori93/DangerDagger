@@ -151,6 +151,12 @@ class Game:
             self.handle_game_keys()
             self.player_turn_results =  []
 
+            if self.level_up:
+                #Make a level up menu
+
+                #To Delete
+                
+                pass 
 
             if self.act_quit:
                 
@@ -164,8 +170,8 @@ class Game:
                 
 
             if self.act_stairs and self.game_state == GameState.PLAYERS_TURN:
-                #next Flore
-                pass 
+                #Taking stairs to lower level of dunguan 
+                self.taking_stairs()                
 
             if self.act_move and self.game_state == GameState.PLAYERS_TURN:
                 #Make a move
@@ -196,10 +202,11 @@ class Game:
                 self.enemy_move()
 
     def taking_stairs(self):
-        for entity in entities:
+        for entity in self.entities:
             if entity.stairs and entity.x == self.player.x and entity.y == self.player.y:
-                self.entities = game_map.next_floor(player, message_log, constants)
-                self.fov_map = intialize_fov(game_map)
+                self.entities = self.game_map.next_floor(self.player,self.message_log,self.max_room, self.room_min_size,
+                     self.room_max_size, self.map_width, self.map_height)
+                self.fov_map = intialize_fov(self.game_map)
                 self.fov_recompute = True,
                 self.display.fill(BLACK)
                     

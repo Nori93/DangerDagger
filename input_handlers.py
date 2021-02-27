@@ -61,9 +61,9 @@ def handle_player_turn_keys():
                 return {"drop_inventory": True}
             if event.key == pg.K_j:
                 return {"show_character_screen": True}
-            if event.key == pg.K_KP_ENTER and event.key == pg.K_LALT:
+            if event.key == pg.K_RETURN and event.key == pg.K_LALT:
                 return {"fullscreen": True}
-            if event.key == pg.K_KP_ENTER:
+            if event.key == pg.K_RETURN:
                 return {'take_stairs': True}
             if event.key == pg.K_ESCAPE:
                 return {"exit": True}
