@@ -89,8 +89,7 @@ class MainMenu(Menu):
         self.move_mouse()
         if self.act_start_key or (self.act_mouse_left and self.mouse_is_over_menu):
             if self.state == MainMenu.STATE.START:
-                self.game.curr_menu = self.game.create_char
-                self.game.new_game = True
+                self.game.curr_menu = self.game.create_char                
             elif self.state == MainMenu.STATE.LOAD:
                 self.game.playing = True
                 self.game.load_game = True

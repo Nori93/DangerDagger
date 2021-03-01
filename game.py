@@ -10,6 +10,18 @@ from menus.create_character_menu import CreateCharacterMenu
 from menus.inventory_menu import InventoryMenu
 from menus.pauze_menu import PauzeMenu
 
+
+from components.fighter import Fighter
+from components.inventory import Inventory
+from components.level import Level
+from components.equipment import Equipment
+from components.equippable import Equippable
+from components.weapon import Weapon, WEAPON_TYPE
+
+from equipment_slots import EQUIPMENT_SLOTS
+
+from entity import Entity
+
 from init_new_game import get_game_variables
 from render_function import render_all
 from death_functions import *
@@ -91,7 +103,28 @@ class Game:
         self.load_game = False
         self.error = False
 
+        self.temp_player = None
+
+    def set_player(self, name="Player"):
+        fighter_component = Fighter(hp=100, defense=1, power=2)
+        inventory_component = Inventory(26)
+        level_component = Level()
+        equipment_component = Equipment()
+        self.temp_player = Entity(int(self.width/2), int(self.height /2),WHITE, name, blocks=True, 
+            render_order=RenderOrder.ACTOR, fighter = fighter_component,
+            inventory=inventory_component,  level=level_component,
+            equipment=equipment_component)
+        dag_equippable_component = Equippable(EQUIPMENT_SLOTS.WEAPONS)
+        dag_weapon_component = Weapon(4, 7, 20, WEAPON_TYPE.DAGGER)
+        dagger = Entity(0,0, SKY, "Dagger",equippable= dag_equippable_component, weapon= dag_weapon_component)
+        self.temp_player.inventory.add_item(dagger)
+        self.temp_player.equipment.toggle_equip_main_hand(dagger)
     
+        sh_equippable_component = Equippable(EQUIPMENT_SLOTS.WEAPONS, defense_bonus=2)
+        sh_weapon_component = Weapon(0, 1, 50, WEAPON_TYPE.SHIELD)
+        shield = Entity(0,0, YELLOW, "Shield",equippable= sh_equippable_component, weapon=sh_weapon_component)
+        self.temp_player.inventory.add_item(shield)
+
 
     def load_data(self):
         pass
@@ -107,7 +140,9 @@ class Game:
         self.act_full = action.get("fullscreen")
         self.act_stairs = action.get("take_stairs")
         self.act_exit = action.get("exit")
+        self.act_level_up = action.get("level_up")
         self.act_quit = action.get("quit")
+       
 
         self.act_left_click = mouse_action.get("left_click")
         self.act_right_click = mouse_action.get("right_click")

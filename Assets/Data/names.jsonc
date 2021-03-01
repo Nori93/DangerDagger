@@ -1,0 +1,137 @@
+[
+    {
+        "race":"Dragonborn",        
+        "names": [
+            "Delred Durmorn",
+            "Thammeatoth Caernaar",
+            "Shiarnud Doseth",
+            "Tildrath Durgrax",
+            "Crelden Balbarum",
+            "Clernik Medciar",
+            "Cliltoled Saythas",
+            "Myuced Faerythas",
+            "Cralthondrareac Gheroth",
+            "Krurden Lordhall"
+        ]
+    },
+    {
+        "race":"Dwarf",        
+        "names": [
+            "Galgron Frozenanvil",
+            "Grydek Mountainblood",
+            "Thuldus Brightfist",
+            "Barmek Brawndelver",
+            "Grennyl Broadbrow",
+            "Muirdohr Duthgeg",
+            "Karmek Herthehr",
+            "Krumdrom Grurther",
+            "Gremmyl Gluldivohr",
+            "Malgram Drebrekom"
+        ]
+    },
+    {
+        "race":"Elf",        
+        "names": [
+            "Perxalim",
+            "Elmenor",
+            "Herqen",
+            "Iansandoral",
+            "Naecan",
+            "Thekian",
+            "Aemaer",
+            "Morzumin",
+            "Traris",
+            "Admaer"
+        ]
+    },
+    {
+        "race":"Gnome",        
+        "names": [
+            "Jormorn",
+            "Xocryn",
+            "Sajin",
+            "Wretix",
+            "Salkas",
+            "Bilros",
+            "Felver",
+            "Toston",
+            "Kasser",
+            "Qualen"
+        ]
+    },
+    {
+        "race":"Half-Elf",        
+        "names": [
+            "Xavneak",
+            "Sarfaerd",
+            "Norqarim",
+            "Arozaren",
+            "Eirvoril",
+            "Traneak",
+            "Tyrgotin",
+            "Ulphanis",
+            "Lornan",
+            "Ulfaelor"
+        ]
+    },
+    {
+        "race":"Halfling",        
+        "names": [
+            "Valumo",
+            "Nener",
+            "Orihace",
+            "Quotran",
+            "Danric",
+            "Yarhorn",
+            "Xopos",
+            "Norsire",
+            "Davbin",
+            "Jankin"
+        ]
+    },
+    {
+        "race":"Half-Orc",        
+        "names": [
+            "Atrerak",
+            "Urthabark",
+            "Tanenars",
+            "Hururimm",
+            "Ugudak",
+            "Brakodall",
+            "Ronaonars",
+            "Ullerall",
+            "Ugeg",
+            "Hagidark"
+        ]
+    },
+    {
+        "race":"Human",        
+        "names": [
+            "Jumad Jesha",
+            "Bhuhlam Nemid",
+            "Tekveg Boneflaw",
+            "Oi Ironcut",
+            "Kobom Rev",
+            "Zi Li",
+            "Odror Lunagleam",
+            "Strur Snowshade",
+            "Ga-Vim-Vith Heltilrihk",
+            "Johue Sonkrifk"        
+        ]
+    },
+    {
+        "race":"Tiefling",        
+        "names": [
+            "Erzer",
+            "Casris",
+            "Urnon",
+            "Skathos",
+            "Ozreus",
+            "Thyneris",
+            "Ebcius",
+            "Thexius",
+            "Akrakir",
+            "Ekrius"        
+        ]
+    }
+]

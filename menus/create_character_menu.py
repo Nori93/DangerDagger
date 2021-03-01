@@ -6,7 +6,7 @@ from input_handlers import handle_main_menu
 from render_function import draw_text, draw_panel
 from text_align import TEXT_ALIGN
 from menus.menu import Menu
-from data_loaders import load_race, load_class
+from data_loaders import load_race, load_class, load_name_for_race
 from race_enum import RACE
 from class_enum import CLASS
 from random import randint
@@ -101,6 +101,8 @@ class CreateCharacterMenu(Menu):
 
         self.rolls = []
 
+        self.player_name = None
+
     def display_menu(self):
         self.run_display = True        
         while self.run_display:
@@ -131,7 +133,8 @@ class CreateCharacterMenu(Menu):
                 self.display_roll_dices()
             elif self.state == CreateCharacterMenu.STATE.SET_ROLLS:
                 self.display_set_roll_menu()
-
+            elif self.state == CreateCharacterMenu.STATE.CHARACTER_DESC:
+                self.display_set_name_menu()
             self.blit_screen()
 
 
@@ -604,7 +607,7 @@ class CreateCharacterMenu(Menu):
         
         self.set_cur(
             self.set_roll_option[self.option_index].x + 100,
-            self.set_roll_option[self.option_index].y + 10,
+            self.set_roll_option[self.option_index].y + 10,offset_r= 150
             )
 
         _y = 0   
@@ -628,18 +631,24 @@ class CreateCharacterMenu(Menu):
         if self.act_start_key:
             if self.option_index == 0 and self.t_strenght == 0:
                 self.t_strenght = self.max_roll_sum(self.rolls[self.loadet_index])
+                self.loadet_index +=1
             if self.option_index == 1 and self.t_dexterity == 0:
                 self.t_dexterity = self.max_roll_sum(self.rolls[self.loadet_index])
+                self.loadet_index +=1
             if self.option_index == 2 and self.t_constitution == 0:
                 self.t_constitution = self.max_roll_sum(self.rolls[self.loadet_index])
+                self.loadet_index +=1
             if self.option_index == 3 and self.t_intelligence == 0:
                 self.t_intelligence = self.max_roll_sum(self.rolls[self.loadet_index])
+                self.loadet_index +=1
             if self.option_index == 4 and self.t_wisdom == 0:
                 self.t_wisdom = self.max_roll_sum(self.rolls[self.loadet_index])
-            if self.option_index == 5 and self.t_charisma == 0:
-                self.t_wisdom = self.max_roll_sum(self.rolls[self.loadet_index])
-            if  self.loadet_index  < 6:
                 self.loadet_index +=1
+            if self.option_index == 5 and self.t_charisma == 0:
+                self.t_charisma = self.max_roll_sum(self.rolls[self.loadet_index])
+                self.loadet_index +=1
+            if  self.loadet_index  < 6:
+                pass
             else:
                 self.state = CreateCharacterMenu.STATE.CHARACTER_DESC
                 self.strenght +=self.t_strenght
@@ -649,9 +658,36 @@ class CreateCharacterMenu(Menu):
                 self.wisdom += self.t_wisdom
                 self.charisma += self.t_charisma
                 self.reset_temp_stats()
+                self.option_index = 0
+                self.loadet_index = 0
 
 
 
         self.move_cursor(self._stats)
         self.draw_cursor()
     
+    def display_set_name_menu(self):
+        self._names = load_name_for_race(self.selected_race)
+        self.set_name_option = []
+        for i,name in enumerate(self._names["names"]):
+            self.set_name_option.append(draw_text(self.game.display, name, self.font_size, self.game.font_name,
+             self.select_panel_x + self.offset_x,
+             self.select_panel_y + self.offset_y * i,
+             text_align=TEXT_ALIGN.LEFT))
+        
+        self.set_cur(
+            self.set_name_option[self.option_index].x + 100,
+            self.set_name_option[self.option_index].y + 10,offset_r= 430
+            )
+
+        if self.act_start_key:
+            self.player_name = self._names["names"][self.option_index]
+            self.game.set_player(name=self.player_name)
+            self.run_display = False
+            self.game.playing = True
+            self.game.new_game = True
+
+        self.move_cursor(self._names["names"])
+        self.draw_cursor()
+
+   

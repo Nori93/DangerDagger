@@ -58,4 +58,14 @@ def load_class(type: CLASS):
 		for d in data:
 			if d['class'].upper() == str(type.name).replace("_","-"):
 				return d
-		
+
+NAME_FILE = 'names.jsonc'
+
+def load_name_for_race(type: RACE): 
+	dir = path.dirname(__file__)
+	dir = path.join(dir,ASSETS_DIR,DATA_DIR,NAME_FILE)
+	with open(dir) as json_file:
+		data = json.load(json_file)
+		for d in data:
+			if d['race'].upper() == str(type.name).replace("_","-"):
+				return d

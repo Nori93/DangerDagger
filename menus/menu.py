@@ -26,9 +26,9 @@ class Menu():
         self.game.window.blit(self.game.display, (0, 0))
         pg.display.update()      
 
-    def set_cur(self, x, y):
-        self.cursor_rect_l.midtop =(x + self.offset_l, y + self.offset_h)
-        self.cursor_rect_r.midtop =(x + self.offset_r, y + self.offset_h)
+    def set_cur(self, x, y, offset_r=115,offset_l = -100,offset_h = 0):
+        self.cursor_rect_l.midtop =(x + offset_l, y + offset_h)
+        self.cursor_rect_r.midtop =(x + offset_r, y + offset_h)
 
     def handle_manu(self):
         action = handle_main_menu()
