@@ -1,0 +1,391 @@
+[
+    {
+        "class":"Barbarian",
+        "desc":"A fierce warrior of primitive\nbackground who can enter\na battle rage.",
+        "hit_die":"d12",
+        "primary_ability":["Strength"],
+        "primary_ability_nr": 1,
+        "saves":["Strength","Constituion"],
+        "equipment":{
+            "weapon_choice":[
+                {"main_hand":"greataxe"},
+                {"main_hand":"handaxe","off_hand":"handaxe"}
+            ],
+            "armor_choice":[],
+            "items_choice":[
+                {
+                    "items":[ 
+                        "explorer's pack",
+                        "javelin","javelin","javelin"
+                    ]
+                }               
+            ]
+        }      
+    },
+    {
+        "class":"Bard",
+        "desc":"An inspiring magician whose power\nechoes the music of creation.",
+        "hit_die":"d8",
+        "primary_ability":["Charisma"],
+        "primary_ability_nr": 1,
+        "saves":["Dexterity","Charisma"],
+        "equipment":{
+            "weapon_choice":[
+                {"main_hand":"rapier"},
+                {"main_hand":"longsword"}                
+            ],
+            "armor_choice":[
+                {"armor":"leather armor"}
+            ],
+            "items_choice":[
+                {
+                    "items":[
+                    "diplomat's pack",
+                    "lute",
+                    "dagger"
+                    ]
+                },
+                {
+                    "items":[
+                    "entertainer's pack",
+                    "lute",
+                    "dagger"
+                    ]
+                }
+            ]
+        }      
+    },
+    {
+        "class":"Cleric",
+        "desc":"A priestly champion who wields divine\nmagic in service of a higher power.",
+        "hit_die":"d8",
+        "primary_ability":["Wisdom"],
+        "primary_ability_nr": 1,
+        "saves":["Wisdom","Charisma"],
+        "equipment":{
+            "weapon_choice":[
+                {"main_hand":"mace","off_hand":"shield"},
+                {"main_hand":"warhammer","off_hand":"shield"}                
+            ],
+            "armor_choice":[
+                {"armor":"scale mail"},
+                {"armor":"leather armor"},
+                {"armor":"chain mail"}
+            ],
+            "items_choice":[
+                {
+                    "items":[
+                        "priest's pack",
+                        "holy symbol",
+                        "crossbow",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt"            
+                    ]
+                },
+                {
+                    "items":[
+                        "explorer's  pack",
+                        "holy symbol",
+                        "crossbow",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt"                
+                    ]
+                }
+            ]
+        }      
+    },
+    {
+        "class":"Druid",
+        "desc":"A priest of the Old Faith,\nwielding the powers of nature\nand adopting animal forms.",
+        "hit_die":"d8",
+        "primary_ability":["Wisdom"],
+        "primary_ability_nr": 1,
+        "saves":["Intelligence","Wisdom"],
+        "equipment":{
+            "weapon_choice":[               
+                {"main_hand":"scimitar","off_hand":"shield"}                
+            ],
+            "armor_choice":[
+                {"armor":"leather armor"}              
+            ],
+            "items_choice":[
+                {
+                    "items":[
+                        "explorer's  pack",
+                        "druidic focus"         
+                    ]
+                }
+            ]
+        }      
+    },
+    {
+        "class":"Fighter",
+        "desc":"A master of martial combat,\nskilled with a variety\nof weapons and armor.",
+        "hit_die":"d10",
+        "primary_ability":["Strength","Dexterity"],
+        "primary_ability_nr": 1,
+        "saves":["Strength","Constitution"],
+        "equipment":{
+            "weapon_choice":[               
+                {"main_hand":"scimitar","off_hand":"shield"},
+                {"main_hand":"longbow"}        
+            ],
+            "armor_choice":[
+                {"armor":"chain mail"},
+                {"armor":"leather armor"}              
+            ],
+            "items_choice":[
+                {
+                    "items":[
+                        "crossbow",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
+                        "dungeoneer's pack"       
+                    ]
+                },
+                {
+                    "items":[
+                        "handaxes",
+                        "handaxes",
+                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
+                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
+                        "explorer's pack"       
+                    ]
+                }
+            ]
+        }      
+    },
+    {
+        "class":"Monk",
+        "desc":"A master of martial arts,\nharnessing the power\nof the body in pursuit\nof physical and spiritual\nperfection.",
+        "hit_die":"d8",
+        "primary_ability":["Dexterity","Wisdom"],
+        "primary_ability_nr": 2,
+        "saves":["Strength","Dexterity"],
+        "equipment":{
+            "weapon_choice":[               
+                {"main_hand":"shortsword"}                       
+            ],
+            "armor_choice":[],
+            "items_choice":[
+                {
+                    "items":[                       
+                        "dart","dart","dart","dart","dart","dart","dart","dart","dart","dart",
+                        "dungeoneer's pack"       
+                    ]
+                },
+                {
+                    "items":[                       
+                        "dart","dart","dart","dart","dart","dart","dart","dart","dart","dart",
+                        "explorer's pack"       
+                    ]
+                }              
+            ]
+        }      
+    },
+    {
+        "class":"Paladin",
+        "desc":"A holy warrior bound to\na sacred oath",
+        "hit_die":"d10",
+        "primary_ability":["Strength","Charisma"],
+        "primary_ability_nr": 2,
+        "saves":["Wisdom","Charisma"],
+        "equipment":{
+            "weapon_choice":[               
+                {"main_hand":"shortsword","off_hand":"shield"},
+                {"main_hand":"shortsword","off_hand":"shortsword"}                      
+            ],
+            "armor_choice":[
+                {"armor":"chain mail"}
+            ],
+            "items_choice":[
+                {
+                    "items":[                       
+                        "javelin","javelin","javelin","javelin","javelin",
+                        "priest's pack",
+                        "holy symbol"      
+                    ]
+                },
+                {
+                    "items":[                       
+                        "javelin","javelin","javelin","javelin","javelin",
+                        "explorer's pack",
+                        "holy symbol"   
+                    ]
+                }              
+            ]
+        }      
+    },
+    {
+        "class":"Ranger",
+        "desc":"A warrior who combats threats\non the edges of civilization.",
+        "hit_die":"d10",
+        "primary_ability":["Dexterity","Wisdom"],
+        "primary_ability_nr": 2,
+        "saves":["Strenght","Dexterity"],
+        "equipment":{
+            "weapon_choice":[               
+                {"main_hand":"longbow"}                               
+            ],
+            "armor_choice":[
+                {"armor":"scale mail"},
+                {"armor":"leather armor"}
+            ],
+            "items_choice":[
+                {
+                    "items":[                       
+                        "shortsword","shortsword",
+                        "dungeoneer's  pack",
+                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
+                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow"      
+                    ]
+                },
+                {
+                    "items":[                       
+                        "shortsword","shortsword",
+                        "explorer's  pack",
+                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
+                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow"      
+                    ]
+                }             
+            ]
+        }      
+    },
+    {
+        "class":"Rogue",
+        "desc":"A scoundrel who uses stealth\nand trickery to overcome\nobstacles and enemies.",
+        "hit_die":"d8",
+        "primary_ability":["Dexterity"],
+        "primary_ability_nr": 1,
+        "saves":["Dexterity","Intelligence"],
+        "equipment":{
+            "weapon_choice":[               
+                {"main_hand":"dagger","off_hand":"dagger"} 
+            ],
+            "armor_choice":[
+                {"armor":"leather armor"}
+            ],
+            "items_choice":[
+                {
+                    "items":[                       
+                        "rapier",
+                        "shortbow",
+                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
+                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
+                        "burglar's pack",
+                        "thieves' tools"      
+                    ]
+                },
+                {
+                    "items":[                       
+                        "shortsword",
+                        "shortsword",
+                        "dungeoneer’s pack",
+                        "thieves' tools"      
+                    ]
+                }          
+            ]
+        }      
+    },
+    {
+        "class":"Sorcerer",
+        "desc":"A spellcaster who draws on inherent\nmagic from a gift or bloodline.",
+        "hit_die":"d6",
+        "primary_ability":["Charisma"],
+        "primary_ability_nr": 1,
+        "saves":["Constitution","Charisma"],
+        "equipment":{
+            "weapon_choice":[               
+                {"main_hand":"dagger","off_hand":"dagger"} 
+            ],
+            "armor_choice":[],
+            "items_choice":[
+                {
+                    "items":[
+                        "crossbow",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
+                        "component pouch",   
+                        "dungeoneer’s pack"
+                           
+                    ]
+                },
+                {
+                    "items":[                       
+                        "shortsword",
+                        "arcane focus",
+                        "explorer’s pack"                         
+                    ]
+                }          
+            ]
+        }      
+    },
+    {
+        "class":"Warlock",
+        "desc":"A wielder of magic that is derived\nfrom a bargain with an extraplanar\nentity.",
+        "hit_die":"d8",
+        "primary_ability":["Charisma"],
+        "primary_ability_nr": 1,
+        "saves":["Wisdom","Charisma"],
+        "equipment":{
+            "weapon_choice":[               
+                {"main_hand":"dagger","off_hand":"dagger"} 
+            ],
+            "armor_choice":[
+                {"armor":"leather armor"}
+            ],
+            "items_choice":[
+                {
+                    "items":[
+                        "crossbow",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
+                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
+                        "component pouch",   
+                        "scholar's pack"
+                           
+                    ]
+                },
+                {
+                    "items":[                       
+                        "shortsword",
+                        "arcane focus",
+                        "dungeoneer's pack"                         
+                    ]
+                }          
+            ]
+        }      
+    },
+    {
+        "class":"Wizard",
+        "desc":"A scholarly magic-user capable\nof manipulating the structures\nof reality.",
+        "hit_die":"d6",
+        "primary_ability":["Intelligence"],
+        "primary_ability_nr": 1,
+        "saves":["Intelligence","Wisdom"],
+        "equipment":{
+            "weapon_choice":[
+                {"main_hand":"staff"},       
+                {"off_hand":"dagger"} 
+            ],
+            "armor_choice":[
+                {"armor":"leather armor"}
+            ],
+            "items_choice":[
+                {
+                    "items":[                        
+                        "component pouch",   
+                        "scholar's pack",
+                        "spellbook"                           
+                    ]
+                },
+                {
+                    "items":[
+                        "arcane focus",
+                        "explorer's pack",
+                        "spellbook"                       
+                    ]
+                }          
+            ]
+        }      
+    }
+]

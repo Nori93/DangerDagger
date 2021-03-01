@@ -1,5 +1,8 @@
-import os
+from os import path
 import pickle
+import json
+from race_enum import RACE
+from class_enum import CLASS
 
 SAVE_FILE = "savegame.dat"
 
@@ -30,3 +33,29 @@ def load_game():
 	player = entities[player_index]
 	
 	return player, entities, game_map, message_log, game_state
+
+ASSETS_DIR = "Assets"
+DATA_DIR = "Data"
+
+RACES_FILE = 'races.jsonc'
+
+def load_race(type: RACE): 
+	dir = path.dirname(__file__)
+	dir = path.join(dir,ASSETS_DIR,DATA_DIR,RACES_FILE)
+	with open(dir) as json_file:
+		data = json.load(json_file)
+		for d in data:
+			if d['race'].upper() == str(type.name).replace("_","-"):
+				return d
+
+CLASS_FILE = 'classes.jsonc'
+
+def load_class(type: CLASS): 
+	dir = path.dirname(__file__)
+	dir = path.join(dir,ASSETS_DIR,DATA_DIR,CLASS_FILE)
+	with open(dir) as json_file:
+		data = json.load(json_file)
+		for d in data:
+			if d['class'].upper() == str(type.name).replace("_","-"):
+				return d
+		

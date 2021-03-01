@@ -6,6 +6,7 @@ from menus.menu import Menu
 from menus.main_menu import MainMenu
 from menus.options_menu import OptionsMenu
 from menus.credits_menu import CreditsMenu
+from menus.create_character_menu import CreateCharacterMenu
 from menus.inventory_menu import InventoryMenu
 from menus.pauze_menu import PauzeMenu
 
@@ -15,8 +16,10 @@ from death_functions import *
 from game_state import GameState
 from input_handlers import handle_game, handle_mouse
 from fov_functions import intialize_fov, recompute_fov
-from data_loaders import save_game, load_game
+from data_loaders import save_game, load_game,load_race
+from race_enum import RACE
 from text_align import TEXT_ALIGN
+
 class Game:   
 
     def __init__(self):
@@ -75,7 +78,8 @@ class Game:
         #Main Manu
         self.main_menu = MainMenu(self)
         self.options = OptionsMenu(self)
-        self.credits = CreditsMenu(self)        
+        self.credits = CreditsMenu(self)       
+        self.create_char = CreateCharacterMenu(self) 
         self.curr_menu = self.main_menu
         #Sub Menu
         self.inventory = InventoryMenu(self)
@@ -86,6 +90,8 @@ class Game:
         self.new_game = False
         self.load_game = False
         self.error = False
+
+    
 
     def load_data(self):
         pass
@@ -151,7 +157,7 @@ class Game:
             self.handle_game_keys()
             self.player_turn_results =  []
 
-            if self.level_up:
+            if self.act_level_up:
                 #Make a level up menu
 
                 #To Delete
