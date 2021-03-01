@@ -19,7 +19,7 @@
     {
         "race":"Elf",
         "desc":"Elves are a magical people\nof otherworldly grace,\nliving in the world\nbut not entirely part of it.",
-        "dextrity": 2,     
+        "dexterity": 2,     
         "aditional": [
             "Darkvision", "Keen Senses", "Fey Ancestry", "Trance"
         ]
