@@ -39,6 +39,7 @@ class Select():
         self.drawed = True    
 
     def create_options(self,options):
+        self.drawed = False
         _y=self.y
         _x=self.x
         for opt in options:

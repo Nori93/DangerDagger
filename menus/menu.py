@@ -6,6 +6,7 @@ from text_align import TEXT_ALIGN
 
 from ui.label import Label
 from ui.select import Select
+from ui.panel import Panel
 
 class Menu():
     def __init__(self, game):
@@ -62,6 +63,11 @@ class Menu():
                     'name':element.attrib["name"],
                     'element':self.create_select(element)
                 })
+            elif element.tag == "panel":
+                elements.append({
+                    'name':element.attrib["name"],
+                    'element':self.create_panel(element)
+                })
         
         return elements
     
@@ -110,3 +116,20 @@ class Menu():
             color=color,
             horizontal=horizontal
         )
+    
+    def create_panel(self, element):
+        background_color=None
+        if "background_color" in element.attrib:
+            background_color = self.text_to_color(element.attrib['background_color'])
+        return Panel(
+            background_color = background_color,
+            x=int(element.attrib['x']),
+            y=int(element.attrib['y']),
+            width=int(element.attrib['width']),
+            height=int(element.attrib['height'])
+            
+        )
+
+    def text_to_color(self,color):
+        array = color.split(",")
+        return (int(array[0]),int(array[1]),int(array[2]))

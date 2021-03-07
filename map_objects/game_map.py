@@ -26,8 +26,8 @@ class GameMap:
 
         self.tile_size = tile_size
         # width and hight in tiles
-        self.map_width = int(self.width / self.tile_size)
-        self.map_height= int(self.height/ self.tile_size)    
+        self.map_width = int(self.width/10)
+        self.map_height= int(self.height/10)    
 
         self.tiles = self.initialize_tiles()
         self.unique_id = 0
@@ -42,7 +42,7 @@ class GameMap:
         entities = [player]
         
         self.tiles = self.initialize_tiles()
-        self.make_map(max_rooms, room_min_size,room_max_size, map_width, map_height, player, entities)
+        self.make_map(max_rooms, room_min_size,room_max_size, player, entities)
           
         player.fighter.heal(player.fighter.max_hp // 2)
 
@@ -51,7 +51,7 @@ class GameMap:
         
         return entities
 
-    def make_map(self,max_rooms, room_min_size, room_max_size, map_width, map_height,
+    def make_map(self,max_rooms, room_min_size, room_max_size,
      player, entities):
         rooms = []
         num_rooms = 0
@@ -62,8 +62,8 @@ class GameMap:
         for r in range(max_rooms):
             w = randint(room_min_size, room_max_size)
             h = randint(room_min_size, room_max_size)
-            x = randint(0, map_width - w - 1)
-            y = randint(0, map_height - h - 1)
+            x = randint(0, self.map_width - w - 1)
+            y = randint(0, self.map_height - h - 1)
 
             new_room = Rect(x, y, w, h)
             
@@ -175,13 +175,13 @@ class GameMap:
                     item_component = Item(use_funtion=cast_fireball, targeting=True,
                      targeting_message=Message("Left-click a target tile for the fireball, or right-click to cancel", libtcod.light_cyan),
                      damage=25, radius=3)
-                    item = Entity(x, y, '#', libtcod.red, "Fireball Scroll", render_order=RenderOrder.ITEM, 
+                    item = Entity(x, y,  RED, "Fireball Scroll", render_order=RenderOrder.ITEM, 
                         item=item_component)
                 elif item_choice == "confusion_scroll":
                     item_component = Item(use_funtion=cast_confuse, targeting=True,
                      targeting_message=Message("Left-click an enemy to confuse it, or right-click to cancel", libtcod.light_cyan),
                      damage=25, radius=3)
-                    item = Entity(x, y, '#', libtcod.light_pink, "Confuion Scroll", render_order=RenderOrder.ITEM, 
+                    item = Entity(x, y, ORANGE, "Confuion Scroll", render_order=RenderOrder.ITEM, 
                         item=item_component)
                 elif item_choice == "sword":
                     equippable_component = Equippable(EQUIPMENT_SLOTS.WEAPONS, power_bonus=3)
@@ -191,11 +191,11 @@ class GameMap:
                 elif item_choice == "shield":
                     equippable_component = Equippable(EQUIPMENT_SLOTS.WEAPONS, defense_bonus=1)
                     weapon_component = Weapon(0, 1,50, WEAPON_TYPE.SHIELD)
-                    item = Entity(x, y,ORANGE, "Shield", render_order=RenderOrder.ITEM, 
+                    item = Entity(x, y, ORANGE, "Shield", render_order=RenderOrder.ITEM, 
                         equippable=equippable_component, weapon= weapon_component)
                 else:
                     item_component = Item(use_funtion=cast_lightning, damage=20, maximum_range=5)
-                    item = Entity(x, y, '#', libtcod.yellow, "Lightning Scroll", render_order=RenderOrder.ITEM, 
+                    item = Entity(x, y, YELLOW, "Lightning Scroll", render_order=RenderOrder.ITEM, 
                         item=item_component)
 
                 entities.append(item)

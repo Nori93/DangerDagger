@@ -5,7 +5,7 @@ class Settings:
         self.screen_width = 1024
         self.screen_height = 680
 
-        self.tile_size = 20
+        self.tile_size = 50
         self.FPS = 60
 
         self.bar_width = 20 

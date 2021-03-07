@@ -17,7 +17,7 @@ def get_game_variables(game):
     player = game.temp_player
     entities = [player]
     game_map = GameMap(game.width, game.height, game.tile_size)
-    game_map.make_map(game.max_room,game.room_min_size,game.room_max_size,game.map_width,game.map_height,player,entities)
+    game_map.make_map(game.max_room,game.room_min_size,game.room_max_size,player,entities)
     message_log = MessageLog(game.message_x, game.message_width, game.message_height)
     game_state = GameState.PLAYERS_TURN
 

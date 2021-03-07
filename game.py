@@ -49,8 +49,8 @@ class Game:
 
 
         self.tile_size = self.settings.get["tile_size"]
-        self.map_width = int(self.width / self.tile_size)
-        self.map_height= int(self.height/ self.tile_size)  
+        self.map_width = int(self.width  / 10)
+        self.map_height= int(self.height / 10)  
 
         self.message_x = self.settings.get["message_x"]
         self.message_width = self.settings.get["message_width"]

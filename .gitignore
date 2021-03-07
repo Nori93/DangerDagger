@@ -129,4 +129,5 @@ dmypy.json
 *.zip
 
 # save data
-savegame.dat
+*.dat
+Assets/money.png

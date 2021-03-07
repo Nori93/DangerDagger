@@ -11,12 +11,20 @@ class RenderOrder(Enum):
 
 def render_all(display, game_map, fov_map, fov_recompute, entities, message_log, font_name, player):
     ts = game_map.tile_size
+
+    player_to_mid_x =  (player.x *ts) - (game_map.width/2)
+    player_to_mid_y =  (player.y *ts) - (game_map.height/2)
+
     if fov_recompute:
         for y in range(game_map.map_height):
             for x in range(game_map.map_width):
                 visable = fov_map.fov[y][x]                 
                 wall = game_map.tiles[x][y].block_sight
-                rect = (x * ts, y * ts, ts, ts)                
+                rect = (
+                    (x * ts) - player_to_mid_x,
+                    (y * ts) - player_to_mid_y, 
+                    ts, ts
+                    )                
                 if visable:
                     if wall:                        
                         pg.draw.rect(display, LIGHT_WALL, rect )
@@ -34,7 +42,7 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
 
     for entity in entities_in_render_order:
         if fov_map.fov[entity.y][entity.x] or (entity.stairs and game_map.tiles[entity.x][entity.y].explored):
-             draw_entity(display, entity, ts)
+             draw_entity(display, entity, ts, player_to_mid_x=player_to_mid_x, player_to_mid_y=player_to_mid_y)
 
     render_bar(display, 50, 20, 200, 30, "HP", player.fighter.hp, player.fighter.max_hp,
         GREEN, DARK_RED, 14, font_name, half_color = ORANGE, quarter_coler = RED)
@@ -50,10 +58,13 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
 
    
       
-def draw_entity(display, entity, tile_size):    
+def draw_entity(display, entity, tile_size, player_to_mid_x = 0,player_to_mid_y = 0):    
     #libtcod.console_set_default_foreground(con, entity.color)
     #libtcod.console_put_char(con, entity.x, entity.y, entity.char,libtcod.BKGND_NONE)
-    rect = (entity.x * tile_size, entity.y * tile_size, tile_size, tile_size)     
+    rect = (
+        (entity.x * tile_size) - player_to_mid_x,
+        (entity.y * tile_size) - player_to_mid_y, 
+        tile_size, tile_size)      
     pg.draw.rect(display, entity.color, rect )
 
 def draw_text(display, text,  size, font_name, x, y, color=WHITE,text_align=TEXT_ALIGN.CENTER):

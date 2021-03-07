@@ -7,19 +7,24 @@ from text_align import TEXT_ALIGN
 from equipment_slots import EQUIPMENT_SLOTS
 from menus.menu import Menu
 from menus.main_or_offhand_menu import MainOrOffHandMenu
+from data_loaders import load_xml
 
 
 class InventoryMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.game = game
+        self.xml = load_xml("inventory_menu.xml")
+        self.option_index = 0
         self.main_off_menu = MainOrOffHandMenu(self.game)
+        self.mouse_is_over_menu = False
 
     def display_menu(self):
-        self.run_display = True
-        self.option_index = 0
+        self.run_display = True        
         self.curent_item = None
+        self.elements = self.render_from_xml(self.xml)
         while self.run_display:
+            self.game.clock.tick(self.game.FPS)
             self.handle_manu()
             if self.act_quit:
                 self.game.running, self.game.playing, self.run_display = False, False, False  
@@ -28,31 +33,36 @@ class InventoryMenu(Menu):
             if self.act_start_key:
                self.use_item()
            
-            panel_height = 40 + (len(self.game.player.inventory.items) * 25)
-            draw_panel(self.game.display,INVENTORY_BG, 330, 200, 400, panel_height + 50)
-            draw_panel(self.game.display,INVENTORY_INNER, 340, 240, 380, panel_height)
-            draw_text(self.game.display,'Inventory',20, self.game.font_name, 440, 220)
-            opt = self.draw_inventory()
-            self.move_cursor()
-            self.draw_cursor(opt)
+            for element in self.elements:   
+                if element["element"].__type__ == "select": 
+                    element["element"].create_options(self.get_items())                   
+                    mx ,my =pg.mouse.get_pos()
+                    index = element["element"].collidepoint(mx,my)
+                    if index != None:
+                        self.option_index = index
+                        self.mouse_is_over_menu = True
+                    element["element"].set_cur(self.option_index)
+                
+                element["element"].draw(self.game.display)
+
+            self.move_cursor()      
             self.blit_screen()
 
     def use_item(self):
-         if self.curent_item:
+        self.curent_item = self.game.player.inventory.items[self.option_index]
+        if self.curent_item:
             if self.curent_item.equippable:
                 self.use_equicable_item()
     
     def use_equicable_item(self):
         if self.curent_item.equippable.slot == EQUIPMENT_SLOTS.WEAPONS:
             if self.curent_item.equippable.equipped:
-                if self.curent_item.weapon.main:
+                if self.game.player.equipment.main_hand == self.curent_item.weapon:
                     self.game.player.equipment.toggle_equip_main_hand(self.curent_item)
                 else:
                     self.game.player.equipment.toggle_equip_off_hand(self.curent_item)
             elif self.curent_item.weapon.two_hand:
                 self.game.player.equipment.toggle_equip_main_hand(self.curent_item)
-            elif self.curent_item.weapon.only_off_hand:
-                self.game.player.equipment.toggle_equip_off_hand(self.curent_item)
             else:
                 
                 op_index = self.main_off_menu.display_menu()
@@ -62,6 +72,20 @@ class InventoryMenu(Menu):
                     self.game.player.equipment.toggle_equip_off_hand(self.curent_item)
 
 
+
+
+    def get_items(self):
+        items = []
+        if self.game.player.inventory and len(self.game.player.inventory.items) != 0:
+            for item in self.game.player.inventory.items:
+                if self.game.player.equipment.main_hand == item:
+                    items.append("{} [on main hand]".format(item.name))
+                elif self.game.player.equipment.off_hand == item:
+                    items.append("{} [on off hand]".format(item.name))
+                else:
+                    items.append(item.name)
+        
+        return items
 
 
 
