@@ -46,59 +46,41 @@ class WEAPON_TYPE(Enum):
     SHIELD = 37
     GREATSHIELD = 38
 
-
 class Weapon:
-
-    def __init__(self, dmg, max_dmg,  crit_rate, w_type, range_use=None):
-        self.dmg = dmg
-        self.max_dmg = max_dmg
-        self.crit_rate = crit_rate
-        self.w_type = w_type,    
-        self.range_use = range_use
-
-        self.two_hand_weapon = [
-            WEAPON_TYPE.GREAT_CLUB,
-            WEAPON_TYPE.SHORTBOW,
-            WEAPON_TYPE.GLAIVE,
-            WEAPON_TYPE.GREATAXE,
-            WEAPON_TYPE.GREATSWORD,
-            WEAPON_TYPE.HALBERD,
-            WEAPON_TYPE.MAUL,
-            WEAPON_TYPE.PIKE,
-            WEAPON_TYPE.CROSSBOW_HEAVY,
-            WEAPON_TYPE.LONGBOW
-        ]
-
-        self. throw_weapon = [
-            WEAPON_TYPE.HANDAXE,
-            WEAPON_TYPE.JAVELIN,
-            WEAPON_TYPE.LIGHT_HAMMER,
-            WEAPON_TYPE.SPEAR,
-            WEAPON_TYPE.DART,
-            WEAPON_TYPE.TRIDNET,
-            WEAPON_TYPE.NET
-        ]
-        self.off_hand = [
-            WEAPON_TYPE.SHIELD,
-            WEAPON_TYPE.GREATSHIELD
-        ]
-
-        self.main = True
-        if self.range_use:
-            self.range_use.owner = self
-
-        self.two_hand = self.w_type[0] in self.two_hand_weapon
-        self.throwable = self.w_type[0] in self.throw_weapon       
-        self.only_off_hand = self.w_type[0] in self.off_hand
-        
-        
-    @property
-    def damage_done(self):
-        chanse = randint(1,100)
-        if chanse >= 100 - self.crit_rate:
-            return self.max_dmg
-        else:
-            return self.dmg
-
-    def throw(self):
-        pass
+    def __init__(
+        self,
+        weapon_type:WEAPON_TYPE,
+        dmg_quantity:int,
+        weapon_dmg:int,
+        dmg_type:int,
+        light:bool=False,
+        heavy:bool=False,
+        two_hand:bool=False,
+        reach:bool=False,
+        finesse:bool=False,
+        thrown:bool=False,
+        ammunition:bool=False,
+        range_from:int=None,
+        range_to:int=None,
+        versatile:bool=False,
+        versatile_value:int=None,
+        loading:bool=False,
+        special:bool=False
+        ):
+        self.weapon_type = weapon_type
+        self.dmg_quantity = dmg_quantity
+        self.weapon_dmg = weapon_dmg
+        self.dmg_type = dmg_type
+        self.light = light
+        self.heavy = heavy
+        self.two_hand = two_hand
+        self.reach = reach
+        self.finesse = finesse
+        self.thrown = thrown
+        self.ammunition = ammunition
+        self.range_from = range_from
+        self.range_to = range_to
+        self.versatile = versatile
+        self.versatile_value = versatile_value
+        self.loading = loading
+        self.special = special

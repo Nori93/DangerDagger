@@ -681,8 +681,7 @@ class CreateCharacterMenu(Menu):
             )
 
         if self.act_start_key:
-            self.player_name = self._names["names"][self.option_index]
-            self.game.set_player(name=self.player_name)
+            self.set_game_player()
             self.run_display = False
             self.game.playing = True
             self.game.new_game = True
@@ -690,4 +689,38 @@ class CreateCharacterMenu(Menu):
         self.move_cursor(self._names["names"])
         self.draw_cursor()
 
-   
+    def set_game_player(self):
+        player_name = self._names["names"][self.option_index]
+       
+
+        w_main, w_off, armor_choice, w_choise, items_choice = None, None, None, None, None
+        
+        if self.sel_weapon_index != -1:
+            w_choise = self.loadet_class["equipment"]["weapon_choice"][self.sel_weapon_index]
+            if "main_hand" in w_choise:
+                w_main = w_choise["main_hand"]
+            
+            if "off_hand" in w_choise:
+                w_off = w_choise["off_hand"]
+        
+        if self.sel_armor_index != -1:
+            armor_choice = self.loadet_class["equipment"]["armor_choice"][self.sel_armor_index]
+        
+        if self.sel_items_index != -1:
+            items_choice =  self.loadet_class["equipment"]["items_choice"][self.sel_items_index]
+        
+        self.game.set_player(
+            name=player_name,
+            weapon_main=w_main,
+            weapon_off=w_off,
+            armor= armor_choice,
+            items= items_choice,
+            race= self.loadet_race,
+            clase= self.loadet_race,
+            strenght = self.strenght,
+            dexterity = self.dexterity,
+            constitution = self.constitution,
+            intelligence = self.intelligence,
+            wisdom = self.wisdom,
+            charisma = self.charisma,
+            )

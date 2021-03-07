@@ -10,7 +10,7 @@ from menus.create_character_menu import CreateCharacterMenu
 from menus.inventory_menu import InventoryMenu
 from menus.pauze_menu import PauzeMenu
 
-
+from components.ability import Ability
 from components.fighter import Fighter
 from components.inventory import Inventory
 from components.level import Level
@@ -31,6 +31,9 @@ from fov_functions import intialize_fov, recompute_fov
 from data_loaders import save_game, load_game,load_race
 from race_enum import RACE
 from text_align import TEXT_ALIGN
+
+from database.db_entity_collection import get_transaction
+from database.entities.weapons import Weapons
 
 class Game:   
 
@@ -104,8 +107,36 @@ class Game:
         self.error = False
 
         self.temp_player = None
+        self.config = {}
 
-    def set_player(self, name="Player"):
+    def set_player(
+        self, 
+        name="Player",
+        weapon_main=None,
+        weapon_off=None,
+        armor=None, 
+        items=None,
+        race=None,
+        clase=None,
+        strenght=None,
+        dexterity=None,
+        constitution=None,
+        intelligence=None,
+        wisdom=None,
+        charisma=None
+        ):
+        db = get_transaction()
+
+        db.query()
+        ability_component = Ability(
+            strenght=strenght,
+            dexterity=dexterity,
+            constitution=constitution,
+            intelligence=intelligence,
+            wisdom=wisdom,
+            charisma=charisma
+        )
+
         fighter_component = Fighter(hp=100, defense=1, power=2)
         inventory_component = Inventory(26)
         level_component = Level()
@@ -113,18 +144,44 @@ class Game:
         self.temp_player = Entity(int(self.width/2), int(self.height /2),WHITE, name, blocks=True, 
             render_order=RenderOrder.ACTOR, fighter = fighter_component,
             inventory=inventory_component,  level=level_component,
-            equipment=equipment_component)
-        dag_equippable_component = Equippable(EQUIPMENT_SLOTS.WEAPONS)
-        dag_weapon_component = Weapon(4, 7, 20, WEAPON_TYPE.DAGGER)
-        dagger = Entity(0,0, SKY, "Dagger",equippable= dag_equippable_component, weapon= dag_weapon_component)
-        self.temp_player.inventory.add_item(dagger)
-        self.temp_player.equipment.toggle_equip_main_hand(dagger)
-    
-        sh_equippable_component = Equippable(EQUIPMENT_SLOTS.WEAPONS, defense_bonus=2)
-        sh_weapon_component = Weapon(0, 1, 50, WEAPON_TYPE.SHIELD)
-        shield = Entity(0,0, YELLOW, "Shield",equippable= sh_equippable_component, weapon=sh_weapon_component)
-        self.temp_player.inventory.add_item(shield)
+            equipment=equipment_component,
+            ability=ability_component)
+     
+        if weapon_main:
+            w_main = db.query(Weapons).filter(Weapons.weapon_name == weapon_main).one()
+            item = self.create_weapon(w_main)
+            self.temp_player.inventory.add_item(item)
+            self.temp_player.equipment.toggle_equip_main_hand(item)
 
+        if weapon_off:
+            w_off = db.query(Weapons).filter(Weapons.weapon_name == weapon_off).one()
+            item = self.create_weapon(w_main)
+            self.temp_player.inventory.add_item(item)
+            self.temp_player.equipment.toggle_equip_off_hand(item)
+    
+
+    def create_weapon(self,weapon):
+        equippable_component = Equippable(EQUIPMENT_SLOTS.WEAPONS)
+        weapon_component = Weapon(
+            weapon_type=weapon.weapon_enum,
+            dmg_quantity=weapon.damage_quantity,
+            weapon_dmg=weapon.weapon_damage,
+            dmg_type=weapon.id_weapon_damage_type,
+            light=weapon.light,
+            heavy=weapon.heavy,
+            two_hand=weapon.two_hand,
+            reach=weapon.reach,
+            finesse=weapon.finesse,
+            thrown=weapon.thrown,
+            ammunition=weapon.ammunition,
+            range_from=weapon.range_from,
+            range_to=weapon.range_to,
+            versatile=weapon.versatile,
+            versatile_value=weapon.versatile_value,
+            loading=weapon.loading
+        )
+        return Entity(0,0, SKY, weapon.weapon_name, equippable= equippable_component, weapon= weapon_component)
+    
 
     def load_data(self):
         pass

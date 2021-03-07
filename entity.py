@@ -3,10 +3,24 @@ import tcod as libtcod
 from components.item import Item
 from render_function import RenderOrder
 class Entity:
-    def __init__(self, x, y, color, name, blocks=False,
-        render_order=RenderOrder.CORPSE, fighter=None, ai=None,
-        item=None, inventory=None, stairs=None, level=None,
-        equipment=None, equippable=None, weapon=None):
+    def __init__(
+        self,
+        x,
+        y,
+        color,
+        name,
+        blocks=False,
+        render_order=RenderOrder.CORPSE,
+        fighter=None,
+        ai=None,
+        item=None, 
+        inventory=None, 
+        stairs=None, 
+        level=None,
+        equipment=None, 
+        equippable=None, 
+        weapon=None,
+        ability=None):
         self.x = x
         self.y = y       
         self.color = color
@@ -22,6 +36,7 @@ class Entity:
         self.equipment = equipment
         self.equippable = equippable
         self.weapon = weapon
+        self.ability = ability
         
         if self.fighter:
             self.fighter.owner = self
@@ -45,6 +60,9 @@ class Entity:
                 self.item.owner = self
         if self.weapon:
             self.weapon.owener = self
+        
+        if self.ability:
+            self.ability.owener = self
 
     def move(self, dx, dy):
         self.x += dx

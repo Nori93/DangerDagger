@@ -8,15 +8,15 @@
         "saves":["Strength","Constituion"],
         "equipment":{
             "weapon_choice":[
-                {"main_hand":"greataxe"},
-                {"main_hand":"handaxe","off_hand":"handaxe"}
+                {"main_hand":"Greataxe"},
+                {"main_hand":"Handaxe","off_hand":"Handaxe"}
             ],
             "armor_choice":[],
             "items_choice":[
                 {
                     "items":[ 
-                        "explorer's pack",
-                        "javelin","javelin","javelin"
+                        "Explorer's pack",
+                        "Javelin","Javelin","Javelin"
                     ]
                 }               
             ]
@@ -31,25 +31,25 @@
         "saves":["Dexterity","Charisma"],
         "equipment":{
             "weapon_choice":[
-                {"main_hand":"rapier"},
-                {"main_hand":"longsword"}                
+                {"main_hand":"Rapier"},
+                {"main_hand":"Longsword"}                
             ],
             "armor_choice":[
-                {"armor":"leather armor"}
+                {"armor":"Leather"}
             ],
             "items_choice":[
                 {
                     "items":[
-                    "diplomat's pack",
-                    "lute",
-                    "dagger"
+                    "Diplomat's pack",
+                    "Lute",
+                    "Dagger"
                     ]
                 },
                 {
                     "items":[
                     "entertainer's pack",
-                    "lute",
-                    "dagger"
+                    "Lute",
+                    "Dagger"
                     ]
                 }
             ]
@@ -64,31 +64,31 @@
         "saves":["Wisdom","Charisma"],
         "equipment":{
             "weapon_choice":[
-                {"main_hand":"mace","off_hand":"shield"},
-                {"main_hand":"warhammer","off_hand":"shield"}                
+                {"main_hand":"Mace","off_hand":"Shield"},
+                {"main_hand":"Warhammer","off_hand":"Shield"}                
             ],
             "armor_choice":[
-                {"armor":"scale mail"},
-                {"armor":"leather armor"},
-                {"armor":"chain mail"}
+                {"armor":"Scale mail"},
+                {"armor":"Leather"},
+                {"armor":"Chain mail"}
             ],
             "items_choice":[
                 {
                     "items":[
-                        "priest's pack",
-                        "holy symbol",
-                        "crossbow",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt"            
+                        "Priest's pack",
+                        "Holy symbol",
+                        "Crossbow",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt"            
                     ]
                 },
                 {
                     "items":[
-                        "explorer's  pack",
-                        "holy symbol",
-                        "crossbow",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt"                
+                        "Explorer's  pack",
+                        "Holy symbol",
+                        "Crossbow",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt"                
                     ]
                 }
             ]
@@ -103,16 +103,16 @@
         "saves":["Intelligence","Wisdom"],
         "equipment":{
             "weapon_choice":[               
-                {"main_hand":"scimitar","off_hand":"shield"}                
+                {"main_hand":"Scimitar","off_hand":"Shield"}                
             ],
             "armor_choice":[
-                {"armor":"leather armor"}              
+                {"armor":"Leather"}              
             ],
             "items_choice":[
                 {
                     "items":[
-                        "explorer's  pack",
-                        "druidic focus"         
+                        "Explorer's  pack",
+                        "Druidic focus"         
                     ]
                 }
             ]
@@ -127,29 +127,29 @@
         "saves":["Strength","Constitution"],
         "equipment":{
             "weapon_choice":[               
-                {"main_hand":"scimitar","off_hand":"shield"},
-                {"main_hand":"longbow"}        
+                {"main_hand":"Scimitar","off_hand":"Shield"},
+                {"main_hand":"Longbow"}        
             ],
             "armor_choice":[
-                {"armor":"chain mail"},
-                {"armor":"leather armor"}              
+                {"armor":"Chain mail"},
+                {"armor":"Leather"}              
             ],
             "items_choice":[
                 {
                     "items":[
-                        "crossbow",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
-                        "dungeoneer's pack"       
+                        "Crossbow",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt",
+                        "Dungeoneer's pack"       
                     ]
                 },
                 {
                     "items":[
-                        "handaxes",
-                        "handaxes",
-                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
-                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
-                        "explorer's pack"       
+                        "Handaxes",
+                        "Handaxes",
+                        "Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow",
+                        "Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow",
+                        "Explorer's  pack"       
                     ]
                 }
             ]
@@ -164,20 +164,20 @@
         "saves":["Strength","Dexterity"],
         "equipment":{
             "weapon_choice":[               
-                {"main_hand":"shortsword"}                       
+                {"main_hand":"Shortsword"}                       
             ],
             "armor_choice":[],
             "items_choice":[
                 {
                     "items":[                       
-                        "dart","dart","dart","dart","dart","dart","dart","dart","dart","dart",
-                        "dungeoneer's pack"       
+                        "Dart","Dart","Dart","Dart","Dart","Dart","Dart","Dart","Dart","Dart",
+                        "Dungeoneer's pack"       
                     ]
                 },
                 {
                     "items":[                       
-                        "dart","dart","dart","dart","dart","dart","dart","dart","dart","dart",
-                        "explorer's pack"       
+                        "Dart","Dart","Dart","Dart","Dart","Dart","Dart","Dart","Dart","Dart",
+                        "Explorer's pack"       
                     ]
                 }              
             ]
@@ -192,25 +192,25 @@
         "saves":["Wisdom","Charisma"],
         "equipment":{
             "weapon_choice":[               
-                {"main_hand":"shortsword","off_hand":"shield"},
-                {"main_hand":"shortsword","off_hand":"shortsword"}                      
+                {"main_hand":"Shortsword","off_hand":"Shield"},
+                {"main_hand":"Shortsword","off_hand":"Shortsword"}                      
             ],
             "armor_choice":[
-                {"armor":"chain mail"}
+                {"armor":"Chain mail"}
             ],
             "items_choice":[
                 {
                     "items":[                       
-                        "javelin","javelin","javelin","javelin","javelin",
-                        "priest's pack",
-                        "holy symbol"      
+                        "Javelin","Javelin","Javelin","Javelin","Javelin",
+                        "Priest's pack",
+                        "Holy symbol"      
                     ]
                 },
                 {
                     "items":[                       
-                        "javelin","javelin","javelin","javelin","javelin",
-                        "explorer's pack",
-                        "holy symbol"   
+                        "Javelin","Javelin","Javelin","Javelin","Javelin",
+                        "Explorer's pack",
+                        "Holy symbol"   
                     ]
                 }              
             ]
@@ -225,27 +225,27 @@
         "saves":["Strenght","Dexterity"],
         "equipment":{
             "weapon_choice":[               
-                {"main_hand":"longbow"}                               
+                {"main_hand":"Longbow"}                               
             ],
             "armor_choice":[
-                {"armor":"scale mail"},
-                {"armor":"leather armor"}
+                {"armor":"Scale mail"},
+                {"armor":"Leather"}
             ],
             "items_choice":[
                 {
                     "items":[                       
-                        "shortsword","shortsword",
-                        "dungeoneer's  pack",
-                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
-                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow"      
+                        "Shortsword","Shortsword",
+                        "Dungeoneer's  pack",
+                        "Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow",
+                        "Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow"      
                     ]
                 },
                 {
                     "items":[                       
-                        "shortsword","shortsword",
-                        "explorer's  pack",
-                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
-                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow"      
+                        "Shortsword","Shortsword",
+                        "Explorer's  pack",
+                        "Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow",
+                        "Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow"      
                     ]
                 }             
             ]
@@ -260,28 +260,28 @@
         "saves":["Dexterity","Intelligence"],
         "equipment":{
             "weapon_choice":[               
-                {"main_hand":"dagger","off_hand":"dagger"} 
+                {"main_hand":"Dagger","off_hand":"Dagger"} 
             ],
             "armor_choice":[
-                {"armor":"leather armor"}
+                {"armor":"Leather"}
             ],
             "items_choice":[
                 {
                     "items":[                       
-                        "rapier",
-                        "shortbow",
-                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
-                        "arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow","arrow",
-                        "burglar's pack",
-                        "thieves' tools"      
+                        "Rapier",
+                        "Shortbow",
+                        "Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow",
+                        "Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow","Arrow",
+                        "Burglar's pack",
+                        "Thieves' tools"      
                     ]
                 },
                 {
                     "items":[                       
-                        "shortsword",
-                        "shortsword",
-                        "dungeoneer’s pack",
-                        "thieves' tools"      
+                        "Shortsword",
+                        "Shortsword",
+                        "Dungeoneer's  pack",
+                        "Thieves' tools"      
                     ]
                 }          
             ]
@@ -296,25 +296,25 @@
         "saves":["Constitution","Charisma"],
         "equipment":{
             "weapon_choice":[               
-                {"main_hand":"dagger","off_hand":"dagger"} 
+                {"main_hand":"Dagger","off_hand":"Dagger"} 
             ],
             "armor_choice":[],
             "items_choice":[
                 {
                     "items":[
-                        "crossbow",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
-                        "component pouch",   
-                        "dungeoneer’s pack"
+                        "Crossbow",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt",
+                        "Component pouch",   
+                        "Dungeoneer's  pack"
                            
                     ]
                 },
                 {
                     "items":[                       
-                        "shortsword",
-                        "arcane focus",
-                        "explorer’s pack"                         
+                        "Shortsword",
+                        "Arcane focus",
+                        "Explorer's  pack"                         
                     ]
                 }          
             ]
@@ -329,27 +329,27 @@
         "saves":["Wisdom","Charisma"],
         "equipment":{
             "weapon_choice":[               
-                {"main_hand":"dagger","off_hand":"dagger"} 
+                {"main_hand":"Dagger","off_hand":"Dagger"} 
             ],
             "armor_choice":[
-                {"armor":"leather armor"}
+                {"armor":"Leather"}
             ],
             "items_choice":[
                 {
                     "items":[
-                        "crossbow",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
-                        "bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt","bolt",
-                        "component pouch",   
-                        "scholar's pack"
+                        "Crossbow",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt",
+                        "Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt","Bolt",
+                        "Component pouch",   
+                        "Scholar's pack"
                            
                     ]
                 },
                 {
                     "items":[                       
-                        "shortsword",
-                        "arcane focus",
-                        "dungeoneer's pack"                         
+                        "Shortsword",
+                        "Arcane focus",
+                        "Dungeoneer's pack"                         
                     ]
                 }          
             ]
@@ -365,24 +365,24 @@
         "equipment":{
             "weapon_choice":[
                 {"main_hand":"staff"},       
-                {"off_hand":"dagger"} 
+                {"off_hand":"Dagger"} 
             ],
             "armor_choice":[
-                {"armor":"leather armor"}
+                {"armor":"Leather"}
             ],
             "items_choice":[
                 {
                     "items":[                        
-                        "component pouch",   
-                        "scholar's pack",
-                        "spellbook"                           
+                        "Component pouch",   
+                        "Scholar's pack",
+                        "Spellbook"                           
                     ]
                 },
                 {
                     "items":[
-                        "arcane focus",
-                        "explorer's pack",
-                        "spellbook"                       
+                        "Arcane focus",
+                        "Explorer's pack",
+                        "Spellbook"                       
                     ]
                 }          
             ]

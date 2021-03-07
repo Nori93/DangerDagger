@@ -14,6 +14,10 @@ def handle_main_menu():
                return {"down_key":True}
             if event.key == pg.K_UP:
                 return {"up_key":True}
+            if event.key == pg.K_LEFT:
+                   return {"left_key":True}
+            if event.key == pg.K_RIGHT:
+                return {"right_key":True}
             if event.key == pg.K_ESCAPE:
                 return {"esc":True}
             if event.key == pg.K_KP_ENTER:

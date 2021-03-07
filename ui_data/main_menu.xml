@@ -1,0 +1,22 @@
+<main_menu>
+    <label 
+        name="title" 
+        text="Danger Dagger" 
+        size='50' 
+        font_name=".\Assets\dogicabold.ttf"
+        x="512"
+        y="230"/>
+    <select 
+        name="main_menu"
+        size="20"
+        font_name=".\Assets\dogicabold.ttf"
+        x="512"
+        y="420"
+        offset="40">
+        <option text="Start Game" />
+        <option text="Load Game" />
+        <option text="Options" />
+        <option text="Credits" />
+        <option text="Exit" />
+    </select>
+</main_menu>

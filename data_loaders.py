@@ -1,6 +1,7 @@
 from os import path
 import pickle
 import json
+import xml.etree.ElementTree as ET
 from race_enum import RACE
 from class_enum import CLASS
 
@@ -19,7 +20,7 @@ def save_game(player, entities, game_map, message_log, game_state):
 		
 		
 def load_game():
-	if not os.path.isfile(SAVE_FILE):
+	if not path.isfile(SAVE_FILE):
 		raise FileNotFoundError
 		
 	data_file = pickle.load(open(SAVE_FILE, "rb"))
@@ -69,3 +70,10 @@ def load_name_for_race(type: RACE):
 		for d in data:
 			if d['race'].upper() == str(type.name).replace("_","-"):
 				return d
+
+DATA_UI = 'ui_data'
+def load_xml(file_name:str):
+	dir = path.dirname(__file__)
+	dir = path.join(dir,DATA_UI,file_name)
+	tree = ET.parse(dir)
+	return tree.getroot()
