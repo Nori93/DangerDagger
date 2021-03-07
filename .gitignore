@@ -128,4 +128,5 @@ dmypy.json
 
 *.zip
 
-*.dat
+# save data
+savegame.dat
