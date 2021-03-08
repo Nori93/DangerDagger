@@ -25,6 +25,8 @@ class Tile:
 
         self.tile_id = None
         self.image_name = None
+        self.wall = False
+        self.flore = False
 
     '''
     Round 1
@@ -76,16 +78,18 @@ class Tile:
 
     @property
     def __wall__(self):
-        if ((self.top_left and self.top_left.block_sight == False) or  
+        if self.wall:
+            return True
+        elif ((self.top_left and self.top_left.block_sight == False) or  
             (self.top_mid and self.top_mid.block_sight == False) or 
             (self.top_right and self.top_right.block_sight == False) or
             (self.mid_left and self.mid_left.block_sight == False) or 
             (self.mid_right and self.mid_right.block_sight == False) or
             (self.bottom_left and self.bottom_left.block_sight == False) or 
             (self.bottom_mid and self.bottom_mid.block_sight == False) or 
-            (self.bottom_right and self.bottom_right.block_sight == False)) and self.mid_mid.block_sight == True:
+            (self.bottom_right and self.bottom_right.block_sight == False)) and self.block_sight == True:
             return True
-        elif self.mid_mid.block_sight == False:
+        elif self.block_sight == False:
             return False
         else:
             return None 
@@ -93,6 +97,7 @@ class Tile:
     
     def set_wall_type(self):
         if self.__wall__:
+            self.wall = True
             # Corner
             if (self.bottom_right and self.bottom_right.__wall__ == False and 
                self.bottom_mid and self.bottom_mid.__wall__ == True and 
@@ -166,6 +171,10 @@ class Tile:
 
             elif self.mid_left and self.mid_left.__wall__ == False:
                 self.image_name = 'wall_right'
+        elif self.__wall__ == False:
+            self.flore = True
+            self.image_name = self.bind_flore()
+            
 
     def bind_wall(self):
         rnd = randint(1,100)
@@ -177,3 +186,31 @@ class Tile:
             return 'wall_inner_3'
         else:
             return 'wall_inner_4'
+
+    def bind_flore(self):
+        rnd = randint(1,100)
+        if rnd > 95:
+            return 'flore_craked_5' 
+        elif rnd > 90:
+            return 'flore_craked_4' 
+        elif rnd > 85:
+            return 'flore_craked_3'
+        elif rnd > 80:
+            return 'flore_craked_2'
+        elif rnd > 75:
+            return 'flore_craked_1'
+        else:
+            return 'flore_clean'
+
+    def clean_neighbors(self):
+        self.top_left = None
+        self.top_mid = None
+        self.top_right = None
+
+        self.mid_left = None
+        self.mid_mid = None
+        self.mid_right = None
+
+        self.bottom_left = None
+        self.bottom_mid = None
+        self.bottom_right = None

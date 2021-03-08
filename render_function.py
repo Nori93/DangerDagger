@@ -25,8 +25,8 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
                     (y * ts) - player_to_mid_y, 
                     ts, ts
                     )                
-                if visable or (game_map.tiles[x][y].bottom_mid and game_map.tiles[x][y].bottom_mid.__wall__
-                 and y != game_map.map_height -1 and fov_map.fov[y+1][x]):
+                if visable or (#game_map.tiles[x][y].bottom_mid and game_map.tiles[x][y].bottom_mid.__wall__ and
+                  y != game_map.map_height -1 and fov_map.fov[y+1][x]):
                     if wall:                        
                         #pg.draw.rect(display, LIGHT_WALL, rect )
                         if game_map.tiles[x][y].image_name == None:
@@ -34,7 +34,8 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
                         else:
                             display.blit(spritesheet.get_image_by_name("0_{}".format(game_map.tiles[x][y].image_name),ts,ts),rect)
                     else:                        
-                        pg.draw.rect(display, LIGHT_GROUND, rect )
+                        #pg.draw.rect(display, LIGHT_GROUND, rect )
+                        display.blit(spritesheet.get_image_by_name("0_{}".format(game_map.tiles[x][y].image_name),ts,ts),rect)
                     game_map.tiles[x][y].explored = True
                 elif ((x != 0 and x != game_map.map_width-1 and
                     y!= 0 and y != game_map.map_height-1) and
@@ -48,16 +49,27 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
                         else:
                             display.blit(spritesheet.get_image_by_name("2_{}".format(game_map.tiles[x][y].image_name),ts,ts),rect)
                     else:                        
-                        pg.draw.rect(display, LIGHT_GROUND, rect )    
+                        #pg.draw.rect(display, ORANGE, rect )
+                        if game_map.tiles[x][y].image_name == None:
+                            pass
+                        else:
+                            display.blit(spritesheet.get_image_by_name("1_{}".format(game_map.tiles[x][y].image_name),ts,ts),rect)  
 
                 elif game_map.tiles[x][y].explored:
                     if wall:
                         if game_map.tiles[x][y].image_name == None:
                             pass
                         else:
-                            display.blit(spritesheet.get_image_by_name("2_{}".format(game_map.tiles[x][y].image_name),ts,ts),rect)
+                            if game_map.tiles[x][y].image_name == None:
+                                pass
+                            else:
+                                display.blit(spritesheet.get_image_by_name("2_{}".format(game_map.tiles[x][y].image_name),ts,ts),rect)
                     else:
-                        pg.draw.rect(display, DARK_GROUND, rect )
+                        #pg.draw.rect(display, DARK_GROUND, rect )
+                        if game_map.tiles[x][y].image_name == None:
+                            pass
+                        else:
+                            display.blit(spritesheet.get_image_by_name("2_{}".format(game_map.tiles[x][y].image_name),ts,ts),rect)
                 
     entities_in_render_order = sorted(entities, key= lambda x: x.render_order.value)
 

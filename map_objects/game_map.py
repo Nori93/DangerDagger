@@ -101,6 +101,7 @@ class GameMap:
         for x in self.tiles:
             for y in x:
                 y.set_wall_type()
+                y.clean_neighbors()
         
         stairs_component = Stairs(self.dungeon_level + 1)
         down_stairs = Entity(center_of_last_room_x, center_of_last_room_y,
