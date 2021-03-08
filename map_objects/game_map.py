@@ -93,6 +93,11 @@ class GameMap:
                 self.place_entities(new_room, entities)
                 rooms.append(new_room)
                 num_rooms += 1
+
+        for x in self.tiles:
+            for y in x:
+                y.check_neighbors(self.tiles)
+
         stairs_component = Stairs(self.dungeon_level + 1)
         down_stairs = Entity(center_of_last_room_x, center_of_last_room_y,
             STAIRS, "Stairs", render_order= RenderOrder.STAIRS,

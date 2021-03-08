@@ -35,6 +35,8 @@ from text_align import TEXT_ALIGN
 from database.db_entity_collection import get_transaction
 from database.entities.weapons import Weapons
 
+from map_objects.sprite_sheet import SpriteSheet
+
 class Game:   
 
     def __init__(self):
@@ -108,6 +110,8 @@ class Game:
 
         self.temp_player = None
         self.config = {}
+
+        self.sprite_sheet = SpriteSheet('TILE_SPRITE_SHEAT')
 
     def set_player(
         self, 
@@ -292,7 +296,8 @@ class Game:
                 self.handling_player_turn_result()
             
             self.display.fill(BLACK)
-            render_all(self.display,self.game_map,self.fov_map,self.fov_recompute,self.entities,self.message_log,self.font_name,self.player)           
+            render_all(self.display,self.game_map,self.fov_map,self.fov_recompute,self.entities,
+            self.message_log,self.font_name,self.player,self.sprite_sheet)           
             self.window.blit(self.display, (0, 0))
             pg.display.update()
 

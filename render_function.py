@@ -9,7 +9,7 @@ class RenderOrder(Enum):
     ITEM = 3
     ACTOR = 4
 
-def render_all(display, game_map, fov_map, fov_recompute, entities, message_log, font_name, player):
+def render_all(display, game_map, fov_map, fov_recompute, entities, message_log, font_name, player, spritesheet):
     ts = game_map.tile_size
 
     player_to_mid_x =  (player.x *ts) - (game_map.width/2)
