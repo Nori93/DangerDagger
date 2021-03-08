@@ -34,7 +34,7 @@
    { "name": "0_wall_corner_left_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 80, "w": 16, "h": 16 } }] },
    { "name": "0_wall_bottom", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 16, "y": 80, "w": 16, "h": 16 } }] },
    { "name": "0_wall_corner_right_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 80, "w": 16, "h": 16 } }] },
-   { "name": "0_wall_inner_corner_right_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 16, "w": 16, "h": 15 } }] },
+   { "name": "0_wall_inner_corner_right_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 16, "w": 16, "h": 16 } }] },
    { "name": "0_wall_inner_corner_left_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 16, "w": 16, "h": 16 } }] },
    { "name": "0_wall_inner_right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 32, "w": 16, "h": 16 } }] },
    { "name": "0_wall_inner_left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 32, "w": 16, "h": 16 } }] },
