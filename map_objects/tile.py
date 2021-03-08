@@ -24,35 +24,54 @@ class Tile:
         self.bottom_right = None
 
         self.tile_id = None
+        self.image_name = None
 
     '''
-    [top_left(x-1,y-1)]    [top_min(x-1,y)]    [top_right(x-1,y+1)]
+    Round 1
+    [top_left(x-1,y-1)]    [top_min(x,y-1)]    [top_right(x-1,y+1)]
     [mid_left(x,y-1)]      [mid_mid(x,y)]      [mid_right(x,y+1)]
     [bottom_left(x+1,y-1)] [bottom_mid(x+1,y)] [bottom_right(x+1,y+1)]
+    '''
+    
+    '''
+    Round 2
+    [top_left(x-1,y+1)]    [top_min(x,y+1)]    [top_right(x+1,y+1)]
+    [mid_left(x-1,y)]      [mid_mid(x,y)]      [mid_right(x+1,y)]
+    [bottom_left(x-1,y-1)] [bottom_mid(x,y-1)] [bottom_right(x+1,y-1)]
+    '''
+
+    '''
+    Round 3
+    [top_left(x-1,y-1)]    [top_min(x,y-1)]    [top_right(x+1,y-1)]
+    [mid_left(x-1,y)]      [mid_mid(x,y)]      [mid_right(x+1,y)]
+    [bottom_left(x-1,y+1)] [bottom_mid(x,y+1)] [bottom_right(x+1,y+1)]
     '''
 
     def check_neighbors(self,tiles):
         #Top Row
         if self.y != 0 and self.x != 0:
             self.top_left = tiles[self.x - 1][self.y - 1]
-        if self.x != 0:
-            self.top_mid = tiles[self.x-1][self.y]
-        if self.y != (len(tiles[self.x]) - 1) and self.x != 0:
-            self.top_right = tiles[self.x - 1][self.y + 1]
-        #Mid Row
+
         if self.y != 0:
-            self.mid_left = tiles[self.x][self.y-1]    
+            self.top_mid = tiles[self.x][self.y-1]
+
+        if self.y != 0 and self.x != (len(tiles) - 1):
+            self.top_right = tiles[self.x + 1][self.y - 1]
+        #Mid Row
+        if self.x != 0:
+            self.mid_left = tiles[self.x-1][self.y]    
        
         self.mid_mid = self
        
-        if self.y != (len(tiles[self.x]) - 1):
-            self.mid_right = tiles[self.x][self.y + 1]
-        #Bottom Row
-        if self.y != 0 and self.x != (len(tiles) - 1):
-            self.bottom_left = tiles[self.x + 1][self.y - 1]
         if self.x != (len(tiles) - 1):
-            self.bottom_mid = tiles[self.x + 1][self.y]
-        if self.y != (len(tiles[self.x]) - 1) and self.x != (len(tiles) - 1) :
+            self.mid_right = tiles[self.x+1][self.y
+            ]
+        #Bottom Row
+        if self.y != (len(tiles[self.x])-1) and self.x != 0:
+            self.bottom_left = tiles[self.x - 1][self.y + 1]
+        if self.y != (len(tiles[self.x])-1):
+            self.bottom_mid = tiles[self.x][self.y+1]
+        if self.y != (len(tiles[self.x])-1) and self.x != (len(tiles) - 1) :
             self.bottom_right = tiles[self.x + 1][self.y + 1]
 
     @property
@@ -71,28 +90,34 @@ class Tile:
         else:
             return None 
     
-    @property
-    def __wall_type__(self):
+    
+    def set_wall_type(self):
         if self.__wall__:
             # Corner
             if (self.bottom_right and self.bottom_right.__wall__ == False and 
                self.bottom_mid and self.bottom_mid.__wall__ == True and 
                self.mid_right and self.mid_right.__wall__ == True):
-               self.image_name = 'wall_corner_right_bottom'
+               if self.top_mid:
+                  self.top_mid.block_sight = True                  
+                  self.top_mid.image_name = 'wall_corner_right_bottom'
+               self.image_name = 'wall_left'
 
             elif (self.bottom_left and self.bottom_left.__wall__ == False and
                 self.bottom_mid and self.bottom_mid.__wall__ == True and
                 self.mid_left and self.mid_left.__wall__ == True):
-                self.image_name = 'wall_corner_left_bottom'
-
-            elif (self.top_left and self.top_left.__wall__ == False and 
-                self.top_mid and self.top_mid.__wall__ == True and
-                self.mid_right and self.mid_right.__wall__ == True):
-                self.image_name = 'wall_corner_right_top' 
+                if self.top_mid:
+                    self.top_mid.block_sight = True
+                    self.top_mid.image_name = 'wall_corner_left_bottom'
+                self.image_name = 'wall_right'                
 
             elif (self.top_left and self.top_left.__wall__ == False and 
                 self.top_mid and self.top_mid.__wall__ == True and
                 self.mid_left and self.mid_left.__wall__ == True):
+                self.image_name = 'wall_corner_right_top' 
+
+            elif (self.top_right and self.top_right.__wall__ == False and 
+                self.top_mid and self.top_mid.__wall__ == True and
+                self.mid_right and self.mid_right.__wall__ == True):
                 self.image_name = 'wall_corner_left_top'
             
             # Inner corner
@@ -100,13 +125,19 @@ class Tile:
                 self.mid_right and self.mid_right.__wall__ == False and
                 self.top_mid and self.top_mid.__wall__ == True and
                 self.mid_left and self.mid_left.__wall__ == True):
-                self.image_name = 'wall_inner_corner_right_top'
+                if self.top_mid:
+                    self.top_mid.block_sight = True
+                    self.top_mid.image_name = 'wall_inner_corner_right_top'
+                self.image_name = 'wall_inner_right'
 
             elif (self.bottom_mid and self.bottom_mid.__wall__ == False and
                 self.mid_left and self.mid_left.__wall__ == False and
                 self.top_mid and self.top_mid.__wall__ == True and
                 self.mid_right and self.mid_right.__wall__ == True):
-                self.image_name = 'wall_inner_corner_left_top'
+                if self.top_mid:
+                    self.top_mid.block_sight = True
+                    self.top_mid.image_name = 'wall_inner_corner_left_top'
+                self.image_name = 'wall_inner_left'              
 
             elif (self.top_mid and self.top_mid.__wall__ == False and
                 self.mid_right and self.mid_right.__wall__ == False and
@@ -122,11 +153,27 @@ class Tile:
 
             # Normal walls
             elif self.bottom_mid and self.bottom_mid.__wall__ == False:
-                self.image_name = 'wall_top'
+                if self.top_mid:
+                    self.top_mid.block_sight = True
+                    self.top_mid.image_name = 'wall_top'
+                self.image_name = self.bind_wall()
+
             elif self.mid_right and self.mid_right.__wall__ == False:
                 self.image_name = 'wall_left'
+
             elif self.top_mid and self.top_mid.__wall__ == False:
                 self.image_name = 'wall_bottom'
+
             elif self.mid_left and self.mid_left.__wall__ == False:
                 self.image_name = 'wall_right'
-        
+
+    def bind_wall(self):
+        rnd = randint(1,100)
+        if rnd > 80:
+            return 'wall_inner_1' 
+        if rnd > 60:
+            return 'wall_inner_2' 
+        if rnd > 40:
+            return 'wall_inner_3'
+        else:
+            return 'wall_inner_4'
