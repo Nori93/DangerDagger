@@ -34,6 +34,8 @@ from text_align import TEXT_ALIGN
 
 from database.db_entity_collection import get_transaction
 from database.entities.weapons import Weapons
+from database.entities.classes import Classes
+from database.entities.armors import Armors
 
 from map_objects.sprite_sheet import SpriteSheet
 
@@ -122,7 +124,7 @@ class Game:
         armor=None, 
         items=None,
         race=None,
-        clase=None,
+        class_name=None,
         strenght=None,
         dexterity=None,
         constitution=None,
@@ -142,9 +144,21 @@ class Game:
             charisma=charisma
         )
 
+        hit_points = 1
+        defense =1  
+        if class_name != None:
+            _class = db.query(Classes).filter(Classes.class_name == class_name).one()
+            hit_points = 8 + ability_component.modifaier_constitution 
+
+        if armor != None: 
+            _armor = db.query(Armors).filter(Armors.armor_name == armor).one()
+            armor_class = _armor.armor_class + (ability_component.dexterity * _armor.dex_modifier)
+              
+        
+            
         #fighter_component = Fighter(hp=100, defense=1, power=2)
         # for tests
-        fighter_component = Fighter(hp=1000, defense=1, power=10)
+        fighter_component = Fighter(hp=hit_points, ac=armor_class, power=10)
         inventory_component = Inventory(26)
         level_component = Level()
         equipment_component = Equipment()

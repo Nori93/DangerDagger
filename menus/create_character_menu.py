@@ -716,7 +716,7 @@ class CreateCharacterMenu(Menu):
             armor= armor_choice,
             items= items_choice,
             race= self.loadet_race,
-            clase= self.loadet_race,
+            class_name= self.loadet_class['class'],
             strenght = self.strenght,
             dexterity = self.dexterity,
             constitution = self.constitution,

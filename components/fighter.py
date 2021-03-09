@@ -1,46 +1,13 @@
 import tcod as libtcod
 from game_message import Message
 class Fighter:
-    def __init__(self, hp, defense, power, xp=0):
-        self.base_max_hp = hp
+    def __init__(self, hp, ac, power, xp=0):
+        self.max_hp = hp
         self.hp = hp
-        self.base_defense = defense
-        self.base_power = power
+        self.armor_class = ac
+        self.power = power
         self.xp = xp
-
-    @property
-    def max_hp(self):
-        if self.owner and self.owner.equipment:
-            bonus = self.owner.equipment.max_hp_bonus
-        else:
-            bonus = 0
-        return self.base_max_hp + bonus
-
-    @property
-    def power(self):
-        
-        if self.owner and self.owner.equipment:
-            bonus = self.owner.equipment.power_bonus
-        else:
-            bonus = 0
-        
-        if self.owner and  self.owner.equipment and self.owner.equipment.main_hand and self.owner.equipment.main_hand.weapon:
-            if self.owner and self.owner.equipment.off_hand and self.owner.equipment.main_hand.weapon:
-                return self.owner.equipment.main_hand.weapon.damage_done + self.owner.equipment.off_hand.weapon.damage_done + bonus
-            else:
-                return self.owner.equipment.main_hand.weapon.damage_done + bonus
-        return self.base_power + bonus
-    
-    @property
-    def defense(self):
-        if self.owner and self.owner.equipment:
-            bonus = self.owner.equipment.defense_bonus
-        else:
-            bonus = 0
-        return self.base_defense + bonus
-    
-
-
+  
     def take_damage(self, amount):
         results = []
         self.hp -= amount
@@ -53,6 +20,15 @@ class Fighter:
         self.hp += amount
         if self.hp > self.max_hp:
             self.hp = self.max_hp
+
+    def hit(self,target):
+        enemy_ac = target.fighter.armor_class
+        main_hand_weapon = self.owner.equipment.main_hand
+        off_hand_weapon = self.owner.equipment.off_hand
+        pref = self.owner.preficiencies
+        bonus = 
+        if main_hand_weapon != None:
+        bonus += pref.is_proficient_weapon()
 
     def attack(self, target):
         results = []
