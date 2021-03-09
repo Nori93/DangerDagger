@@ -106,7 +106,7 @@ class GameMap:
         stairs_component = Stairs(self.dungeon_level + 1)
         down_stairs = Entity(center_of_last_room_x, center_of_last_room_y,
             STAIRS, "Stairs", render_order= RenderOrder.STAIRS,
-            stairs=stairs_component)
+            stairs=stairs_component,image_name = 'flore_stars')
         entities.append(down_stairs)
 
 
@@ -139,7 +139,7 @@ class GameMap:
         number_of_items = randint(0, max_items_per_room)
 
         monster_chances = {
-            "orc": 80,
+            "goblin": 80,
             "troll": from_dungeon_level([[15,3],[30,5],[60,7]],self.dungeon_level)
             }
         item_chances = {
@@ -157,11 +157,11 @@ class GameMap:
 
             if not any([entity for entity in entities if entity.x == x and entity.y == y]):
                 monster_choice = random_choice_from_dict(monster_chances)
-                if monster_choice == "orc":
+                if monster_choice == "goblin":
                     ai_component = BasicMonster()
                     fighter_component = Fighter(hp=20, defense =0, power=4, xp=35)
-                    monster = Entity(x, y, DESATURED_GREEN,"Orc_" + str(self.unique_id), blocks=True,
-                    render_order = RenderOrder.ACTOR ,fighter = fighter_component, ai = ai_component)
+                    monster = Entity(x, y, DESATURED_GREEN,"Goblin_" + str(self.unique_id), blocks=True,
+                    render_order = RenderOrder.ACTOR ,fighter = fighter_component, ai = ai_component,image_name="goblin_right")
                 else:
                     ai_component = BasicMonster()
                     fighter_component = Fighter(hp=30, defense =2, power=8, xp=100)
@@ -180,7 +180,7 @@ class GameMap:
                 if item_choice == "healing_potion":
                     item_component = Item(use_funtion=heal, amount=40 )
                     item = Entity(x, y, VIOLET, "Healing Potion", render_order=RenderOrder.ITEM, 
-                        item=item_component)
+                        item=item_component,image_name="potion")
                 elif item_choice == "fireball_scroll":
                     item_component = Item(use_funtion=cast_fireball, targeting=True,
                      targeting_message=Message("Left-click a target tile for the fireball, or right-click to cancel", libtcod.light_cyan),

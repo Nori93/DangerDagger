@@ -20,7 +20,8 @@ class Entity:
         equipment=None, 
         equippable=None, 
         weapon=None,
-        ability=None):
+        ability=None,
+        image_name=None):
         self.x = x
         self.y = y       
         self.color = color
@@ -37,6 +38,7 @@ class Entity:
         self.equippable = equippable
         self.weapon = weapon
         self.ability = ability
+        self.image_name = image_name
         
         if self.fighter:
             self.fighter.owner = self
@@ -65,8 +67,22 @@ class Entity:
             self.ability.owener = self
 
     def move(self, dx, dy):
+        self.update_image(dx,dy)
         self.x += dx
         self.y += dy
+
+    def update_image(self,dx,dy):
+        image_name_array = self.image_name.split("_")
+        if dy > 0:
+            self.image_name = "{}_{}".format(image_name_array[0],"bottom")
+        elif dy < 0:
+            self.image_name = "{}_{}".format(image_name_array[0],"top")
+        elif dx > 0:
+            self.image_name = "{}_{}".format(image_name_array[0],"right")
+        elif dx < 0:
+            self.image_name = "{}_{}".format(image_name_array[0],"left")
+        else:
+            self.image_name = self.image_name
 
     def get_blocking_entities_at_location(self,entities, destination_x, destination_y):
         for entity in entities:
@@ -104,6 +120,7 @@ class Entity:
         if not libtcod.path_is_empty(my_path) and libtcod.path_size(my_path) < 25:
             x,y = libtcod.path_walk(my_path, True)
             if x or y:
+                self.update_image(x-self.x,y-self.y)
                 self.x = x
                 self.y = y
         else:

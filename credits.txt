@@ -6,3 +6,5 @@ weapon info
 https://www.dandwiki.com/wiki/5e_SRD:Weapons
 armor info
 https://roll20.net/compendium/dnd5e/Armor#content
+Character sprites 
+https://www.spriters-resource.com/game_boy_advance/tow3/

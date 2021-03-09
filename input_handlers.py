@@ -71,6 +71,8 @@ def handle_player_turn_keys():
                 return {'take_stairs': True}
             if event.key == pg.K_ESCAPE:
                 return {"exit": True}
+            if event.key == pg.K_m:
+                return {"mini_map": True}
     return {}   
 
 

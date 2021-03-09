@@ -1,4 +1,5 @@
 import pygame as pg
+from color import BLACK
 from data_loaders import load_sprite_sheet_json, load_sprite_sheet
 class SpriteSheet:
      # utility class for loading and parsing spritesheets
@@ -21,4 +22,5 @@ class SpriteSheet:
         image = pg.Surface((width, height))
         image.blit(self.spritesheet, (0, 0), (x, y, width, height))
         image = pg.transform.scale(image, (scale_width, scale_height))
+        image.set_colorkey(BLACK)
         return image

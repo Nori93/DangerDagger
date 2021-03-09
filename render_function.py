@@ -9,13 +9,13 @@ class RenderOrder(Enum):
     ITEM = 3
     ACTOR = 4
 
-def render_all(display, game_map, fov_map, fov_recompute, entities, message_log, font_name, player, spritesheet):
+def render_all(display, game_map, fov_map, fov_recompute, entities, message_log, font_name, player, spritesheet,mini_map=False):
     ts = game_map.tile_size
 
     player_to_mid_x =  (player.x *ts) - (game_map.width/2)
     player_to_mid_y =  (player.y *ts) - (game_map.height/2)
 
-    mini_map_location_x = game_map.width-400
+    mini_map_location_x = game_map.width/2
     mini_map_location_y = game_map.height/2
 
     mini_map_tile_size = 5
@@ -67,27 +67,28 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
                         #pg.draw.rect(display, DARK_GROUND, rect )
                         if game_map.tiles[x][y].image_name != None:
                             display.blit(spritesheet.get_image_by_name("2_{}".format(game_map.tiles[x][y].image_name),ts,ts),rect)
-        #mini map              
-        for y in range(game_map.map_height):                
-            for x in range(game_map.map_width):
-                visable = fov_map.fov[y][x]                 
-                wall = game_map.tiles[x][y].block_sight                
-                rect_min = (
-                    (x * mini_map_tile_size) + mini_map_location_x,
-                    (y * mini_map_tile_size) + mini_map_location_y,
-                    mini_map_tile_size,mini_map_tile_size
-                )
-                if wall:
-                    if visable or (y != game_map.map_height -1 and fov_map.fov[y+1][x]):
-                        pg.draw.rect(display, WHITE, rect_min )
-                    elif ((x != 0 and x != game_map.map_width-1 and
-                        y!= 0 and y != game_map.map_height-1) and
-                        (fov_map.fov[y-1][x-1] or fov_map.fov[y-1][x] or fov_map.fov[y-1][x+1] or
-                        fov_map.fov[y][x-1] or fov_map.fov[y][x+1] or
-                        fov_map.fov[y+1][x-1] or fov_map.fov[y+1][x] or fov_map.fov[y+1][x+1])):                    
-                        pg.draw.rect(display, WHITE, rect_min )
-                    elif game_map.tiles[x][y].explored:
-                        pg.draw.rect(display, WHITE, rect_min )
+        #mini map 
+        if mini_map:             
+            for y in range(game_map.map_height):                
+                for x in range(game_map.map_width):
+                    visable = fov_map.fov[y][x]                 
+                    wall = game_map.tiles[x][y].block_sight                
+                    rect_min = (
+                        (x * mini_map_tile_size) + mini_map_location_x,
+                        (y * mini_map_tile_size) + mini_map_location_y,
+                        mini_map_tile_size,mini_map_tile_size
+                    )
+                    if wall:
+                        if visable or (y != game_map.map_height -1 and fov_map.fov[y+1][x]):
+                            pg.draw.rect(display, WHITE, rect_min )
+                        elif ((x != 0 and x != game_map.map_width-1 and
+                            y!= 0 and y != game_map.map_height-1) and
+                            (fov_map.fov[y-1][x-1] or fov_map.fov[y-1][x] or fov_map.fov[y-1][x+1] or
+                            fov_map.fov[y][x-1] or fov_map.fov[y][x+1] or
+                            fov_map.fov[y+1][x-1] or fov_map.fov[y+1][x] or fov_map.fov[y+1][x+1])):                    
+                            pg.draw.rect(display, WHITE, rect_min )
+                        elif game_map.tiles[x][y].explored:
+                            pg.draw.rect(display, WHITE, rect_min )
                    
                                        
     entities_in_render_order = sorted(entities, key= lambda x: x.render_order.value)
@@ -95,11 +96,14 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
 
     for entity in entities_in_render_order:
         if fov_map.fov[entity.y][entity.x] or (entity.stairs and game_map.tiles[entity.x][entity.y].explored):
-            draw_entity(display, entity, ts, player_to_mid_x=player_to_mid_x, player_to_mid_y=player_to_mid_y)
+            draw_entity(display, entity, ts, spritesheet,
+             player_to_mid_x=player_to_mid_x, player_to_mid_y=player_to_mid_y,
+             fov = fov_map.fov[entity.y][entity.x])
     
-    for entity in entities_in_render_order:
-        if fov_map.fov[entity.y][entity.x] or (entity.stairs and game_map.tiles[entity.x][entity.y].explored):
-             draw_entity_mini_map(display, entity, mini_map_tile_size,mini_map_location_x, mini_map_location_y)
+    if mini_map:
+        for entity in entities_in_render_order:
+            if fov_map.fov[entity.y][entity.x] or (entity.stairs and game_map.tiles[entity.x][entity.y].explored):
+                draw_entity_mini_map(display, entity, mini_map_tile_size,mini_map_location_x, mini_map_location_y)
 
     render_bar(display, 50, 20, 200, 30, "HP", player.fighter.hp, player.fighter.max_hp,
         GREEN, DARK_RED, 14, font_name, half_color = ORANGE, quarter_coler = RED)
@@ -122,14 +126,30 @@ def draw_entity_mini_map(display, entity,mini_map_size,mini_map_x,mini_map_y):
         mini_map_size, mini_map_size)      
     pg.draw.rect(display, entity.color, rect ) 
       
-def draw_entity(display, entity, tile_size, player_to_mid_x = 0,player_to_mid_y = 0):    
+def draw_entity(display, entity, tile_size, spritesheet, player_to_mid_x = 0,player_to_mid_y = 0,fov=True):    
     #libtcod.console_set_default_foreground(con, entity.color)
     #libtcod.console_put_char(con, entity.x, entity.y, entity.char,libtcod.BKGND_NONE)
     rect = (
         (entity.x * tile_size) - player_to_mid_x,
         (entity.y * tile_size) - player_to_mid_y, 
-        tile_size, tile_size)      
-    pg.draw.rect(display, entity.color, rect )
+        tile_size, tile_size)
+    if fov:
+        if entity.image_name != None:
+            if entity.fighter:
+                rect = (
+                    (entity.x * tile_size) - player_to_mid_x,
+                    (entity.y * tile_size) - player_to_mid_y-tile_size, 
+                    tile_size, tile_size)
+                display.blit(spritesheet.get_image_by_name("0_{}".format(entity.image_name),tile_size,tile_size*2),rect)
+            else:
+                display.blit(spritesheet.get_image_by_name("0_{}".format(entity.image_name),tile_size,tile_size),rect)        
+        else:
+            pg.draw.rect(display, entity.color, rect)
+    else:
+        if entity.image_name != None:
+            display.blit(spritesheet.get_image_by_name("2_{}".format(entity.image_name),tile_size,tile_size),rect)
+        else:
+            pg.draw.rect(display, entity.color, rect)
 
 def draw_text(display, text,  size, font_name, x, y, color=WHITE,text_align=TEXT_ALIGN.CENTER):
     font = pg.font.Font(font_name, size)

@@ -112,6 +112,7 @@ class Game:
         self.config = {}
 
         self.sprite_sheet = SpriteSheet('TILE_SPRITE_SHEAT')
+        self.show_mini_map = False
 
     def set_player(
         self, 
@@ -141,7 +142,9 @@ class Game:
             charisma=charisma
         )
 
-        fighter_component = Fighter(hp=100, defense=1, power=2)
+        #fighter_component = Fighter(hp=100, defense=1, power=2)
+        # for tests
+        fighter_component = Fighter(hp=1000, defense=1, power=10)
         inventory_component = Inventory(26)
         level_component = Level()
         equipment_component = Equipment()
@@ -149,7 +152,8 @@ class Game:
             render_order=RenderOrder.ACTOR, fighter = fighter_component,
             inventory=inventory_component,  level=level_component,
             equipment=equipment_component,
-            ability=ability_component)
+            ability=ability_component,
+            image_name="player_left")
      
         if weapon_main:
             w_main = db.query(Weapons).filter(Weapons.weapon_name == weapon_main).one()
@@ -203,6 +207,7 @@ class Game:
         self.act_exit = action.get("exit")
         self.act_level_up = action.get("level_up")
         self.act_quit = action.get("quit")
+        self.act_mini_map = action.get("mini_map")
        
 
         self.act_left_click = mouse_action.get("left_click")
@@ -269,7 +274,9 @@ class Game:
                 #TODO: Pause Menu with save, load,exit , newgame, options,
                 # In future some nice illustration of flors and starrs 
                 self.pauze_menu.display_menu()
-                
+            
+            if self.act_mini_map:
+                self.show_mini_map = not self.show_mini_map
 
             if self.act_stairs and self.game_state == GameState.PLAYERS_TURN:
                 #Taking stairs to lower level of dunguan 
@@ -297,7 +304,7 @@ class Game:
             
             self.display.fill(BLACK)
             render_all(self.display,self.game_map,self.fov_map,self.fov_recompute,self.entities,
-            self.message_log,self.font_name,self.player,self.sprite_sheet)           
+            self.message_log,self.font_name,self.player,self.sprite_sheet,mini_map=self.show_mini_map)           
             self.window.blit(self.display, (0, 0))
             pg.display.update()
 

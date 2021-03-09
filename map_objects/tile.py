@@ -100,30 +100,47 @@ class Tile:
             self.wall = True
             # Corner
             if (self.bottom_right and self.bottom_right.__wall__ == False and 
-               self.bottom_mid and self.bottom_mid.__wall__ == True and 
-               self.mid_right and self.mid_right.__wall__ == True):
-               if self.top_mid:
-                  self.top_mid.block_sight = True                  
-                  self.top_mid.image_name = 'wall_corner_right_bottom'
-               self.image_name = 'wall_left'
+                self.bottom_mid and self.bottom_mid.__wall__ == True and 
+                self.mid_right and self.mid_right.__wall__ == True):
+                if self.top_mid:
+                    if self.top_mid.__wall__ == False:
+                       self.top_mid.image_name = self.bind_flore()
+                    else:
+                        self.top_mid.image_name = 'wall_corner_right_bottom'
+                if self.mid_left and self.mid_left.__wall__:
+                    self.image_name == 'wall_left_right'
+                else:
+                    self.image_name = 'wall_left'            
 
             elif (self.bottom_left and self.bottom_left.__wall__ == False and
                 self.bottom_mid and self.bottom_mid.__wall__ == True and
                 self.mid_left and self.mid_left.__wall__ == True):
                 if self.top_mid:
-                    self.top_mid.block_sight = True
-                    self.top_mid.image_name = 'wall_corner_left_bottom'
-                self.image_name = 'wall_right'                
+                    if self.top_mid.__wall__ == False:
+                           self.top_mid.image_name = self.bind_flore()
+                    else:
+                        self.top_mid.image_name = 'wall_corner_left_bottom'
+                if self.mid_right and self.mid_right.__wall__:
+                    self.image_name == 'wall_left_right'
+                else:
+                    self.image_name = 'wall_right'                
 
             elif (self.top_left and self.top_left.__wall__ == False and 
                 self.top_mid and self.top_mid.__wall__ == True and
                 self.mid_left and self.mid_left.__wall__ == True):
-                self.image_name = 'wall_corner_right_top' 
+                if self.bottom_mid and self.bottom_mid.__wall__ == False:
+                    self.image_name =self.bind_wall()
+                else:
+                    if self.mid_right and self.mid_right.__wall__ == False:
+                        self.image_name = 'wall_corner_left_top' 
 
             elif (self.top_right and self.top_right.__wall__ == False and 
                 self.top_mid and self.top_mid.__wall__ == True and
                 self.mid_right and self.mid_right.__wall__ == True):
-                self.image_name = 'wall_corner_left_top'
+                if self.bottom_mid and self.bottom_mid.__wall__ == False:
+                    self.image_name =self.bind_wall()
+                else:
+                    self.image_name = 'wall_corner_right_top'
             
             # Inner corner
             elif (self.bottom_mid and self.bottom_mid.__wall__ == False and
@@ -131,8 +148,11 @@ class Tile:
                 self.top_mid and self.top_mid.__wall__ == True and
                 self.mid_left and self.mid_left.__wall__ == True):
                 if self.top_mid:
-                    self.top_mid.block_sight = True
-                    self.top_mid.image_name = 'wall_inner_corner_right_top'
+                    if self.top_mid and self.top_mid.__wall__ == False:
+                        self.top_mid.image_name = 'wall_inner_corner_mid_left'
+                    else:
+                        self.top_mid.block_sight = True
+                        self.top_mid.image_name = 'wall_inner_corner_right_top'
                 self.image_name = 'wall_inner_right'
 
             elif (self.bottom_mid and self.bottom_mid.__wall__ == False and
@@ -140,8 +160,11 @@ class Tile:
                 self.top_mid and self.top_mid.__wall__ == True and
                 self.mid_right and self.mid_right.__wall__ == True):
                 if self.top_mid:
-                    self.top_mid.block_sight = True
-                    self.top_mid.image_name = 'wall_inner_corner_left_top'
+                    if self.top_mid.top_mid and self.top_mid.top_mid.__wall__ == False:
+                        self.top_mid.image_name = 'wall_inner_corner_mid_right'
+                    else:
+                        #self.top_mid.block_sight = True
+                        self.top_mid.image_name = 'wall_inner_corner_left_top'
                 self.image_name = 'wall_inner_left'              
 
             elif (self.top_mid and self.top_mid.__wall__ == False and
@@ -158,13 +181,36 @@ class Tile:
 
             # Normal walls
             elif self.bottom_mid and self.bottom_mid.__wall__ == False:
-                if self.top_mid:
-                    self.top_mid.block_sight = True
-                    self.top_mid.image_name = 'wall_top'
-                self.image_name = self.bind_wall()
-
-            elif self.mid_right and self.mid_right.__wall__ == False:
-                self.image_name = 'wall_left'
+                if (self.top_mid and self.top_mid.__wall__ == False):
+                        self.top_mid.image_name = self.bind_flore()
+                        self.image_name = self.bind_wall()
+                elif self.top_mid and self.top_mid.top_mid:
+                    if self.top_mid.top_mid.__wall__ == False:
+                        self.top_mid.image_name = 'wall_top_bottom'
+                        self.image_name = self.bind_wall()             
+                elif (self.mid_left and self.mid_left.__wall__ == False and
+                    self.mid_right and self.mid_left.__wall__ == False):
+                    if self.top_mid:
+                        self.top_mid.image_name = 'wall_inner_corner_mid_top'
+                    self.image_name = 'wall_inner_mid'
+                else:
+                    if self.top_mid:
+                        self.top_mid.image_name = 'wall_top'
+                    self.image_name = self.bind_wall()
+            elif (self.mid_right and self.mid_right.__wall__ == False and
+                 self.mid_left and self.mid_left.__wall__ == False):
+                if self.top_mid and self.top_mid.__wall__ == False:
+                    self.image_name = 'wall_inner_corner_mid_bottom'
+                elif self.bottom_mid and self.bottom_mid.__wall__ == False:
+                    self.image_name = 'wall_inner_corner_mid_top'
+                else:
+                    self.image_name = 'wall_left_right'
+            elif self.mid_right and self.mid_right.__wall__ == False: 
+                if (self.top_right and self.top_right.__wall__ == False and self.bottom_mid
+                    and self.bottom_mid.bottom_mid and self.bottom_mid.bottom_mid.__wall__ == False):
+                    self.image_name = 'wall_inner_corner_right_top'
+                else:     
+                    self.image_name = 'wall_left'
 
             elif self.top_mid and self.top_mid.__wall__ == False:
                 self.image_name = 'wall_bottom'
@@ -174,6 +220,9 @@ class Tile:
         elif self.__wall__ == False:
             self.flore = True
             self.image_name = self.bind_flore()
+            if (self.bottom_mid and self.bottom_mid.__wall__ == None and
+            self.bottom_mid.bottom_mid and self.bottom_mid.bottom_mid.__wall__ == True):
+                self.bottom_mid.image_name = 'wall_top_bottom'
             
 
     def bind_wall(self):
