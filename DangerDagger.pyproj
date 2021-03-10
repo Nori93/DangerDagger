@@ -11,6 +11,10 @@
     <OutputPath>.</OutputPath>
     <Name>DangerDagger</Name>
     <RootNamespace>DangerDagger</RootNamespace>
+    <IsWindowsApplication>True</IsWindowsApplication>
+    <InterpreterId>Global|PythonCore|3.7</InterpreterId>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,9 +44,16 @@
     <Compile Include="database\entities\armors.py" />
     <Compile Include="database\entities\classes.py" />
     <Compile Include="database\entities\monsters.py" />
+    <Compile Include="database\entities\monsters_weapons.py" />
     <Compile Include="database\entities\preficiencies_weapons.py" />
     <Compile Include="database\entities\weapons.py" />
     <Compile Include="database\entities\weapon_damage_type.py" />
+    <Compile Include="database\entities\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="database\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="data_loaders.py" />
     <Compile Include="death_functions.py" />
     <Compile Include="entity.py" />
@@ -59,6 +70,9 @@
     <Compile Include="map_objects\rectangle.py" />
     <Compile Include="map_objects\sprite_sheet.py" />
     <Compile Include="map_objects\tile.py" />
+    <Compile Include="map_objects\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="menus\create_character_menu.py" />
     <Compile Include="menus\credits_menu.py" />
     <Compile Include="menus\inventory_menu.py" />
@@ -68,7 +82,13 @@
     <Compile Include="menus\menu.py" />
     <Compile Include="menus\options_menu.py" />
     <Compile Include="menus\pauze_menu.py" />
+    <Compile Include="menus\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="monsters\monster_factory.py" />
+    <Compile Include="monsters\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="race_enum.py" />
     <Compile Include="random_utils.py" />
     <Compile Include="render_function.py" />
@@ -81,6 +101,9 @@
     <Compile Include="ui\label.py" />
     <Compile Include="ui\panel.py" />
     <Compile Include="ui\select.py" />
+    <Compile Include="ui\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
@@ -90,20 +113,14 @@
     <Folder Include="Assets\Sprites\Weapon\" />
     <Folder Include="Assets\WIP\" />
     <Folder Include="components\" />
-    <Folder Include="components\__pycache__\" />
     <Folder Include="database\" />
     <Folder Include="database\entities\" />
-    <Folder Include="database\entities\__pycache__\" />
     <Folder Include="database\scripts\" />
-    <Folder Include="database\__pycache__\" />
     <Folder Include="map_objects\" />
-    <Folder Include="map_objects\__pycache__\" />
     <Folder Include="menus\" />
-    <Folder Include="menus\__pycache__\" />
     <Folder Include="monsters\" />
     <Folder Include="Staff\" />
     <Folder Include="ui\" />
-    <Folder Include="ui\__pycache__\" />
     <Folder Include="ui_data\" />
   </ItemGroup>
   <ItemGroup>
@@ -128,45 +145,14 @@
     <Content Include="Assets\WIP\SHIELD.aseprite" />
     <Content Include="Assets\WIP\TILE_SPRITE_SHEAT.aseprite" />
     <Content Include="Assets\WIP\Visualization.aseprite" />
-    <Content Include="components\__pycache__\ability.cpython-37.pyc" />
-    <Content Include="components\__pycache__\ai.cpython-37.pyc" />
-    <Content Include="components\__pycache__\equipment.cpython-37.pyc" />
-    <Content Include="components\__pycache__\equippable.cpython-37.pyc" />
-    <Content Include="components\__pycache__\fighter.cpython-37.pyc" />
-    <Content Include="components\__pycache__\inventory.cpython-37.pyc" />
-    <Content Include="components\__pycache__\item.cpython-37.pyc" />
-    <Content Include="components\__pycache__\level.cpython-37.pyc" />
-    <Content Include="components\__pycache__\playable.cpython-37.pyc" />
-    <Content Include="components\__pycache__\stairs.cpython-37.pyc" />
-    <Content Include="components\__pycache__\weapon.cpython-37.pyc" />
-    <Content Include="components\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="database\database.db" />
-    <Content Include="database\entities\__pycache__\armors.cpython-37.pyc" />
-    <Content Include="database\entities\__pycache__\classes.cpython-37.pyc" />
-    <Content Include="database\entities\__pycache__\preficiencies_weapons.cpython-37.pyc" />
-    <Content Include="database\entities\__pycache__\weapons.cpython-37.pyc" />
-    <Content Include="database\entities\__pycache__\weapon_damage_type.cpython-37.pyc" />
     <Content Include="database\scripts\schema.sql" />
-    <Content Include="database\__pycache__\db_entity_collection.cpython-37.pyc" />
-    <Content Include="map_objects\__pycache__\game_map.cpython-37.pyc" />
-    <Content Include="map_objects\__pycache__\rectangle.cpython-37.pyc" />
-    <Content Include="map_objects\__pycache__\sprite_sheet.cpython-37.pyc" />
-    <Content Include="map_objects\__pycache__\tile.cpython-37.pyc" />
-    <Content Include="menus\__pycache__\create_character_menu.cpython-37.pyc" />
-    <Content Include="menus\__pycache__\credits_menu.cpython-37.pyc" />
-    <Content Include="menus\__pycache__\inventory_menu.cpython-37.pyc" />
-    <Content Include="menus\__pycache__\main_menu.cpython-37.pyc" />
-    <Content Include="menus\__pycache__\main_or_offhand_menu.cpython-37.pyc" />
-    <Content Include="menus\__pycache__\menu.cpython-37.pyc" />
-    <Content Include="menus\__pycache__\options_menu.cpython-37.pyc" />
-    <Content Include="menus\__pycache__\pauze_menu.cpython-37.pyc" />
-    <Content Include="ui\__pycache__\cursor.cpython-37.pyc" />
-    <Content Include="ui\__pycache__\label.cpython-37.pyc" />
-    <Content Include="ui\__pycache__\panel.cpython-37.pyc" />
-    <Content Include="ui\__pycache__\select.cpython-37.pyc" />
     <Content Include="ui_data\inventory_menu.xml" />
     <Content Include="ui_data\main_menu.xml" />
     <Content Include="ui_data\option_menu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.7" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

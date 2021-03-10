@@ -1,5 +1,6 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
 from database.db_entity_collection import BaseModel
+from database.entities.monsters_weapons import MonstersWeapons
 
 class Monsters(BaseModel):
     __tablename__='monsters'
@@ -15,3 +16,4 @@ class Monsters(BaseModel):
     intelligence = Column(Integer, nullable=False, default=1)
     wisdom = Column(Integer, nullable=False, default=1)
     charisma = Column(Integer, nullable=False, default=1)
+    monsters_weapons = relationship('Weapons',secondary='monsters_weapons')

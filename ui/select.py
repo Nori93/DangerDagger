@@ -1,8 +1,7 @@
 import pygame as pg
 from color import *
 from text_align import TEXT_ALIGN
-from ui.label import Label
-from ui.cursor import Cursor
+from ui import Label, Cursor
 
 class Select():
     def __init__(

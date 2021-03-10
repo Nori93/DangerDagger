@@ -1,11 +1,7 @@
 from color import *
 
-from components.equipment import Equipment
-from components.equippable import Equippable
-from components.playable import Playable
-from components.item import Item
-from components.stairs import Stairs
-from components.weapon import Weapon,WEAPON_TYPE
+from components import Equipment, Equippable, Playable, Item, Stairs, Weapon, WEAPON_TYPE
+
 
 from map_objects.tile import Tile
 from map_objects.rectangle import Rect
@@ -17,6 +13,8 @@ from item_funktion import *
 from random import randint
 from random_utils import random_choice_from_dict ,from_dungeon_level
 from render_function import RenderOrder
+
+from monsters import MonsterFactory
 
 class GameMap:
     def __init__(self, width, height, tile_size,dungeon_level=1):
@@ -160,7 +158,7 @@ class GameMap:
                 if monster_choice == "goblin":
                    
                     
-                    playable_component = Playable(hp=7, defense =15, xp=50)
+                   
 
                     monster = Entity(x, y, DESATURED_GREEN,"Goblin_" + str(self.unique_id), blocks=True,
                     render_order = RenderOrder.ACTOR ,fighter = fighter_component, ai = ai_component,image_name="goblin_right")

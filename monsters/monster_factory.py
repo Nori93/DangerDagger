@@ -1,9 +1,8 @@
 
 from components.ai import BasicMonster
-
-
-from database.db_entity_collection import get_transaction
-from database.entities.monsters import Monsters
+from components.ability import Ability
+from components import Playable, BasicMonster, Ability
+from database import get_transaction, Monsters
 
 
 class MonsterFactory:
@@ -21,3 +20,4 @@ class MonsterFactory:
                         wisdom=_monster.wisdom,
                         charisma=_monster.charisma
                     )
+        playable_component = Playable(hp=7, ac =15, xp=50)
