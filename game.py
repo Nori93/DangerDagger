@@ -159,7 +159,7 @@ class Game:
             
         #fighter_component = Fighter(hp=100, defense=1, power=2)
         # for tests
-        playable_component = Playable(hp=hit_points, ac=armor_class)
+        playable_component = Playable(hp=hit_points, ac=armor_class, xp=0)
         inventory_component = Inventory(26)
         level_component = Level()
         equipment_component = Equipment()
