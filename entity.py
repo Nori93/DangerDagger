@@ -22,7 +22,8 @@ class Entity:
         weapon=None,
         ability=None,
         image_name=None,
-        preficiencies=None):
+        preficiencies=None,
+        skills=None):
         self.x = x
         self.y = y       
         self.color = color
@@ -41,6 +42,7 @@ class Entity:
         self.ability = ability
         self.image_name = image_name
         self.preficiencies = preficiencies
+        self.skills = skills
         
         if self.playable:
             self.playable.owner = self
@@ -69,6 +71,8 @@ class Entity:
             self.ability.owner = self
         if self.preficiencies:
             self.preficiencies.owner = self
+        if self.skills:
+            self.skills.owner = self
 
     def move(self, dx, dy):
         self.update_image(dx,dy)

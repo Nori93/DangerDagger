@@ -4,6 +4,7 @@ from settings import Settings
 from color import *
 from menus import *
 from components import *
+from factories import WeaponFactory
 from equipment_slots import EQUIPMENT_SLOTS
 from entity import Entity
 from init_new_game import get_game_variables
@@ -97,6 +98,8 @@ class Game:
         self.sprite_sheet = SpriteSheet('TILE_SPRITE_SHEAT')
         self.show_mini_map = False
 
+        self.weapon_factory = WeaponFactory()
+
     def set_player(
         self, 
         name="Player",
@@ -127,64 +130,44 @@ class Game:
 
         hit_points = 1
         armor_class = 1
-        
+        preficientcies_component = None
+
         if class_name != None:
-            _class = db.query(Classes).filter(Classes.class_name == class_name).one()
+            _class:Classes = db.query(Classes).filter(Classes.class_name == class_name).one()
             hit_points = 8 + ability_component.modifaier_constitution 
+            preficientcies_component = Preficiencies(weapons =_class.preficiencies_weapons)
 
         if armor != None: 
             _armor = db.query(Armors).filter(Armors.armor_name == armor).one()
             armor_class = _armor.armor_class + (ability_component.dexterity * _armor.dex_modifier)
               
         
-            
-        #fighter_component = Fighter(hp=100, defense=1, power=2)
-        # for tests
+        
         playable_component = Playable(hp=hit_points, ac=armor_class, xp=0)
         inventory_component = Inventory(26)
         level_component = Level()
         equipment_component = Equipment()
-        self.temp_player = Entity(int(self.width/2), int(self.height /2),WHITE, name, blocks=True, 
+        self.temp_player = Entity(int(self.width/2), int(self.height /2),BLUE, name, blocks=True, 
             render_order=RenderOrder.ACTOR, playable = playable_component,
             inventory=inventory_component,  level=level_component,
             equipment=equipment_component,
             ability=ability_component,
+            preficiencies= preficientcies_component,
             image_name="player_left")
      
         if weapon_main:
             w_main = db.query(Weapons).filter(Weapons.weapon_name == weapon_main).one()
-            item = self.create_weapon(w_main)
+            item = self.weapon_factory.create_weapon(w_main)
             self.temp_player.inventory.add_item(item)
             self.temp_player.equipment.toggle_equip_main_hand(item)
 
         if weapon_off:
             w_off = db.query(Weapons).filter(Weapons.weapon_name == weapon_off).one()
-            item = self.create_weapon(w_main)
+            item = self.weapon_factory.create_weapon(w_main)
             self.temp_player.inventory.add_item(item)
             self.temp_player.equipment.toggle_equip_off_hand(item)
     
 
-    def create_weapon(self,weapon):
-        equippable_component = Equippable(EQUIPMENT_SLOTS.WEAPONS)
-        weapon_component = Weapon(
-            weapon_type=weapon.weapon_enum,
-            dmg_quantity=weapon.damage_quantity,
-            weapon_dmg=weapon.weapon_damage,
-            dmg_type=weapon.id_weapon_damage_type,
-            light=weapon.light,
-            heavy=weapon.heavy,
-            two_hand=weapon.two_hand,
-            reach=weapon.reach,
-            finesse=weapon.finesse,
-            thrown=weapon.thrown,
-            ammunition=weapon.ammunition,
-            range_from=weapon.range_from,
-            range_to=weapon.range_to,
-            versatile=weapon.versatile,
-            versatile_value=weapon.versatile_value,
-            loading=weapon.loading
-        )
-        return Entity(0,0, SKY, weapon.weapon_name, equippable= equippable_component, weapon= weapon_component)
     
 
     def load_data(self):

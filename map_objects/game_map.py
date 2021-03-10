@@ -14,7 +14,7 @@ from random import randint
 from random_utils import random_choice_from_dict ,from_dungeon_level
 from render_function import RenderOrder
 
-from monsters import MonsterFactory
+from factories import MonsterFactory
 
 class GameMap:
     def __init__(self, width, height, tile_size,dungeon_level=1):
@@ -30,6 +30,7 @@ class GameMap:
         self.tiles = self.initialize_tiles()
         self.unique_id = 0
         self.dungeon_level = dungeon_level
+        self.monster_factory = MonsterFactory()
         
     def initialize_tiles(self):
         tiles = [[Tile(True,x,y) for y in range(self.map_height)] for x in range(self.map_width)]
@@ -135,10 +136,10 @@ class GameMap:
         max_items_per_room = from_dungeon_level([[1,1],[2,4]],self.dungeon_level)
         number_of_monsters = randint(0, max_monsers_per_room)
         number_of_items = randint(0, max_items_per_room)
-
+        monster_factory = MonsterFactory()
         monster_chances = {
-            "goblin": 80,
-            "troll": from_dungeon_level([[15,3],[30,5],[60,7]],self.dungeon_level)
+            "Rat": 80,
+            "Goblin": from_dungeon_level([[15,3],[30,5],[60,7]],self.dungeon_level)
             }
         item_chances = {
             "healing_potion":70,
@@ -155,21 +156,7 @@ class GameMap:
 
             if not any([entity for entity in entities if entity.x == x and entity.y == y]):
                 monster_choice = random_choice_from_dict(monster_chances)
-                if monster_choice == "goblin":
-                   
-                    
-                   
-
-                    monster = Entity(x, y, DESATURED_GREEN,"Goblin_" + str(self.unique_id), blocks=True,
-                    render_order = RenderOrder.ACTOR ,fighter = fighter_component, ai = ai_component,image_name="goblin_right")
-                else:
-                    ai_component = BasicMonster()
-                    fighter_component = Fighter(hp=30, defense =2, power=8, xp=100)
-                    monster = Entity(x, y, DESATURED_BROWN,"Troll_" + str(self.unique_id), blocks=True,
-                    render_order = RenderOrder.ACTOR ,fighter = fighter_component, ai = ai_component)
-                
-                entities.append(monster)
-                self.unique_id +=1
+                entities.append(monster_factory.create_monster(monster_choice,x,y))
 
         for i in range(number_of_items):
             x = randint(room.x1 + 1, room.x2 - 1)

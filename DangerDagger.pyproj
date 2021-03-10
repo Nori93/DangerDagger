@@ -58,6 +58,9 @@
     <Compile Include="death_functions.py" />
     <Compile Include="entity.py" />
     <Compile Include="equipment_slots.py" />
+    <Compile Include="factories\weapon_factory.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="fov_functions.py" />
     <Compile Include="game.py" />
     <Compile Include="game_message.py" />
@@ -85,8 +88,8 @@
     <Compile Include="menus\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="monsters\monster_factory.py" />
-    <Compile Include="monsters\__init__.py">
+    <Compile Include="factories\monster_factory.py" />
+    <Compile Include="factories\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="race_enum.py" />
@@ -94,7 +97,6 @@
     <Compile Include="render_function.py" />
     <Compile Include="settings.py" />
     <Compile Include="sprite.py" />
-    <Compile Include="Staff\dice.py" />
     <Compile Include="text_align.py" />
     <Compile Include="ui\button.py" />
     <Compile Include="ui\cursor.py" />
@@ -118,8 +120,7 @@
     <Folder Include="database\scripts\" />
     <Folder Include="map_objects\" />
     <Folder Include="menus\" />
-    <Folder Include="monsters\" />
-    <Folder Include="Staff\" />
+    <Folder Include="factories\" />
     <Folder Include="ui\" />
     <Folder Include="ui_data\" />
   </ItemGroup>

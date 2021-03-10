@@ -1,0 +1,2 @@
+from factories.monster_factory import MonsterFactory
+from factories.weapon_factory import WeaponFactory

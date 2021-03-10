@@ -1,4 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy.orm import relationship
 from database.db_entity_collection import BaseModel
 from database.entities.monsters_weapons import MonstersWeapons
 

@@ -128,7 +128,11 @@
    { "name": "0_wall_inner_mid", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 304, "w": 16, "h": 16 } }] },
    { "name": "1_wall_inner_mid", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 416, "w": 16, "h": 16 } }] },
    { "name": "2_wall_inner_mid", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 528, "w": 16, "h": 16 } }] },
-   { "name": "0_potion", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 272, "y": 128, "w": 16, "h": 16 } }] }
+   { "name": "0_potion", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 272, "y": 128, "w": 16, "h": 16 } }] },
+   { "name": "0_rat_left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 400, "y": 32, "w": 16, "h": 32 } }] },
+   { "name": "0_rat_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 416, "y": 16, "w": 16, "h": 32 } }] },
+   { "name": "0_rat_right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 432, "y": 32, "w": 16, "h": 32 } }] },
+   { "name": "0_rat_bottom", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 416, "y": 48, "w": 16, "h": 32 } }] }
   ]
  }
 }

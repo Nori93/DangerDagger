@@ -4,7 +4,7 @@ class Level:
         self.current_xp = current_xp
         self.level_up_base = level_up_base
         self.level_up_factor = level_up_factor		
-        self.preficiency_bonus = 2
+        self.proficiency_bonus = 2
 
     @property
     def exprience_to_next_level(self):
@@ -15,11 +15,17 @@ class Level:
 
         if self.current_xp > self.exprience_to_next_level:
             self.current_xp -= self.exprience_to_next_level
-            self.current_level += 1
+            self.level_up()
 
             return True
         else:
             return False
 
     def level_up(self):
-        pass
+        self.current_level += 1
+        '''
+        TODO:
+        1.Add proficiency bonus for example at lvl 5
+        2.Add new skils base on class
+        '''
+        

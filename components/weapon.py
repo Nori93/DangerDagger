@@ -84,6 +84,3 @@ class Weapon:
         self.versatile_value = versatile_value
         self.loading = loading
         self.special = special
-
-        #TO DO : After new dmg calculator
-        self.damage_done = 4
