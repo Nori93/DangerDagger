@@ -1,27 +1,11 @@
 import pygame as pg
+
 from settings import Settings
 from color import *
-
-from menus.menu import Menu
-from menus.main_menu import MainMenu
-from menus.options_menu import OptionsMenu
-from menus.credits_menu import CreditsMenu
-from menus.create_character_menu import CreateCharacterMenu
-from menus.inventory_menu import InventoryMenu
-from menus.pauze_menu import PauzeMenu
-
-from components.ability import Ability
-from components.playable import Playable
-from components.inventory import Inventory
-from components.level import Level
-from components.equipment import Equipment
-from components.equippable import Equippable
-from components.weapon import Weapon, WEAPON_TYPE
-
+from menus import *
+from components import *
 from equipment_slots import EQUIPMENT_SLOTS
-
 from entity import Entity
-
 from init_new_game import get_game_variables
 from render_function import render_all
 from death_functions import *
@@ -31,11 +15,8 @@ from fov_functions import intialize_fov, recompute_fov
 from data_loaders import save_game, load_game,load_race
 from race_enum import RACE
 from text_align import TEXT_ALIGN
+from database import *
 
-from database.db_entity_collection import get_transaction
-from database.entities.weapons import Weapons
-from database.entities.classes import Classes
-from database.entities.armors import Armors
 
 from map_objects.sprite_sheet import SpriteSheet
 
