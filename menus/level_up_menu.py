@@ -23,7 +23,7 @@ class SkillPointMenu(Menu):
         self.wisdom_x, self.wisdom_y = self.pauze_offset_x, self.pauze_offset_y  + (self.space_h * 4)
         self.charisma_x, self.charisma_y = self.pauze_offset_x, self.pauze_offset_y + (self.space_h * 5)
 
-     def display_menu(self):
+    def display_menu(self):
         self.run_display = True
         self.option_index = 0
         self.curent_item = None
