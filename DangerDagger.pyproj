@@ -148,6 +148,9 @@
     <Content Include="Assets\WIP\Visualization.aseprite" />
     <Content Include="database\database.db" />
     <Content Include="database\scripts\schema.sql" />
+    <Content Include="install.ps1">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="ui_data\inventory_menu.xml" />
     <Content Include="ui_data\main_menu.xml" />
     <Content Include="ui_data\option_menu.xml" />
