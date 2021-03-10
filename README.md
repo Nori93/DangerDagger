@@ -13,10 +13,12 @@ The main assumption is to make a game that:
    1. For 1 player 
    2. Base combat only on colision
    3. Base spell with "spell scrole" (* with mouse use)
-   <s>4. Base state system
+   <s>
+   4. Base state system
       1. Str - Power
       2. Dex - Agility
-      3. Con - Constitution</s>
+      3. Con - Constitution
+    </s>
 
    4. Base state system 
       1. Str - Power
@@ -33,7 +35,9 @@ The main assumption is to make a game that:
    9. Self generate map
    10. Inventory menu (text only)
    11. Player stats (text only)
-   <s>12. Grafic only with shapes and text </s>
+   <s>
+   12. Grafic only with shapes and text 
+   </s>
    12.Grafic with simple pixel art
    13.Mini-map
    14.xml creatig gui
