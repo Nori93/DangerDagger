@@ -8,10 +8,10 @@ def heal(*args, **kwargs):
 
     results = []
 
-    if entity.fighter.hp == entity.fighter.max_hp:
+    if entity.playable.hp == entity.playable.max_hp:
         results.append({"consumed": False, "message":Message("You are already at full health", libtcod.yellow)})
     else:
-        entity.fighter.heal(amount)
+        entity.playable.heal(amount)
         results.append({"consumed": True, "message":Message("You wounds start to feel better!", libtcod.green)})
     
     return results
@@ -29,7 +29,7 @@ def cast_lightning(*args, **kwargs):
     closest_distance = maximum_range + 1
     
     for entity in entities:
-        if entity.fighter and entity != caster and libtcod.map_is_in_fov(fov_map,entity.x, entity.y):
+        if entity.playable and entity != caster and libtcod.map_is_in_fov(fov_map,entity.x, entity.y):
             distance = caster.distance_to(entity)
 
             if distance < closest_distance:
@@ -63,11 +63,11 @@ def cast_fireball(*args, **kwargs):
         "The fireball explodes, burning everything within {} tiles!".format(radius), libtcod.orange)})	
     
     for entity in entities:
-        if entity.distance(target_x, target_y) <= radius and entity.fighter:
+        if entity.distance(target_x, target_y) <= radius and entity.playable:
             results.append({"message":Message(
                 "The {} gets burned for {} hit points.".format(entity.name, damage),
 				libtcod.orange)})
-            results.extend(entity.fighter.take_damage(damage))
+            results.extend(entity.playable.take_damage(damage))
     
     return results
 

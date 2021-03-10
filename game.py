@@ -11,7 +11,7 @@ from menus.inventory_menu import InventoryMenu
 from menus.pauze_menu import PauzeMenu
 
 from components.ability import Ability
-from components.fighter import Fighter
+from components.playable import Playable
 from components.inventory import Inventory
 from components.level import Level
 from components.equipment import Equipment
@@ -145,7 +145,8 @@ class Game:
         )
 
         hit_points = 1
-        defense =1  
+        armor_class = 1
+        
         if class_name != None:
             _class = db.query(Classes).filter(Classes.class_name == class_name).one()
             hit_points = 8 + ability_component.modifaier_constitution 
@@ -158,12 +159,12 @@ class Game:
             
         #fighter_component = Fighter(hp=100, defense=1, power=2)
         # for tests
-        fighter_component = Fighter(hp=hit_points, ac=armor_class, power=10)
+        playable_component = Playable(hp=hit_points, ac=armor_class)
         inventory_component = Inventory(26)
         level_component = Level()
         equipment_component = Equipment()
         self.temp_player = Entity(int(self.width/2), int(self.height /2),WHITE, name, blocks=True, 
-            render_order=RenderOrder.ACTOR, fighter = fighter_component,
+            render_order=RenderOrder.ACTOR, playable = playable_component,
             inventory=inventory_component,  level=level_component,
             equipment=equipment_component,
             ability=ability_component,
@@ -449,7 +450,7 @@ class Game:
         if not self.game_map.is_blocked(destination_x,destination_y):
             target = self.player.get_blocking_entities_at_location(self.entities, destination_x, destination_y)
             if target:
-                attack_results = self.player.fighter.attack(target)
+                attack_results = self.player.playable.attack(target)
                 self.player_turn_results.extend(attack_results)                
             else:
                 self.fov_recompute = True

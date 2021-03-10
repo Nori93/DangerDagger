@@ -1,7 +1,7 @@
 
 from color import *
 from entity import Entity
-from components.fighter import Fighter
+from components.playable import Playable
 from components.inventory import Inventory
 from components.level import Level
 from components.equipment import Equipment

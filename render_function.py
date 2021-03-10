@@ -105,7 +105,7 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
             if fov_map.fov[entity.y][entity.x] or (entity.stairs and game_map.tiles[entity.x][entity.y].explored):
                 draw_entity_mini_map(display, entity, mini_map_tile_size,mini_map_location_x, mini_map_location_y)
 
-    render_bar(display, 50, 20, 200, 30, "HP", player.fighter.hp, player.fighter.max_hp,
+    render_bar(display, 50, 20, 200, 30, "HP", player.playable.hp, player.playable.max_hp,
         GREEN, DARK_RED, 14, font_name, half_color = ORANGE, quarter_coler = RED)
 
     render_bar(display, 50, 5, 200, 15, "EXP", player.level.current_xp, player.level.exprience_to_next_level,
@@ -135,7 +135,7 @@ def draw_entity(display, entity, tile_size, spritesheet, player_to_mid_x = 0,pla
         tile_size, tile_size)
     if fov:
         if entity.image_name != None:
-            if entity.fighter:
+            if entity.playable:
                 rect = (
                     (entity.x * tile_size) - player_to_mid_x,
                     (entity.y * tile_size) - player_to_mid_y-tile_size, 

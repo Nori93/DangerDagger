@@ -11,7 +11,7 @@ class Entity:
         name,
         blocks=False,
         render_order=RenderOrder.CORPSE,
-        fighter=None,
+        playable=None,
         ai=None,
         item=None, 
         inventory=None, 
@@ -28,7 +28,7 @@ class Entity:
         self.color = color
         self.name = name
         self.blocks = blocks
-        self.fighter = fighter
+        self.playable = playable
         self.ai = ai
         self.render_order = render_order
         self.item = item
@@ -42,8 +42,8 @@ class Entity:
         self.image_name = image_name
         self.preficiencies = preficiencies
         
-        if self.fighter:
-            self.fighter.owner = self
+        if self.playable:
+            self.playable.owner = self
         if self.ai:
             self.ai.owner = self
         if self.item:

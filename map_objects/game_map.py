@@ -1,8 +1,8 @@
 from color import *
-from components.ai import BasicMonster
+
 from components.equipment import Equipment
 from components.equippable import Equippable
-from components.fighter import Fighter
+from components.playable import Playable
 from components.item import Item
 from components.stairs import Stairs
 from components.weapon import Weapon,WEAPON_TYPE
@@ -44,7 +44,7 @@ class GameMap:
         self.tiles = self.initialize_tiles()
         self.make_map(max_rooms, room_min_size,room_max_size, player, entities)
           
-        player.fighter.heal(player.fighter.max_hp // 2)
+        player.playable.heal(player.playable.max_hp // 2)
 
         message_log.add_message(Message("You take a moment to rest, and rocover your strength.", 
             libtcod.light_violet))
@@ -158,8 +158,10 @@ class GameMap:
             if not any([entity for entity in entities if entity.x == x and entity.y == y]):
                 monster_choice = random_choice_from_dict(monster_chances)
                 if monster_choice == "goblin":
-                    ai_component = BasicMonster()
-                    fighter_component = Fighter(hp=20, defense =0, power=4, xp=35)
+                   
+                    
+                    playable_component = Playable(hp=7, defense =15, xp=50)
+
                     monster = Entity(x, y, DESATURED_GREEN,"Goblin_" + str(self.unique_id), blocks=True,
                     render_order = RenderOrder.ACTOR ,fighter = fighter_component, ai = ai_component,image_name="goblin_right")
                 else:
