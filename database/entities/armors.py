@@ -12,5 +12,5 @@ class Armors(BaseModel):
     armor_class = Column(Integer, nullable=False)
     dex_modifier = Column(Integer)
     strenght = Column(Integer, nullable=False, default=0)
-    stealths = Column(Integer, nullable=False, default=0)
+    stealth = Column(Integer, nullable=False, default=0)
     weight = Column(Integer, nullable=False, default=0)

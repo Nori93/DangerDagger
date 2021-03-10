@@ -713,7 +713,7 @@ class CreateCharacterMenu(Menu):
             name=player_name,
             weapon_main=w_main,
             weapon_off=w_off,
-            armor= armor_choice,
+            armor= armor_choice['armor'],
             items= items_choice,
             race= self.loadet_race,
             class_name= self.loadet_class['class'],

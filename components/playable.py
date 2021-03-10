@@ -74,7 +74,7 @@ class Playable:
                     results.append({
                     "message":Message("{} attacks {} for {} hit points.".format(
                         self.owner.name.capitalize(), target.name, damage),WHITE)})
-                    results.extend(target.Playable.take_damage(damage))
+                    results.extend(target.playable.take_damage(damage))
                 else:
                     results.append({"message":
                     Message("{} attacks {} but does no damage.".format(self.owner.name.capitalize(), target.name),WHITE)})
