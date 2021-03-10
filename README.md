@@ -38,10 +38,10 @@ The main assumption is to make a game that:
    <s>
    12. Grafic only with shapes and text 
    </s>
-   12.Grafic with simple pixel art
-   13.Mini-map
-   14.xml creatig gui
-   15. database 
+   12. Grafic with simple pixel art
+   13. Mini-map
+   14. Xml based GUI
+   15. Database 
    16. Character creator.
 
 2. Final game:
