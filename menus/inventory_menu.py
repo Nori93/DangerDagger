@@ -20,18 +20,22 @@ class InventoryMenu(Menu):
         self.mouse_is_over_menu = False
 
     def display_menu(self):
+       
         self.run_display = True        
         self.curent_item = None
         self.elements = self.render_from_xml(self.xml)
         while self.run_display:
             self.game.clock.tick(self.game.FPS)
             self.handle_manu()
+            results = []
             if self.act_quit:
                 self.game.running, self.game.playing, self.run_display = False, False, False  
             if self.act_esc:
                 self.run_display = False
             if self.act_start_key:
-               self.use_item()
+               results.extend(self.use_item())
+               return results
+               
            
             for element in self.elements:   
                 if element["element"].__type__ == "select": 
@@ -49,10 +53,14 @@ class InventoryMenu(Menu):
             self.blit_screen()
 
     def use_item(self):
+        results = []
         self.curent_item = self.game.player.inventory.items[self.option_index]
         if self.curent_item:
             if self.curent_item.equippable:
                 self.use_equicable_item()
+            else:
+                results.extend(self.game.player.inventory.use(self.curent_item))
+        return results
     
     def use_equicable_item(self):
         if self.curent_item.equippable.slot == EQUIPMENT_SLOTS.WEAPONS:

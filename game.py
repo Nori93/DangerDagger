@@ -272,7 +272,7 @@ class Game:
                 self.pickup()
 
             if self.act_show_inv:
-                self.inventory.display_menu()
+                self.player_turn_results.extend(self.inventory.display_menu())
 
             if self.game_state == GameState.TARGETING:
                 self.targeting_stage()

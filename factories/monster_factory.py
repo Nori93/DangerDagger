@@ -4,6 +4,7 @@ from database import get_transaction, Monsters
 from render_function import RenderOrder
 from entity import Entity
 from color import DESATURED_GREEN
+from random import randint
 
 class MonsterFactory:
     def __init__(self):

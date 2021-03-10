@@ -95,8 +95,9 @@ class Playable:
                 a punch, kick, head--butt, or similar forceful blow (none of which count as weapons). 
                 On a hit, an unarmed strike deals bludgeoning damage equal to 1 + your Strength modifier.
                 You are proficient with your unarmed strikes.
-                '''  
-                damage = 1 + self.owner.ability.modifaier_strenght
+                '''
+
+                damage = 1 + max(self.owner.ability.modifaier_strenght, 0)
                 if damage > 0 :
                     results.append({
                     "message":Message("{} attacks {} for {} hit points.".format(
