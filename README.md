@@ -66,6 +66,6 @@ The main assumption is to make a game that:
 ## Bugs:
 1. Pressed event don't work ..;/ moving by taping buttons.
 2. Tile rules still buget
-[Tile rules bug](/screens/tile_bug1.png)
+[Tile rules bug](./screens/tile_bug1.png)
 3. Set abillity in character creator something not right...
-[Ability bug](/screens/set_ability_bug.png)
+[Ability bug](./screens/set_ability_bug.png)
