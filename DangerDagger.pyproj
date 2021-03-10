@@ -1,0 +1,180 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>be2f0a4f-10fe-487d-893a-95f4bbfa1843</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>main.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>DangerDagger</Name>
+    <RootNamespace>DangerDagger</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="class_enum.py" />
+    <Compile Include="color.py" />
+    <Compile Include="components\ability.py" />
+    <Compile Include="components\ai.py" />
+    <Compile Include="components\equipment.py" />
+    <Compile Include="components\equippable.py" />
+    <Compile Include="components\inventory.py" />
+    <Compile Include="components\item.py" />
+    <Compile Include="components\level.py" />
+    <Compile Include="components\playable.py" />
+    <Compile Include="components\preficiencies.py" />
+    <Compile Include="components\skill.py" />
+    <Compile Include="components\stairs.py" />
+    <Compile Include="components\weapon.py" />
+    <Compile Include="components\__init__.py" />
+    <Compile Include="database\db_entity_collection.py" />
+    <Compile Include="database\entities\armors.py" />
+    <Compile Include="database\entities\classes.py" />
+    <Compile Include="database\entities\monsters.py" />
+    <Compile Include="database\entities\preficiencies_weapons.py" />
+    <Compile Include="database\entities\weapons.py" />
+    <Compile Include="database\entities\weapon_damage_type.py" />
+    <Compile Include="data_loaders.py" />
+    <Compile Include="death_functions.py" />
+    <Compile Include="entity.py" />
+    <Compile Include="equipment_slots.py" />
+    <Compile Include="fov_functions.py" />
+    <Compile Include="game.py" />
+    <Compile Include="game_message.py" />
+    <Compile Include="game_state.py" />
+    <Compile Include="init_new_game.py" />
+    <Compile Include="input_handlers.py" />
+    <Compile Include="item_funktion.py" />
+    <Compile Include="main.py" />
+    <Compile Include="map_objects\game_map.py" />
+    <Compile Include="map_objects\rectangle.py" />
+    <Compile Include="map_objects\sprite_sheet.py" />
+    <Compile Include="map_objects\tile.py" />
+    <Compile Include="menus\create_character_menu.py" />
+    <Compile Include="menus\credits_menu.py" />
+    <Compile Include="menus\inventory_menu.py" />
+    <Compile Include="menus\level_up_menu.py" />
+    <Compile Include="menus\main_menu.py" />
+    <Compile Include="menus\main_or_offhand_menu.py" />
+    <Compile Include="menus\menu.py" />
+    <Compile Include="menus\options_menu.py" />
+    <Compile Include="menus\pauze_menu.py" />
+    <Compile Include="monsters\monster_factory.py" />
+    <Compile Include="race_enum.py" />
+    <Compile Include="random_utils.py" />
+    <Compile Include="render_function.py" />
+    <Compile Include="settings.py" />
+    <Compile Include="sprite.py" />
+    <Compile Include="Staff\dice.py" />
+    <Compile Include="text_align.py" />
+    <Compile Include="ui\button.py" />
+    <Compile Include="ui\cursor.py" />
+    <Compile Include="ui\label.py" />
+    <Compile Include="ui\panel.py" />
+    <Compile Include="ui\select.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
+    <Folder Include="Assets\Data\" />
+    <Folder Include="Assets\Sprites\" />
+    <Folder Include="Assets\Sprites\Map\" />
+    <Folder Include="Assets\Sprites\Weapon\" />
+    <Folder Include="Assets\WIP\" />
+    <Folder Include="components\" />
+    <Folder Include="components\__pycache__\" />
+    <Folder Include="database\" />
+    <Folder Include="database\entities\" />
+    <Folder Include="database\entities\__pycache__\" />
+    <Folder Include="database\scripts\" />
+    <Folder Include="database\__pycache__\" />
+    <Folder Include="map_objects\" />
+    <Folder Include="map_objects\__pycache__\" />
+    <Folder Include="menus\" />
+    <Folder Include="menus\__pycache__\" />
+    <Folder Include="monsters\" />
+    <Folder Include="Staff\" />
+    <Folder Include="ui\" />
+    <Folder Include="ui\__pycache__\" />
+    <Folder Include="ui_data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\8-BIT WONDER.TTF" />
+    <Content Include="Assets\Data\classes.jsonc" />
+    <Content Include="Assets\Data\names.jsonc" />
+    <Content Include="Assets\Data\races.jsonc" />
+    <Content Include="Assets\dogica.zip" />
+    <Content Include="Assets\dogicabold.ttf" />
+    <Content Include="Assets\money.png" />
+    <Content Include="Assets\Sprites\Map\TILE_SPRITE_SHEAT.aseprite" />
+    <Content Include="Assets\Sprites\Map\TILE_SPRITE_SHEAT.json" />
+    <Content Include="Assets\Sprites\Map\TILE_SPRITE_SHEAT.png" />
+    <Content Include="Assets\Sprites\Weapon\DAGGER_001.png" />
+    <Content Include="Assets\WIP\Attack_icon.aseprite" />
+    <Content Include="Assets\WIP\Attack_icon.png" />
+    <Content Include="Assets\WIP\Attack_icon_disable.png" />
+    <Content Include="Assets\WIP\DAGGER.aseprite" />
+    <Content Include="Assets\WIP\in_front_of_monitor.aseprite" />
+    <Content Include="Assets\WIP\map_idea_on_pauze_menu.aseprite" />
+    <Content Include="Assets\WIP\potion.aseprite" />
+    <Content Include="Assets\WIP\SHIELD.aseprite" />
+    <Content Include="Assets\WIP\TILE_SPRITE_SHEAT.aseprite" />
+    <Content Include="Assets\WIP\Visualization.aseprite" />
+    <Content Include="components\__pycache__\ability.cpython-37.pyc" />
+    <Content Include="components\__pycache__\ai.cpython-37.pyc" />
+    <Content Include="components\__pycache__\equipment.cpython-37.pyc" />
+    <Content Include="components\__pycache__\equippable.cpython-37.pyc" />
+    <Content Include="components\__pycache__\fighter.cpython-37.pyc" />
+    <Content Include="components\__pycache__\inventory.cpython-37.pyc" />
+    <Content Include="components\__pycache__\item.cpython-37.pyc" />
+    <Content Include="components\__pycache__\level.cpython-37.pyc" />
+    <Content Include="components\__pycache__\playable.cpython-37.pyc" />
+    <Content Include="components\__pycache__\stairs.cpython-37.pyc" />
+    <Content Include="components\__pycache__\weapon.cpython-37.pyc" />
+    <Content Include="components\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="database\database.db" />
+    <Content Include="database\entities\__pycache__\armors.cpython-37.pyc" />
+    <Content Include="database\entities\__pycache__\classes.cpython-37.pyc" />
+    <Content Include="database\entities\__pycache__\preficiencies_weapons.cpython-37.pyc" />
+    <Content Include="database\entities\__pycache__\weapons.cpython-37.pyc" />
+    <Content Include="database\entities\__pycache__\weapon_damage_type.cpython-37.pyc" />
+    <Content Include="database\scripts\schema.sql" />
+    <Content Include="database\__pycache__\db_entity_collection.cpython-37.pyc" />
+    <Content Include="map_objects\__pycache__\game_map.cpython-37.pyc" />
+    <Content Include="map_objects\__pycache__\rectangle.cpython-37.pyc" />
+    <Content Include="map_objects\__pycache__\sprite_sheet.cpython-37.pyc" />
+    <Content Include="map_objects\__pycache__\tile.cpython-37.pyc" />
+    <Content Include="menus\__pycache__\create_character_menu.cpython-37.pyc" />
+    <Content Include="menus\__pycache__\credits_menu.cpython-37.pyc" />
+    <Content Include="menus\__pycache__\inventory_menu.cpython-37.pyc" />
+    <Content Include="menus\__pycache__\main_menu.cpython-37.pyc" />
+    <Content Include="menus\__pycache__\main_or_offhand_menu.cpython-37.pyc" />
+    <Content Include="menus\__pycache__\menu.cpython-37.pyc" />
+    <Content Include="menus\__pycache__\options_menu.cpython-37.pyc" />
+    <Content Include="menus\__pycache__\pauze_menu.cpython-37.pyc" />
+    <Content Include="ui\__pycache__\cursor.cpython-37.pyc" />
+    <Content Include="ui\__pycache__\label.cpython-37.pyc" />
+    <Content Include="ui\__pycache__\panel.cpython-37.pyc" />
+    <Content Include="ui\__pycache__\select.cpython-37.pyc" />
+    <Content Include="ui_data\inventory_menu.xml" />
+    <Content Include="ui_data\main_menu.xml" />
+    <Content Include="ui_data\option_menu.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

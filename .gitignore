@@ -131,3 +131,4 @@ dmypy.json
 # save data
 *.dat
 Assets/money.png
+*.suo
