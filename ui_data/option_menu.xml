@@ -1,13 +1,12 @@
 <option_menu>
-    <label 
-        name="title" 
-        text="Options" 
-        size='30' 
+    <label
+        name="title"
+        text="Options"
+        size='30'
         font_name=".\Assets\dogicabold.ttf"
         x="512"
-        y="40"
-        />
-    <select 
+        y="40" />
+    <select
         name="option_menu"
         size="20"
         font_name=".\Assets\dogicabold.ttf"

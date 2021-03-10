@@ -5,28 +5,26 @@
         x='290'
         y='200'
         width='400'
-        height='390'
-        />
+        height='390' />
     <panel
         name="front_panel"
         background_color='217,160,102'
         x='300'
         y='240'
         width='380'
-        height='340'
-        />
-    <label 
-        name="title" 
-        text="Inventory" 
-        size='20' 
+        height='340' />
+    <label
+        name="title"
+        text="Inventory"
+        size='20'
         font_name=".\Assets\dogicabold.ttf"
         x="440"
-        y="220"/>
-    <select 
+        y="220" />
+    <select
         name="inventory_menu"
         size="15"
         font_name=".\Assets\dogicabold.ttf"
         x="480"
         y="260"
-        offset="40"/>        
+        offset="40" />
 </inventory_menu>

@@ -1,12 +1,12 @@
 <main_menu>
-    <label 
-        name="title" 
-        text="Danger Dagger" 
-        size='50' 
+    <label
+        name="title"
+        text="Danger Dagger"
+        size='50'
         font_name=".\Assets\dogicabold.ttf"
         x="512"
-        y="230"/>
-    <select 
+        y="230" />
+    <select
         name="main_menu"
         size="20"
         font_name=".\Assets\dogicabold.ttf"
