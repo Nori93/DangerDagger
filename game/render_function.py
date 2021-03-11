@@ -1,7 +1,7 @@
 import pygame as pg
 from enum import Enum
-from color import *
-from text_align import TEXT_ALIGN
+from game.color import *
+from game.text_align import TEXT_ALIGN
 
 class RenderOrder(Enum):
     STAIRS = 1

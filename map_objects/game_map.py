@@ -1,4 +1,4 @@
-from color import *
+from game.color import *
 
 from components import Equipment, Equippable, Playable, Item, Stairs, Weapon, WEAPON_TYPE
 
@@ -6,13 +6,13 @@ from components import Equipment, Equippable, Playable, Item, Stairs, Weapon, WE
 from map_objects.tile import Tile
 from map_objects.rectangle import Rect
 
-from entity import Entity
-from equipment_slots import EQUIPMENT_SLOTS
+from game.entity import Entity
+from game.equipment_slots import EQUIPMENT_SLOTS
 
-from item_funktion import *
+from game.item_funktion import *
 from random import randint
-from random_utils import random_choice_from_dict ,from_dungeon_level
-from render_function import RenderOrder
+from game.random_utils import random_choice_from_dict ,from_dungeon_level
+from game.render_function import RenderOrder
 
 from factories import MonsterFactory
 

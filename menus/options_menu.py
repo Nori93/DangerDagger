@@ -1,10 +1,10 @@
 import pygame as pg
-from color import *
+from game.color import *
 from enum import Enum
-from input_handlers import handle_main_menu
-from render_function import draw_text, draw_panel
+from game.input_handlers import handle_main_menu
+from game.render_function import draw_text, draw_panel
 from menus.menu import Menu
-from data_loaders import load_xml
+from game.data_loaders import load_xml
         
 class OptionsMenu(Menu):
     

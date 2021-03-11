@@ -1,8 +1,8 @@
 import pygame as pg
-from color import *
-from input_handlers import handle_main_menu
-from render_function import draw_text, draw_panel
-from text_align import TEXT_ALIGN
+from game.color import *
+from game.input_handlers import handle_main_menu
+from game.render_function import draw_text, draw_panel
+from game.text_align import TEXT_ALIGN
 
 from ui.label import Label
 from ui.select import Select

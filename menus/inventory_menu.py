@@ -1,13 +1,13 @@
 import pygame as pg
-from color import *
+from game.color import *
 from enum import Enum
-from input_handlers import handle_main_menu
-from render_function import draw_text, draw_panel
-from text_align import TEXT_ALIGN
-from equipment_slots import EQUIPMENT_SLOTS
+from game.input_handlers import handle_main_menu
+from game.render_function import draw_text, draw_panel
+from game.text_align import TEXT_ALIGN
+from game.equipment_slots import EQUIPMENT_SLOTS
 from menus.menu import Menu
 from menus.main_or_offhand_menu import MainOrOffHandMenu
-from data_loaders import load_xml
+from game.data_loaders import load_xml
 
 
 class InventoryMenu(Menu):

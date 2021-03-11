@@ -1,5 +1,5 @@
 import tcod as libtcod
-from game_message import Message
+from game.game_message import Message
 from components.ai import CofusedMonster
 
 def heal(*args, **kwargs):

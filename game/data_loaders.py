@@ -2,9 +2,11 @@ from os import path
 import pickle
 import json
 import xml.etree.ElementTree as ET
-from race_enum import RACE
-from class_enum import CLASS
+from game.race_enum import RACE
+from game.class_enum import CLASS
 import pygame as pg
+
+main_dir = ""
 
 SAVE_FILE = "savegame.dat"
 
@@ -49,7 +51,7 @@ NAME_FILE = 'names.jsonc'
 NAME_FILE = 'names.jsonc'
 
 def load_race(type: RACE): 
-	dir = path.dirname(__file__)
+	dir = path.dirname(main_dir)
 	dir = path.join(dir,ASSETS_DIR,DATA_DIR,RACES_FILE)
 	with open(dir) as json_file:
 		data = json.load(json_file)
@@ -59,7 +61,7 @@ def load_race(type: RACE):
 
 
 def load_class(type: CLASS): 
-	dir = path.dirname(__file__)
+	dir = path.dirname(main_dir)
 	dir = path.join(dir,ASSETS_DIR,DATA_DIR,CLASS_FILE)
 	with open(dir) as json_file:
 		data = json.load(json_file)
@@ -69,7 +71,7 @@ def load_class(type: CLASS):
 
 
 def load_name_for_race(type: RACE): 
-	dir = path.dirname(__file__)
+	dir = path.dirname(main_dir)
 	dir = path.join(dir,ASSETS_DIR,DATA_DIR,NAME_FILE)
 	with open(dir) as json_file:
 		data = json.load(json_file)
@@ -79,19 +81,19 @@ def load_name_for_race(type: RACE):
 
 
 def load_xml(file_name:str):
-	dir = path.dirname(__file__)
+	dir = path.dirname(main_dir)
 	dir = path.join(dir,DATA_UI,file_name)
 	tree = ET.parse(dir)
 	return tree.getroot()
 
 def load_sprite_sheet_json(file_name:str):
-	dir = path.dirname(__file__)
+	dir = path.dirname(main_dir)
 	dir = path.join(dir, ASSETS_DIR,SPRITES_DIR,MAP_DIR,file_name)
 	with open(dir) as json_file:
 		data = json.load(json_file)
 		return data
 
 def load_sprite_sheet(file_name:str):
-	dir = path.dirname(__file__)
+	dir = path.dirname(main_dir)
 	dir = path.join(dir, ASSETS_DIR,SPRITES_DIR,MAP_DIR,file_name)
 	return pg.image.load(dir).convert()

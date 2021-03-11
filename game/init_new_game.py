@@ -1,6 +1,6 @@
 
-from color import *
-from entity import Entity
+from game.color import *
+from game.entity import Entity
 from components.playable import Playable
 from components.inventory import Inventory
 from components.level import Level
@@ -8,10 +8,10 @@ from components.equipment import Equipment
 from components.equippable import Equippable
 from components.weapon import Weapon, WEAPON_TYPE
 from map_objects.game_map import GameMap
-from render_function import RenderOrder
-from game_state import GameState
-from equipment_slots import EQUIPMENT_SLOTS
-from game_message import MessageLog
+from game.render_function import RenderOrder
+from game.game_state import GameState
+from game.equipment_slots import EQUIPMENT_SLOTS
+from game.game_message import MessageLog
 
 def get_game_variables(game):
     player = game.temp_player

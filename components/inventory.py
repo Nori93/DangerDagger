@@ -1,6 +1,6 @@
 import tcod as libtcod
 
-from game_message import Message
+from game.game_message import Message
 
 class Inventory:
     def __init__(self, capacity):

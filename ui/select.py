@@ -1,6 +1,6 @@
 import pygame as pg
-from color import *
-from text_align import TEXT_ALIGN
+from game.color import *
+from game.text_align import TEXT_ALIGN
 from ui import Label, Cursor
 
 class Select():

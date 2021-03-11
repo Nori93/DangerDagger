@@ -1,6 +1,6 @@
 import pygame as pg
-from color import BLACK
-from data_loaders import load_sprite_sheet_json, load_sprite_sheet
+from game.color import BLACK
+from game.data_loaders import load_sprite_sheet_json, load_sprite_sheet
 class SpriteSheet:
      # utility class for loading and parsing spritesheets
     def __init__(self, filename):

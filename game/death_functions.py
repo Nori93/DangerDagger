@@ -1,7 +1,7 @@
 import tcod as libtcod
-from game_state import GameState
-from render_function import RenderOrder
-from game_message import Message
+from game.game_state import GameState
+from game.render_function import RenderOrder
+from game.game_message import Message
 
 def kill_player(player):  
     player.color = libtcod.dark_red

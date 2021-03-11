@@ -25,8 +25,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="class_enum.py" />
-    <Compile Include="color.py" />
     <Compile Include="components\ability.py" />
     <Compile Include="components\ai.py" />
     <Compile Include="components\equipment.py" />
@@ -54,20 +52,29 @@
     <Compile Include="database\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="data_loaders.py" />
-    <Compile Include="death_functions.py" />
-    <Compile Include="entity.py" />
-    <Compile Include="equipment_slots.py" />
     <Compile Include="factories\weapon_factory.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="fov_functions.py" />
-    <Compile Include="game.py" />
-    <Compile Include="game_message.py" />
-    <Compile Include="game_state.py" />
-    <Compile Include="init_new_game.py" />
-    <Compile Include="input_handlers.py" />
-    <Compile Include="item_funktion.py" />
+    <Compile Include="game\class_enum.py" />
+    <Compile Include="game\color.py" />
+    <Compile Include="game\data_loaders.py" />
+    <Compile Include="game\death_functions.py" />
+    <Compile Include="game\entity.py" />
+    <Compile Include="game\equipment_slots.py" />
+    <Compile Include="game\fov_functions.py" />
+    <Compile Include="game\game.py" />
+    <Compile Include="game\game_message.py" />
+    <Compile Include="game\game_state.py" />
+    <Compile Include="game\init_new_game.py" />
+    <Compile Include="game\input_handlers.py" />
+    <Compile Include="game\item_funktion.py" />
+    <Compile Include="game\race_enum.py" />
+    <Compile Include="game\random_utils.py" />
+    <Compile Include="game\render_function.py" />
+    <Compile Include="game\settings.py" />
+    <Compile Include="game\sprite.py" />
+    <Compile Include="game\text_align.py" />
+    <Compile Include="game\__init__.py" />
     <Compile Include="main.py" />
     <Compile Include="map_objects\game_map.py" />
     <Compile Include="map_objects\rectangle.py" />
@@ -92,12 +99,6 @@
     <Compile Include="factories\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="race_enum.py" />
-    <Compile Include="random_utils.py" />
-    <Compile Include="render_function.py" />
-    <Compile Include="settings.py" />
-    <Compile Include="sprite.py" />
-    <Compile Include="text_align.py" />
     <Compile Include="ui\button.py" />
     <Compile Include="ui\cursor.py" />
     <Compile Include="ui\label.py" />
@@ -118,9 +119,11 @@
     <Folder Include="database\" />
     <Folder Include="database\entities\" />
     <Folder Include="database\scripts\" />
+    <Folder Include="game\" />
     <Folder Include="map_objects\" />
     <Folder Include="menus\" />
     <Folder Include="factories\" />
+    <Folder Include="screens\" />
     <Folder Include="ui\" />
     <Folder Include="ui_data\" />
   </ItemGroup>
@@ -151,6 +154,10 @@
     <Content Include="install.ps1">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="README.md" />
+    <Content Include="requirements.txt" />
+    <Content Include="screens\set_ability_bug.png" />
+    <Content Include="screens\tile_bug1.png" />
     <Content Include="ui_data\inventory_menu.xml" />
     <Content Include="ui_data\main_menu.xml" />
     <Content Include="ui_data\option_menu.xml" />

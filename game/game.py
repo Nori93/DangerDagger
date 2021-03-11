@@ -1,21 +1,21 @@
 import pygame as pg
 
-from settings import Settings
-from color import *
+from game.settings import Settings
+from game.color import *
 from menus import *
 from components import *
 from factories import WeaponFactory
-from equipment_slots import EQUIPMENT_SLOTS
-from entity import Entity
-from init_new_game import get_game_variables
-from render_function import render_all
-from death_functions import *
-from game_state import GameState
-from input_handlers import handle_game, handle_mouse
-from fov_functions import intialize_fov, recompute_fov
-from data_loaders import save_game, load_game,load_race
-from race_enum import RACE
-from text_align import TEXT_ALIGN
+from game.equipment_slots import EQUIPMENT_SLOTS
+from game.entity import Entity
+from game.init_new_game import get_game_variables
+from game.render_function import render_all
+from game.death_functions import *
+from game.game_state import GameState
+from game.input_handlers import handle_game, handle_mouse
+from game.fov_functions import intialize_fov, recompute_fov
+from game.data_loaders import main_dir,save_game, load_game,load_race
+from game.race_enum import RACE
+from game.text_align import TEXT_ALIGN
 from database import *
 
 
@@ -23,7 +23,8 @@ from map_objects.sprite_sheet import SpriteSheet
 
 class Game:   
 
-    def __init__(self):
+    def __init__(self,dir):
+        main_dir = dir
         #Get the standard settings
         self.settings = Settings()
         

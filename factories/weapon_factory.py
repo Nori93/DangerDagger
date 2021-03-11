@@ -1,8 +1,8 @@
 from components import Equippable, Weapon
-from equipment_slots import EQUIPMENT_SLOTS
+from game.equipment_slots import EQUIPMENT_SLOTS
 from database import get_transaction, Weapons
-from entity import Entity
-from color import SKY
+from game.entity import Entity
+from game.color import SKY
 
 class WeaponFactory:
     def __init__(self):

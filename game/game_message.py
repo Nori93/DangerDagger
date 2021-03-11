@@ -1,5 +1,5 @@
 import textwrap
-from color import WHITE
+from game.color import WHITE
 class Message:
     def __init__(self, text, color=WHITE):
         self.text = text

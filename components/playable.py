@@ -1,7 +1,7 @@
 import tcod as libtcod
 from components.weapon import Weapon
-from game_message import Message
-from color import *
+from game.game_message import Message
+from game.color import *
 from random import randint
 class Playable:
     def __init__(self, hp, ac,xp):
