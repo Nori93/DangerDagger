@@ -119,7 +119,7 @@ class Playable:
         Only addet when u can wield this type of weapon
         '''
         proficiency_bonus = 0
-        if self.owner.preficiencies.is_proficient_weapon(weapon):
+        if self.owner.preficiencies and self.owner.preficiencies.is_proficient_weapon(weapon):
             proficiency_bonus = self.owner.level.proficiency_bonus
         return modifier_bonus + proficiency_bonus
 

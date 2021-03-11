@@ -1,7 +1,7 @@
 from game.color import *
 
 from components import Equipment, Equippable, Playable, Item, Stairs, Weapon, WEAPON_TYPE
-
+from database import get_transaction, MonstersChances
 
 from map_objects.tile import Tile
 from map_objects.rectangle import Rect
@@ -132,15 +132,17 @@ class GameMap:
 
      
     def place_entities(self, room, entities):
+        db = get_transaction()
         max_monsers_per_room = from_dungeon_level([[2,1],[3,4],[5,6]],self.dungeon_level)
         max_items_per_room = from_dungeon_level([[1,1],[2,4]],self.dungeon_level)
         number_of_monsters = randint(0, max_monsers_per_room)
         number_of_items = randint(0, max_items_per_room)
         monster_factory = MonsterFactory()
-        monster_chances = {
-            "Rat": 80,
-            "Goblin": from_dungeon_level([[15,3],[30,5],[60,7]],self.dungeon_level)
-            }
+        
+        monster_chances = {}
+        _monsters = db.query(MonstersChances).filter(MonstersChances.id_dungeon_level <= self.dungeon_level)    
+        for _monster in _monsters:
+            monster_chances[_monster.monster.monster_name]=_monster.chances
         item_chances = {
             "healing_potion":70,
             "lightinh_scroll":from_dungeon_level([[25,4]],self.dungeon_level),

@@ -8,8 +8,24 @@ import pygame as pg
 
 main_dir = ""
 
+ICON = 'icon.png'
 SAVE_FILE = "savegame.dat"
 
+ASSETS_DIR = "Assets"
+DATA_DIR = "Data"
+SPRITES_DIR = 'Sprites'
+MAP_DIR = 'Map'
+
+DATA_UI = 'ui_data'
+
+RACES_FILE = 'races.jsonc'
+CLASS_FILE = 'classes.jsonc'
+NAME_FILE = 'names.jsonc'
+NAME_FILE = 'names.jsonc'
+
+def load_icon():
+	dir = path.dirname(main_dir)
+	return path.join(dir,ASSETS_DIR,SPRITES_DIR,ICON)
 
 def save_game(player, entities, game_map, message_log, game_state):
 	data_file = {}
@@ -38,17 +54,6 @@ def load_game():
 	
 	return player, entities, game_map, message_log, game_state
 
-ASSETS_DIR = "Assets"
-DATA_DIR = "Data"
-SPRITES_DIR = 'Sprites'
-MAP_DIR = 'Map'
-
-DATA_UI = 'ui_data'
-
-RACES_FILE = 'races.jsonc'
-CLASS_FILE = 'classes.jsonc'
-NAME_FILE = 'names.jsonc'
-NAME_FILE = 'names.jsonc'
 
 def load_race(type: RACE): 
 	dir = path.dirname(main_dir)

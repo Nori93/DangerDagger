@@ -42,6 +42,7 @@
     <Compile Include="database\entities\armors.py" />
     <Compile Include="database\entities\classes.py" />
     <Compile Include="database\entities\monsters.py" />
+    <Compile Include="database\entities\monsters_chances.py" />
     <Compile Include="database\entities\monsters_weapons.py" />
     <Compile Include="database\entities\preficiencies_weapons.py" />
     <Compile Include="database\entities\weapons.py" />

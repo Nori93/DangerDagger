@@ -13,7 +13,7 @@ from game.death_functions import *
 from game.game_state import GameState
 from game.input_handlers import handle_game, handle_mouse
 from game.fov_functions import intialize_fov, recompute_fov
-from game.data_loaders import main_dir,save_game, load_game,load_race
+from game.data_loaders import main_dir, load_icon, save_game, load_game, load_race
 from game.race_enum import RACE
 from game.text_align import TEXT_ALIGN
 from database import *
@@ -57,7 +57,9 @@ class Game:
         #initalize game sounds
         pg.mixer.init()
         self.display = pg.Surface((self.width, self.height + 100))
-
+        icon_path = load_icon()
+        self.icon = pg.image.load(icon_path)
+        pg.display.set_icon(self.icon)
         #set screen 
         self.window = pg.display.set_mode((self.width, self.height + 100))
         #set title of game
@@ -273,7 +275,9 @@ class Game:
                 self.pickup()
 
             if self.act_show_inv:
-                self.player_turn_results.extend(self.inventory.display_menu())
+                inventory_results = self.inventory.display_menu()
+                if inventory_results != None:
+                    self.player_turn_results.extend(inventory_results)
 
             if self.game_state == GameState.TARGETING:
                 self.targeting_stage()

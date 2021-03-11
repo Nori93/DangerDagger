@@ -104,13 +104,17 @@ def render_all(display, game_map, fov_map, fov_recompute, entities, message_log,
         for entity in entities_in_render_order:
             if fov_map.fov[entity.y][entity.x] or (entity.stairs and game_map.tiles[entity.x][entity.y].explored):
                 draw_entity_mini_map(display, entity, mini_map_tile_size,mini_map_location_x, mini_map_location_y)
-
-    render_bar(display, 50, 20, 200, 30, "HP", player.playable.hp, player.playable.max_hp,
+    '''
+    Player stuff : hp,exp, lvl, name 
+    '''
+    draw_text(display, "{} LV:{}".format(player.name, player.level.current_level),10,font_name,10,10,text_align=TEXT_ALIGN.LEFT)
+    render_bar(display, 10, 35, 200, 30, "HP", player.playable.hp, player.playable.max_hp,
         GREEN, DARK_RED, 14, font_name, half_color = ORANGE, quarter_coler = RED)
 
-    render_bar(display, 50, 5, 200, 15, "EXP", player.level.current_xp, player.level.exprience_to_next_level,
+    render_bar(display, 10, 20, 200, 15, "EXP", player.level.current_xp, player.level.exprience_to_next_level,
         YELLOW, DARK_RED, 8, font_name,half_color=YELLOW, quarter_coler=YELLOW)
 
+    draw_text(display, "Dungeon level {}".format(game_map.dungeon_level),10,font_name,game_map.width-10,10,text_align=TEXT_ALIGN.RIGHT,color=SKY)
     y= game_map.height - 10
     x = 10
     for message_log in message_log.messages:

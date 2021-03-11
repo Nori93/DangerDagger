@@ -45,6 +45,6 @@ class MonsterFactory:
             
             if _weapon != None:                   
                monster.inventory.add_item(_weapon)
-               monster.inventory.toggle_equip_main_hand(_weapon)
+               monster.equipment.toggle_equip_main_hand(_weapon)
 
         return monster
