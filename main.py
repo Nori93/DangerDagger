@@ -1,7 +1,7 @@
 from game import Game
 import sys
 
-app = Game()
+app = Game(__file__)
 
 while app.running:
     app.clock.tick(app.FPS)

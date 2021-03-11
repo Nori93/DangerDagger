@@ -1,14 +1,14 @@
 import pygame as pg
 import numpy as np
-from color import *
+from game.color import *
 from enum import Enum
-from input_handlers import handle_main_menu
-from render_function import draw_text, draw_panel
-from text_align import TEXT_ALIGN
+from game.input_handlers import handle_main_menu
+from game.render_function import draw_text, draw_panel
+from game.text_align import TEXT_ALIGN
 from menus.menu import Menu
-from data_loaders import load_race, load_class, load_name_for_race
-from race_enum import RACE
-from class_enum import CLASS
+from game.data_loaders import load_race, load_class, load_name_for_race
+from game.race_enum import RACE
+from game.class_enum import CLASS
 from random import randint
 
 
@@ -704,7 +704,7 @@ class CreateCharacterMenu(Menu):
                 w_off = w_choise["off_hand"]
         
         if self.sel_armor_index != -1:
-            armor_choice = self.loadet_class["equipment"]["armor_choice"][self.sel_armor_index]
+            armor_choice = self.loadet_class["equipment"]["armor_choice"][self.sel_armor_index]['armor']
         
         if self.sel_items_index != -1:
             items_choice =  self.loadet_class["equipment"]["items_choice"][self.sel_items_index]
@@ -713,7 +713,7 @@ class CreateCharacterMenu(Menu):
             name=player_name,
             weapon_main=w_main,
             weapon_off=w_off,
-            armor= armor_choice['armor'],
+            armor= armor_choice,
             items= items_choice,
             race= self.loadet_race,
             class_name= self.loadet_class['class'],

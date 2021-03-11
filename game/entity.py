@@ -1,7 +1,7 @@
 import math
 import tcod as libtcod
 from components.item import Item
-from render_function import RenderOrder
+from game.render_function import RenderOrder
 class Entity:
     def __init__(
         self,

@@ -1,5 +1,5 @@
-from equipment_slots import EQUIPMENT_SLOTS
-from game_message import Message
+from game.equipment_slots import EQUIPMENT_SLOTS
+from game.game_message import Message
 class Equipment:
     def __init__(self,main_hand=None, off_hand=None):
         self.main_hand = main_hand

@@ -1,6 +1,5 @@
-{ "frames": [
-   {
-    "filename": "TILE_SPRITE_SHEAT.aseprite",
+{ "frames": {
+   "TILE_SPRITE_SHEAT.aseprite": {
     "frame": { "x": 0, "y": 0, "w": 1024, "h": 640 },
     "rotated": false,
     "trimmed": false,
@@ -8,7 +7,7 @@
     "sourceSize": { "w": 1024, "h": 640 },
     "duration": 100
    }
- ],
+ },
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.21-dev",
@@ -16,6 +15,17 @@
   "format": "RGBA8888",
   "size": { "w": 1024, "h": 640 },
   "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "map", "opacity": 255, "blendMode": "normal" },
+   { "name": "Potion", "opacity": 255, "blendMode": "normal" },
+   { "name": "Player", "opacity": 255, "blendMode": "normal" },
+   { "name": "Goblin", "opacity": 255, "blendMode": "normal" },
+   { "name": "rat", "opacity": 255, "blendMode": "normal" },
+   { "name": "blood", "opacity": 255, "blendMode": "normal" },
+   { "name": "bat", "opacity": 255, "blendMode": "normal" }
+  ],
   "slices": [
    { "name": "0_wall_corner_right_bottom", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "0_wall_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 16, "y": 0, "w": 16, "h": 16 } }] },
@@ -132,7 +142,11 @@
    { "name": "0_rat_left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 400, "y": 32, "w": 16, "h": 32 } }] },
    { "name": "0_rat_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 416, "y": 16, "w": 16, "h": 32 } }] },
    { "name": "0_rat_right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 432, "y": 32, "w": 16, "h": 32 } }] },
-   { "name": "0_rat_bottom", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 416, "y": 48, "w": 16, "h": 32 } }] }
+   { "name": "0_rat_bottom", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 416, "y": 48, "w": 16, "h": 32 } }] },
+   { "name": "0_bat_left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 448, "y": 32, "w": 16, "h": 32 } }] },
+   { "name": "0_bat_bottom", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 464, "y": 48, "w": 16, "h": 32 } }] },
+   { "name": "0_bat_right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 480, "y": 32, "w": 16, "h": 32 } }] },
+   { "name": "0_bat_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 464, "y": 16, "w": 16, "h": 32 } }] }
   ]
  }
 }

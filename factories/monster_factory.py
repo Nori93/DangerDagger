@@ -1,9 +1,9 @@
 from components import Playable, BasicMonster, Ability, Inventory, Equipment
 from factories.weapon_factory import WeaponFactory
 from database import get_transaction, Monsters
-from render_function import RenderOrder
-from entity import Entity
-from color import DESATURED_GREEN
+from game.render_function import RenderOrder
+from game.entity import Entity
+from game.color import DESATURED_GREEN
 from random import randint
 
 class MonsterFactory:
@@ -45,6 +45,6 @@ class MonsterFactory:
             
             if _weapon != None:                   
                monster.inventory.add_item(_weapon)
-               monster.inventory.toggle_equip_main_hand(_weapon)
+               monster.equipment.toggle_equip_main_hand(_weapon)
 
         return monster

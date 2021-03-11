@@ -1,5 +1,5 @@
 import pygame as pg
-from game_state import GameState
+from game.game_state import GameState
 
 def handle_main_menu():
     for event in pg.event.get():
