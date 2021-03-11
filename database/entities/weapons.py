@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, Numeric
 from sqlalchemy.orm import relationship
 from database.db_entity_collection import BaseModel
-from database.entities.weapon_damage_type import Weapon_Damage_Type
+from database.entities.weapon_damage_type import WeaponDamageType
 
 
 class Weapons(BaseModel):
@@ -31,4 +31,4 @@ class Weapons(BaseModel):
     special = Column(Boolean, nullable=False, default=0)
 
     #refs
-    weapon_damage_type = relationship("Weapon_Damage_Type", back_populates="weapons")
+    weapon_damage_type = relationship("WeaponDamageType", back_populates="weapons")

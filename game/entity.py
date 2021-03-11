@@ -23,7 +23,9 @@ class Entity:
         ability=None,
         image_name=None,
         preficiencies=None,
-        skills=None):
+        skills=None,
+        class_name=None,
+        race_name=None):
         self.x = x
         self.y = y       
         self.color = color
@@ -43,7 +45,8 @@ class Entity:
         self.image_name = image_name
         self.preficiencies = preficiencies
         self.skills = skills
-        
+        self.class_name = class_name
+        self.race_name = race_name
         if self.playable:
             self.playable.owner = self
         if self.ai:

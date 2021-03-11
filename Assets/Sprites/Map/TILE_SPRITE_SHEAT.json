@@ -24,7 +24,9 @@
    { "name": "Goblin", "opacity": 255, "blendMode": "normal" },
    { "name": "rat", "opacity": 255, "blendMode": "normal" },
    { "name": "blood", "opacity": 255, "blendMode": "normal" },
-   { "name": "bat", "opacity": 255, "blendMode": "normal" }
+   { "name": "bat", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 4", "opacity": 255, "blendMode": "normal" },
+   { "name": "hp_exp_bar", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
    { "name": "0_wall_corner_right_bottom", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 16, "h": 16 } }] },
@@ -146,7 +148,8 @@
    { "name": "0_bat_left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 448, "y": 32, "w": 16, "h": 32 } }] },
    { "name": "0_bat_bottom", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 464, "y": 48, "w": 16, "h": 32 } }] },
    { "name": "0_bat_right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 480, "y": 32, "w": 16, "h": 32 } }] },
-   { "name": "0_bat_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 464, "y": 16, "w": 16, "h": 32 } }] }
+   { "name": "0_bat_top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 464, "y": 16, "w": 16, "h": 32 } }] },
+   { "name": "health_bar", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 878, "y": 12, "w": 135, "h": 21 } }] }
   ]
  }
 }

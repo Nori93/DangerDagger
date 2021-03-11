@@ -156,7 +156,7 @@ class Game:
             equipment=equipment_component,
             ability=ability_component,
             preficiencies= preficientcies_component,
-            image_name="player_left")
+            image_name="player_left",class_name=class_name,race_name=race)
      
         if weapon_main:
             w_main = db.query(Weapons).filter(Weapons.weapon_name == weapon_main).one()
@@ -170,7 +170,8 @@ class Game:
             self.temp_player.inventory.add_item(item)
             self.temp_player.equipment.toggle_equip_off_hand(item)
     
-
+        #For Making Level memu
+        self.temp_player.level.add_xp(340)
     
 
     def load_data(self):
@@ -241,12 +242,8 @@ class Game:
             self.player_turn_results =  []
 
             if self.act_level_up:
-                #Make a level up menu
-
-                #To Delete
+                pass
                 
-                pass 
-
             if self.act_quit:
                 
                 self.playing , self.running = False, False
@@ -281,7 +278,28 @@ class Game:
 
             if self.game_state == GameState.TARGETING:
                 self.targeting_stage()
-
+            
+            if self.game_state == GameState.LEVEL_UP:
+                #Check if need a menu or message player about something                
+                db = get_transaction()
+                
+                level_ups = db.query(LevelUps).join(Classes,LevelUps.classes).filter(
+                    Classes.class_name == self.player.class_name)
+                for level_up in level_ups:
+                    if level_up.level == self.player.level.current_level:
+                        if level_up.proficiency_bonus:
+                            self.player.level.proficiency_bonus += 1
+                        if level_up.id_spells != None:
+                            #add spell to spellbook of player
+                            pass
+                        if level_up.id_class_ability != None:
+                            #add class ability to player
+                            pass
+                        if level_up.ability_increase:
+                            #Show levelUp menu
+                            pass
+                
+                self.game_state = GameState.PLAYERS_TURN
 
             if self.player_turn_results:
                 self.handling_player_turn_result()

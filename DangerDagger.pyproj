@@ -41,6 +41,9 @@
     <Compile Include="database\db_entity_collection.py" />
     <Compile Include="database\entities\armors.py" />
     <Compile Include="database\entities\classes.py" />
+    <Compile Include="database\entities\level_ups.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="database\entities\monsters.py" />
     <Compile Include="database\entities\monsters_chances.py" />
     <Compile Include="database\entities\monsters_weapons.py" />
